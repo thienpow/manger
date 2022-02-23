@@ -1,0 +1,115 @@
+
+use sycamore::prelude::*;
+use sycamore_router::{Route};
+
+mod pages;
+mod context;
+mod svg;
+mod components;
+mod global;
+use crate::components::{background::Background, togglemode::ToggleMode};
+use crate::context::{DarkMode, CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo};
+use crate::pages::app::App;
+
+#[derive(Debug, Route)]
+pub  enum AppRoutes {
+    #[to("/")]
+    Home,
+    #[to("/bible")]
+    BibleStudy,
+    #[to("/love")]
+    Love,
+    #[to("/community")]
+    Community,
+    #[to("/people/<id>")]
+    People(String),
+    #[to("/profile")]
+    Profile,
+    #[not_found]
+    NotFound,
+}
+
+fn main() {
+
+
+    sycamore::render(|ctx| {
+
+        
+        let local_storage = web_sys::window().unwrap().local_storage().unwrap();
+        
+        // Get dark mode from media query.
+        let dark_mode_mq = web_sys::window()
+            .unwrap()
+            .match_media("(prefers-color-scheme: dark)")
+            .unwrap()
+            .unwrap()
+            .matches();
+            
+        let dark_mode = if let Some(local_storage) = &local_storage {
+            let dark_mode_ls = local_storage.get_item("dark_mode").unwrap();
+            dark_mode_ls.as_deref() == Some("true") || (dark_mode_ls.is_none() && dark_mode_mq)
+        } else {
+            dark_mode_mq
+        };
+        
+        if !dark_mode {
+            let document = web_sys::window().unwrap().document().unwrap();
+            document.body().unwrap().class_list().toggle("light-mode").expect("");
+        }
+
+        let dark_mode = DarkMode(create_rc_signal(dark_mode));
+        ctx.provide_context(dark_mode);
+
+        let DarkMode(dark_mode) = ctx.use_context::<DarkMode>();
+
+        ctx.create_effect(move || {
+            if let Some(local_storage) = &local_storage {
+                local_storage
+                    .set_item("dark_mode", &*dark_mode.get().to_string())
+                    .unwrap();
+            }
+        });
+
+        let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
+        ctx.provide_context(current_route);
+
+        let left_menu_opened = LeftMenuOpened(create_rc_signal(false));
+        ctx.provide_context(left_menu_opened);
+
+        let local_storage = web_sys::window().unwrap().local_storage().unwrap();
+        let _background_image = if let Some(local_storage) = &local_storage {
+            let background_image_ls = local_storage.get_item("background_image").unwrap();
+            if background_image_ls.is_none() {
+                "".to_string()
+            } else {
+                background_image_ls.unwrap()
+            }
+        } else { 
+            "".to_string()
+        };
+
+        let background_image = BackgroundImage(create_rc_signal("".to_string()));
+        ctx.provide_context(background_image);
+
+        let _background_video = if let Some(local_storage) = &local_storage {
+            let background_video_ls = local_storage.get_item("background_video").unwrap();
+            if background_video_ls.is_none() {
+                "".to_string()
+            } else {
+                background_video_ls.unwrap()
+            }
+        } else { 
+            "".to_string()
+        };
+
+        let background_video = BackgroundVideo(create_rc_signal("".to_string()));
+        ctx.provide_context(background_video);
+
+
+        view! { ctx, 
+            Background()
+            ToggleMode()
+            App()
+        }
+    });
+}

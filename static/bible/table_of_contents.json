@@ -1,0 +1,92 @@
+{"language":"en", "chapters": 1189, "verses": 31102, "testaments": [
+    {"testament_name": "Old Testament", "verses": 23145, "chapters": 929, "total_divisions": 5, "divisions": [
+        {"division_id": 1, "division_name": "Pentateuch (The Law)", "total_books": 5, "total_chapters": 187, "books": [
+            {"book_id": 1, "book_name": "Genesis", "chapters": 50},
+            {"book_id": 2, "book_name": "Exodus", "chapters": 40},
+            {"book_id": 3, "book_name": "Leviticus", "chapters": 27},
+            {"book_id": 4, "book_name": "Numbers", "chapters": 36},
+            {"book_id": 5, "book_name": "Deuteronomy", "chapters": 34}
+        ]},
+        {"division_id": 2, "division_name": "Historical Books", "total_books": 12, "total_chapters": 249, "books": [
+            {"book_id": 6, "book_name": "Joshua", "chapters": 24},
+            {"book_id": 7, "book_name": "Judges", "chapters": 21},
+            {"book_id": 8, "book_name": "Ruth", "chapters": 4},
+            {"book_id": 9, "book_name": "1 Samuel", "chapters": 31},
+            {"book_id": 10, "book_name": "2 Samuel", "chapters": 24},
+            {"book_id": 11, "book_name": "1 Kings", "chapters": 22},
+            {"book_id": 12, "book_name": "2 Kings", "chapters": 25},
+            {"book_id": 13, "book_name": "1 Chronicles", "chapters": 29},
+            {"book_id": 14, "book_name": "2 Chronicles", "chapters": 36},
+            {"book_id": 15, "book_name": "Ezra", "chapters": 10},
+            {"book_id": 16, "book_name": "Nehemiah", "chapters": 13},
+            {"book_id": 17, "book_name": "Esther", "chapters": 10}
+        ]},
+        {"division_id": 3, "division_name": "Books of Wisdom (Poetry)", "total_books": 5, "total_chapters": 243, "books": [
+            {"book_id": 18, "book_name": "Job", "chapters": 42},
+            {"book_id": 19, "book_name": "Psalms", "chapters": 150},
+            {"book_id": 20, "book_name": "Proverbs", "chapters": 31},
+            {"book_id": 21, "book_name": "Ecclesiastes", "chapters": 12},
+            {"book_id": 22, "book_name": "Song of Solomon", "chapters": 8}
+        ]},
+        {"division_id": 4, "division_name": "Major Prophets", "total_books": 5, "total_chapters": 183, "books": [
+            {"book_id": 23, "book_name": "Isaiah", "chapters": 66},
+            {"book_id": 24, "book_name": "Jeremiah", "chapters": 52},
+            {"book_id": 25, "book_name": "Lamentations", "chapters": 5},
+            {"book_id": 26, "book_name": "Ezekiel", "chapters": 48},
+            {"book_id": 27, "book_name": "Daniel", "chapters": 12}
+        ]},
+        {"division_id": 5, "division_name": "Minor Prophets", "total_books": 12, "total_chapters": 67, "books": [
+            {"book_id": 28, "book_name": "Hosea", "chapters": 14},
+            {"book_id": 29, "book_name": "Joel", "chapters": 3},
+            {"book_id": 30, "book_name": "Amos", "chapters": 9},
+            {"book_id": 31, "book_name": "Obadiah", "chapters": 1},
+            {"book_id": 32, "book_name": "Jonah", "chapters": 4},
+            {"book_id": 33, "book_name": "Micah", "chapters": 7},
+            {"book_id": 34, "book_name": "Nahum", "chapters": 3},
+            {"book_id": 35, "book_name": "Habakkuk", "chapters": 3},
+            {"book_id": 36, "book_name": "Zephaniah", "chapters": 3},
+            {"book_id": 37, "book_name": "Haggai", "chapters": 2},
+            {"book_id": 38, "book_name": "Zechariah", "chapters": 14},
+            {"book_id": 39, "book_name": "Malachi", "chapters": 4}
+        ]}
+    ]},
+    {"testament_name": "New Testament", "verses": 7957, "chapters": 260, "total_divisions": 5, "divisions": [
+        {"division_id": 6, "division_name": "Gospels", "total_books": 4, "total_chapters": 89, "books": [
+            {"book_id": 40, "book_name": "Matthew", "chapters": 28},
+            {"book_id": 41, "book_name": "Mark", "chapters": 16},
+            {"book_id": 42, "book_name": "Luke", "chapters": 24},
+            {"book_id": 43, "book_name": "John", "chapters": 21}
+        ]},
+        {"division_id": 7, "division_name": "History", "total_books": 1, "total_chapters": 28, "books": [
+            {"book_id": 44, "book_name": "Acts", "chapters": 28}
+        ]},
+        {"division_id": 8, "division_name": "Pauline Epistles", "total_books": 13, "total_chapters": 87, "books": [
+            {"book_id": 45, "book_name": "Romans", "chapters": 16},
+            {"book_id": 46, "book_name": "1 Corinthians", "chapters": 16},
+            {"book_id": 47, "book_name": "2 Corinthians", "chapters": 13},
+            {"book_id": 48, "book_name": "Galatians", "chapters": 6},
+            {"book_id": 49, "book_name": "Ephesians", "chapters": 6},
+            {"book_id": 50, "book_name": "Philippians", "chapters": 4},
+            {"book_id": 51, "book_name": "Colossians", "chapters": 4},
+            {"book_id": 52, "book_name": "1 Thessalonians", "chapters": 5},
+            {"book_id": 53, "book_name": "2 Thessalonians", "chapters": 3},
+            {"book_id": 54, "book_name": "1 Timothy", "chapters": 6},
+            {"book_id": 55, "book_name": "2 Timothy", "chapters": 4},
+            {"book_id": 56, "book_name": "Titus", "chapters": 3},
+            {"book_id": 57, "book_name": "Philemon", "chapters": 1}
+        ]},
+        {"division_id": 9, "division_name": "General Epistles", "total_books": 1, "total_chapters": 34, "books": [
+            {"book_id": 58, "book_name": "Hebrews", "chapters": 13},
+            {"book_id": 59, "book_name": "James", "chapters": 5},
+            {"book_id": 60, "book_name": "1 Peter", "chapters": 5},
+            {"book_id": 61, "book_name": "2 Peter", "chapters": 3},
+            {"book_id": 62, "book_name": "1 John", "chapters": 5},
+            {"book_id": 63, "book_name": "2 John", "chapters": 1},
+            {"book_id": 64, "book_name": "3 John", "chapters": 1},
+            {"book_id": 65, "book_name": "Jude", "chapters": 1}
+        ]},
+        {"division_id": 10, "division_name": "Apocalyptic Writings (Prophecy)", "total_books": 1, "total_chapters": 22, "books": [
+            {"book_id": 66, "book_name": "Revelation", "chapters": 22}
+        ]}
+    ]}
+]}
