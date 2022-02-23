@@ -34,7 +34,7 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
                         href="/love",
                     ) {
                         img(class="love", loading="lazy",
-                        src="assets/img/love.webp", 
+                        src="/assets/img/love.webp", 
                         alt="Love in action")
                     }
                 }

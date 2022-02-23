@@ -16,3 +16,6 @@ http://manger.aadi.my.ipns.localhost:8080/
 
 Certificate is saved at: /etc/letsencrypt/live/ipfs-pi.aadi.my/fullchain.pem
 Key is saved at:         /etc/letsencrypt/live/ipfs-pi.aadi.my/privkey.pem
+
+
+dig manger.aadi.my  +nostats +nocomments +nocmd
