@@ -1,6 +1,8 @@
 use sycamore::prelude::*;
 use web_sys::{console, Event};
 
+use crate::components::footer;
+
 
 #[component]
 pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
@@ -25,9 +27,7 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
 
             div(class="content-section") {
                 
-                div(class="content-section-title") {
-                    "PROFILE DATA"
-                }
+                div(class="content-section-title") { "PROFILE DATA" }
                 div(class="apps-card") {
                     div(class="app-card") {
                         div(style="width:100%; display: flex; justify-content: center;") {
@@ -38,12 +38,61 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
 
                         div(class="app-card__subtext") {
                             span(){"Display Name: "}
-                            span(){"First Name: "}
-                            span(){"Last Name: "}
                         }
                         div(class="app-card-buttons") {
                             button(class="cbutton status-button", on:click=handle_click_bible) {"Edit"}
-                            div(class="menu")
+                        }
+                    }
+                    div(class="app-card") {
+
+                        div(class="app-card__subtext") {
+                            span(){"Real Name: "}
+                            span(){"Email: "}
+                            span(){"Phone: "}
+                            div(class="app-card__seperator")
+                            span(){"Age: "}
+                            span(){"Gender: "}
+                            span(){"Race: "}
+                            span(){"Job: "}
+                        }
+                        div(class="app-card-buttons") {
+                            button(class="cbutton status-button", on:click=handle_click_bible) {"Edit"}
+                        }
+                    }
+                    div(class="app-card") {
+
+                        div(class="app-card__subtext") {
+                            span(){"Church Name: "}
+                            span(){"Cell Group: "}
+                            span(){"Other Info: "}
+                            div(class="app-card__seperator")
+                            span(){"Address: "}
+                            span(){"City: "}
+                            span(){"ZipCode: "}
+                            span(){"State: "}
+                            span(){"Country: "}
+                        }
+                        div(class="app-card-buttons") {
+                            button(class="cbutton status-button", on:click=handle_click_bible) {"Edit"}
+                        }
+                    }
+                }
+
+            }
+
+            div(class="content-section") {
+                div(class="content-section-title") { "SYSTEM PREFERENCES" }
+                div(class="apps-card") {
+                    div(class="app-card") {
+                        
+                        div(class="app-card__subtext") {
+                            span(){"Appearance: "}
+                            span(){"Accent Color: "}
+                            span(){"Background Image: "}
+                            span(){"Background Video: "}
+                        }
+                        div(class="app-card-buttons") {
+                            button(class="cbutton status-button", on:click=handle_click_bible) {"Update"}
                         }
                     }
                 }
@@ -66,7 +115,7 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
                 img(class="content-wrapper-img", src="https://assets.codepen.io/3364143/glass.png", alt="")
             }
             */
-            
+            footer::ContentFooter()
         }
     }
 }

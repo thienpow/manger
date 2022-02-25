@@ -12,7 +12,7 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
 
     view! { ctx,
         
-        div(class="tab-bar") {
+        div(class="tab-bar", style=(match *current_route.get() {AppRoutes::People(_) => "display: none", _ => ""})) {
             ul {
                 li() {
                     a(class=(match *current_route.get() {AppRoutes::Home => "tab-bar-button is-active", _ => "tab-bar-button"}), 

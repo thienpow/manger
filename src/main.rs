@@ -7,7 +7,7 @@ mod context;
 mod svg;
 mod components;
 mod global;
-use crate::components::{background::Background, togglemode::ToggleMode};
+use crate::components::{background::Background};
 use crate::context::{DarkMode, CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo};
 use crate::pages::app::App;
 
@@ -108,7 +108,7 @@ fn main() {
 
         view! { ctx, 
             Background()
-            ToggleMode()
+            //ToggleMode()
             App()
         }
     });
