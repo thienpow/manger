@@ -1,0 +1,101 @@
+
+.side-bar-contact {
+    flex-basis: 240px;
+    border-right: 0px solid var(--border-color);
+    overflow: auto;
+    flex-shrink: 0;
+}
+  
+.side-title-contact {
+    color: var(--inactive-color);
+    margin-bottom: 14px;
+    padding-left: 26px; padding-right: 26px;
+}
+  
+.side-wrapper .side-menu .person {
+    position: relative;
+    padding-left: 12px;
+    cursor: pointer;
+}
+
+.person.active:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    border-left: 2px solid var(--menu-underline-color);
+}
+
+.person .avatar img {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.person .avatar {
+    position: relative;
+    display: inline-block;
+}
+
+.person .avatar .status {
+    position: absolute;
+    right: 7px;
+    bottom: 0px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);	
+}
+
+.person .avatar .status.online {
+    background: #0bf9c7;
+}
+
+.person .avatar .status.away {
+    background: #f4a711;
+}
+
+.person .avatar .status.busy {
+    background: #f42464;
+}
+
+.person .info {
+    display: inline-block;
+    width: auto;
+}
+
+.person .name, .person .status-msg {
+    display: inline-block;
+}
+
+.person .name {
+    color: var(--content-title-color);
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.person .status-msg {
+    width: 180px;
+    font-size: .7rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.person .unread-messages, .person .last-login {
+    font-size: .7rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.person .unread-messages {
+    padding: 0 8px;
+    text-align: center;
+    color: var(--content-title-color);
+    background: var(--content-bg);
+    border-radius: 10px;
+}
+  

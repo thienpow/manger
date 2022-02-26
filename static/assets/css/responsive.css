@@ -1,0 +1,115 @@
+
+@media screen and (max-width: 1580px) {
+    .app-card {
+      width: calc(50% - 20px);
+    }
+    .app-card:last-child {
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+    .side-bar-contact {
+      display: none;
+    }
+    .chat-area-footer {
+      width: calc(100vw-270);
+      margin-left: 255px;
+      margin-right: 15px;
+    }
+  }
+  
+  @media screen and (max-width: 1055px) {
+    .notify {
+      display: none;
+    }
+    .main-header .header-menu {
+      margin: auto;
+    }
+    .menu-link {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 945px) {
+    
+    .side-bar-left {
+      display: none;
+    }
+    .chat-area-footer {
+      width: calc(100vw-30);
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .menu-left {
+      display: none;
+    }
+    .notification + svg {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .status {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 610px) {
+    .header-menu a:not(.main-header-link) {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 540px) {
+    .app-card {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .app-card + .app-card {
+      margin-left: 0;
+    }
+    .status-button {
+      padding: 6px 14px;
+    }
+    .button-wrapper {
+      width: auto;
+    }
+    .products {
+      width: 120px;
+    }
+    .header {
+      display: none;
+    }
+    .adobe-product .menu {
+      display: none;
+    }
+    .main-container {
+      border-radius: 0px;
+    }
+    .optinal-button {
+      display: none;
+    }
+    .content-wrapper-header {
+      padding: 20px;
+    }
+    .tab-bar {
+      display: flex;
+    }
+    .content-wrapper-img {
+      width: 110px;
+    }
+    .pop-up {
+      width: 100%;
+    }
+    .content-wrapper {
+      padding: 20px;
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
+    }
+    .content-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .chat-area-content::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  

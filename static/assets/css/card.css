@@ -1,0 +1,66 @@
+
+.apps-card {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.app-card {
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: calc(33.3% - 20px);
+    font-size: 16px;
+    background-color: var(--content-bg);
+    border-radius: 12px;
+    border: 1px solid var(--theme-bg-color);
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.app-card:hover {
+    transform: scale(1.02);
+    background-color: var(--theme-bg-color);
+}
+
+.app-card svg {
+    width: 28px;
+    border-radius: 6px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.app-card + .app-card {
+    margin-left: 20px;
+}
+
+.app-card span {
+    display: flex;
+    align-items: center;
+}
+
+.app-card__subtext {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6em;
+    margin-top: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.app-card__seperator {
+    border-bottom: 1px solid var(--border-color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.app-card-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-top: 16px;
+}
+  

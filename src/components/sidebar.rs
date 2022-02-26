@@ -58,7 +58,6 @@ pub fn SidebarLeft<G: Html>(ctx: ScopeRef) -> View<G> {
                     a(href="#") {
                         span(dangerously_set_inner_html=FORUM_SVG) 
                         "Forum"
-                        span(class="notification-number updates") {(3)}
                     }
                 }
                 

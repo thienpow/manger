@@ -63,7 +63,7 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
 
             div(class="header-profile") {
                 div(class="notification") {
-                    span(class="notification-number") {(3)}
+                    span(class="notification-number") {(10)}
                     span(dangerously_set_inner_html=NOTIF_SVG) 
                 }
                 div() {

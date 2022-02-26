@@ -117,8 +117,9 @@ fn main() {
 
             
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
+
             let height: f64 =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-130.0;
-            let width: f64 = web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
+            //let width: f64 = web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
 
             console::log_1(&format!("window_resize_closure").as_str().into());
 
@@ -127,11 +128,14 @@ fn main() {
                 let chat_area_content = chat_area_content.unwrap();
                 chat_area_content.set_attribute("style", format!("height:{}px;", height).as_str()).unwrap();
 
+                /*
                 if width <= 540.0 {
                     chat_area_content.set_class_name("chat-area-content-inviscroll");
                 } else {
                     chat_area_content.set_class_name("chat-area-content");
                 }
+                 */
+                
             }
         }) as Box<dyn FnMut(_)>);
         web_sys::window().unwrap().add_event_listener_with_callback("resize", window_resize_closure.as_ref().unchecked_ref()).unwrap();

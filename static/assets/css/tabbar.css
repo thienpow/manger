@@ -1,0 +1,49 @@
+
+.love {
+    position: relative;
+    top: -18px;
+    width: 52px;
+    height: 52px;
+}
+
+.tab-bar {
+    padding-top: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-top-style: solid;
+    border-top-color: var(--border-color);
+    border-top-width: 1px;
+    width: 100vw;
+    height: 46px;
+    background-color: var(--theme-bg-color);
+    display: none;
+}
+  
+.tab-bar ul {
+    margin: 0; padding: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 100vw;
+}
+  
+.tab-bar ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 8px;
+    cursor: pointer;
+}
+  
+.tab-bar-button.is-active svg {
+    fill: #5ac950bd;
+}
+  
+.tab-bar ul li svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    fill: #f9fafb;
+}
+  
