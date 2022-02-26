@@ -127,7 +127,7 @@ fn main() {
                 let chat_area_content = chat_area_content.unwrap();
                 chat_area_content.set_attribute("style", format!("height:{}px;", height).as_str()).unwrap();
 
-                if width <= 574.0 {
+                if width <= 540.0 {
                     chat_area_content.set_class_name("chat-area-content-inviscroll");
                 } else {
                     chat_area_content.set_class_name("chat-area-content");
