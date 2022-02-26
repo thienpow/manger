@@ -2,7 +2,7 @@ use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
 use crate::{components::{header::Header, sidebar::SidebarLeft, contactbar::ContactBar, tabbar::TabBar}, AppRoutes, context::CurrentRoute};
-use crate::pages::{home::Home, profile::Profile, people::People};
+use crate::pages::{home::Home, profile::Profile, chat::Chat};
 
 #[component]
 pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {
@@ -47,10 +47,10 @@ pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {
                                         view! { ctx,
                                         p {"Community features here (chat,meeting,sharing,prayer,help)"}
                                     }},
-                                    AppRoutes::People(cid) => {
-                                        current_route.set(AppRoutes::People(cid.to_string()));
+                                    AppRoutes::Chat(cid) => {
+                                        current_route.set(AppRoutes::Chat(cid.to_string()));
                                         view! { ctx,
-                                            People()
+                                            Chat()
                                         }
                                     },
                                     AppRoutes::Profile => {

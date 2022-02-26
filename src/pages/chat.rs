@@ -1,16 +1,33 @@
 use sycamore::prelude::*;
-use crate::svg::{VIDEO_SVG, IMAGE_SVG, PAPER_CLIP_SVG, SMILE_SVG, THUMBS_UP_SVG};
+use wasm_bindgen::{prelude::Closure, JsCast};
+use web_sys::console;
+use crate::{svg::{VIDEO_SVG, IMAGE_SVG, PAPER_CLIP_SVG, SMILE_SVG, THUMBS_UP_SVG}};
 
 
 #[component]
-pub fn ChatArea<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
 
-    let i =  web_sys::window().unwrap().inner_height().unwrap();
-    let chat_area_style = format!("height: {}px;", i.unchecked_into_f64()-130f64);
+
+    fn get_chat_area_style() -> String {
+        let height =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-130.0;
+        format!("height: {}px;", height)
+    }
+
+    fn get_chat_area_class() -> String {
+        let mut chat_area_class = format!("chat-area-content");
+
+        let inner_width =  web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
+        if inner_width <= 574.0 {
+            chat_area_class = format!("chat-area-content-inviscroll");
+        }
+        
+        chat_area_class
+    }
+
 
     view! { ctx,
-        div(class="chat-area", style=chat_area_style) { 
-            div(class="chat-area-content") {
+        div(class="chat-area") { 
+            div(id="chat-area-content", class=get_chat_area_class(), style=get_chat_area_style()) {
                 div(style="padding-left: 25px; display: flex; justify-content: flex-start;"){"opponent side halo"}
                 div(style="padding-right: 25px; display: flex; justify-content: flex-end;"){"my side of message"}
                 div(style="padding-left: 25px; display: flex; justify-content: flex-start;"){"opponent side halo"}

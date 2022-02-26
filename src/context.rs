@@ -18,3 +18,6 @@ pub struct BackgroundImage(pub RcSignal<String>);
 #[derive(Clone)]
 pub struct BackgroundVideo(pub RcSignal<String>);
 
+
+#[derive(Clone)]
+pub struct IsShowTab(pub RcSignal<bool>);

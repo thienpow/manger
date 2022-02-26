@@ -1,6 +1,9 @@
 
 use sycamore::prelude::*;
 use sycamore_router::{Route};
+use wasm_bindgen::JsCast;
+use wasm_bindgen::prelude::Closure;
+use web_sys::console;
 
 mod pages;
 mod context;
@@ -21,8 +24,8 @@ pub  enum AppRoutes {
     Love,
     #[to("/community")]
     Community,
-    #[to("/people/<id>")]
-    People(String),
+    #[to("/chat/<id>")]
+    Chat(String),
     #[to("/profile")]
     Profile,
     #[not_found]
@@ -30,7 +33,14 @@ pub  enum AppRoutes {
 }
 
 fn main() {
+    /*
+        function resizeListener() {
+            heightOutput.textContent = window.innerHeight;
+            widthOutput.textContent = window.innerWidth;
+        }
 
+        window.addEventListener("resize", resizeListener);
+    */
 
     sycamore::render(|ctx| {
 
@@ -105,6 +115,28 @@ fn main() {
         let background_video = BackgroundVideo(create_rc_signal("".to_string()));
         ctx.provide_context(background_video);
 
+            
+        let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
+            let height: f64 =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-130.0;
+            let width: f64 = web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
+
+            console::log_1(&format!("window_resize_closure").as_str().into());
+
+            let chat_area_content = web_sys::window().unwrap().document().unwrap().get_element_by_id("chat-area-content");
+            if chat_area_content.is_some() {
+                let chat_area_content = chat_area_content.unwrap();
+                chat_area_content.set_attribute("style", format!("height:{}px;", height).as_str()).unwrap();
+
+                if width <= 574.0 {
+                    chat_area_content.set_class_name("chat-area-content-inviscroll");
+                } else {
+                    chat_area_content.set_class_name("chat-area-content");
+                }
+            }
+        }) as Box<dyn FnMut(_)>);
+        web_sys::window().unwrap().add_event_listener_with_callback("resize", window_resize_closure.as_ref().unchecked_ref()).unwrap();
+        window_resize_closure.forget();
+        
 
         view! { ctx, 
             Background()
