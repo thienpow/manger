@@ -1,7 +1,7 @@
 use sycamore::prelude::*;
 use web_sys::{console, Event};
 
-use crate::components::footer;
+use crate::{components::footer, context::DarkMode, svg::{CLOUD_MOON_SVG, LIGHT_BULB_SVG}};
 
 
 #[component]
@@ -11,6 +11,16 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
         console::log_1(&format!("clicked").as_str().into());
     };
     
+
+    let DarkMode(dark_mode) = ctx.use_context::<DarkMode>();
+    let toggle = |_| {
+        dark_mode.set(!*dark_mode.get());
+
+        let document = web_sys::window().unwrap().document().unwrap();
+        document.body().unwrap().class_list().toggle("light-mode").expect("");
+
+    };
+
     view! { ctx,
 
         /*
@@ -86,7 +96,14 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
                     div(class="app-card") {
                         
                         div(class="app-card__subtext") {
-                            span(){"Appearance: "}
+                            span() {
+                                "Appearance:"
+                                label(class="theme-switch", for="chkSwitch") {
+                                    input(id="chkSwitch", type="checkbox", checked=*dark_mode.get(), on:click=toggle, dangerously_set_inner_html=if *dark_mode.get() { CLOUD_MOON_SVG } else { LIGHT_BULB_SVG })
+                                    div(class="theme-switch-slider round")
+                                }
+                            }
+                            
                             span(){"Accent Color: "}
                             span(){"Background Image: "}
                             span(){"Background Video: "}

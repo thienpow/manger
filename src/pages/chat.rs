@@ -1,6 +1,4 @@
 use sycamore::prelude::*;
-use wasm_bindgen::{prelude::Closure, JsCast};
-use web_sys::console;
 use crate::{svg::{VIDEO_SVG, IMAGE_SVG, PAPER_CLIP_SVG, SMILE_SVG, THUMBS_UP_SVG}};
 
 

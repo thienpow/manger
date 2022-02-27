@@ -50,7 +50,7 @@ fn main() {
         // Get dark mode from media query.
         let dark_mode_mq = web_sys::window()
             .unwrap()
-            .match_media("(prefers-color-scheme: dark)")
+            .match_media("(prefers-color-scheme: light)")
             .unwrap()
             .unwrap()
             .matches();
