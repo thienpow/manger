@@ -118,24 +118,20 @@ fn main() {
             
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
 
-            let height: f64 =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-130.0;
-            //let width: f64 = web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
+            let mut height: f64 =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-188.0;
+            let width: f64 = web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
 
             console::log_1(&format!("window_resize_closure").as_str().into());
 
-            let chat_area_content = web_sys::window().unwrap().document().unwrap().get_element_by_id("chat-area-content");
-            if chat_area_content.is_some() {
-                let chat_area_content = chat_area_content.unwrap();
-                chat_area_content.set_attribute("style", format!("height:{}px;", height).as_str()).unwrap();
-
-                /*
-                if width <= 540.0 {
-                    chat_area_content.set_class_name("chat-area-content-inviscroll");
-                } else {
-                    chat_area_content.set_class_name("chat-area-content");
-                }
-                 */
+            let chat_content = web_sys::window().unwrap().document().unwrap().get_element_by_id("chat-content");
+            if chat_content.is_some() {
+                let chat_content = chat_content.unwrap();
                 
+                if width <= 540.0 {
+                    height =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-130.0;
+                    
+                }
+                chat_content.set_attribute("style", format!("height:{}px;", height).as_str()).unwrap();
             }
         }) as Box<dyn FnMut(_)>);
         web_sys::window().unwrap().add_event_listener_with_callback("resize", window_resize_closure.as_ref().unchecked_ref()).unwrap();

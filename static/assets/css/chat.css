@@ -1,24 +1,28 @@
 
-.chat-area {
+.chat-wrapper {
+    position: relative;
     left: 0px; 
+    top:  0px;
     width: 100%;
     border: 0px solid;
     color: var(--theme-color);
+    height: 100vh;
 }
-  
-.chat-area-content {
-    display: flex;
-    flex-direction: column; 
+.chat-header {
+    height: 58px;
+    border: 1px solid red;
+}
+.chat-content {
+    position: relative;
+    top: 0px;
     justify-content: flex-start; 
     width: calc(100vw-480);
     padding-bottom: 15px;
-    height: 100%;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-  
-.chat-area-footer {
+.chat-footer {
     position: fixed;
     display: flex;
     justify-self: flex-end;
@@ -36,7 +40,7 @@
     margin-right: 255px;
 }
   
-.chat-area-footer svg {
+.chat-footer svg {
     color: var(--settings-icon-color);
     width: 20px;
     margin-left: 4px;
@@ -45,15 +49,15 @@
     cursor: pointer;
 }
 
-.chat-area-footer svg:hover {
+.chat-footer svg:hover {
     color: var(--settings-icon-hover);
 }
 
-.chat-area-footer svg + svg {
+.chat-footer svg + svg {
     margin-left: 12px;
 }
   
-.chat-area-footer input {
+.chat-footer input {
     border: none;
     color: var(--body-color);
     background-color: var(--input-bg);
@@ -64,7 +68,7 @@
     width: 100%;
 }
 
-.chat-area-footer input::placeholder {
+.chat-footer input::placeholder {
     color: var(--input-chat-color);
 }
 

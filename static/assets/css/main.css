@@ -595,11 +595,11 @@ body.light-mode .video-bg:before {
 
 .left {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
 }
 .right {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
 }
 .nowrap {
   White-space: nowrap;
