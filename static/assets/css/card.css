@@ -1,12 +1,12 @@
 
-.apps-card {
+.card-wrapper {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
 }
 
-.app-card {
+.card {
     display: flex;
     align-self: flex-start;
     justify-content: flex-start;
@@ -21,43 +21,36 @@
     transition: 0.3s ease;
 }
 
-.app-card:hover {
+.card:hover {
     transform: scale(1.02);
     background-color: var(--theme-bg-color);
 }
 
-.app-card svg {
+.card svg {
     width: 28px;
     border-radius: 6px;
     margin-right: 12px;
     flex-shrink: 0;
 }
 
-.app-card + .app-card {
+.card + .card {
     margin-left: 20px;
 }
 
-.app-card span {
+.card span {
     display: flex;
     align-items: center;
 }
 
-.app-card__subtext {
+.card__subtext {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.6em;
     margin-top: 20px;
-    border-bottom: 1px solid var(--border-color);
     padding-bottom: 20px;
 }
 
-.app-card__seperator {
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.app-card-buttons {
+.card-buttons {
     display: flex;
     align-items: center;
     margin-left: auto;

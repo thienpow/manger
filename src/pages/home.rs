@@ -28,11 +28,11 @@ pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
                 div(class="content-section-title") {
                     "CHOOSE A BIBLE"
                 }
-                div(class="apps-card") {
-                    div(class="app-card") {
+                div(class="card-wrapper") {
+                    div(class="card") {
                         span() {"Bible image here"}
-                        div(class="app-card__subtext") {"Please choose a preferred Bible language."}
-                        div(class="app-card-buttons") {
+                        div(class="card__subtext") {"Please choose a preferred Bible language."}
+                        div(class="card-buttons") {
                             button(class="cbutton status-button", on:click=handle_click_bible) {"中文简体"}
                             div(class="menu")
                         }

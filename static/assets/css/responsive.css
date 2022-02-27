@@ -1,9 +1,9 @@
 
 @media screen and (max-width: 1580px) {
-    .app-card {
+    .card {
       width: calc(50% - 20px);
     }
-    .app-card:last-child {
+    .card:last-child {
       margin-top: 20px;
       margin-left: 0px;
     }
@@ -47,24 +47,18 @@
     }
   }
   
-  @media screen and (max-width: 700px) {
-    .status {
-      display: none;
-    }
-  }
-  
-  @media screen and (max-width: 610px) {
+  @media screen and (max-width: 540px) {
     .header-menu a:not(.main-header-link) {
       display: none;
     }
-  }
-  
-  @media screen and (max-width: 540px) {
-    .app-card {
+    .status {
+      display: none;
+    }
+    .card {
       width: 100%;
       margin-top: 20px;
     }
-    .app-card + .app-card {
+    .card + .card {
       margin-left: 0;
     }
     .status-button {
@@ -88,9 +82,6 @@
     .optinal-button {
       display: none;
     }
-    .content-wrapper-header {
-      padding: 20px;
-    }
     .tab-bar {
       display: flex;
     }
@@ -100,8 +91,11 @@
     .pop-up {
       width: 100%;
     }
+    .content-wrapper-header {
+      padding: 15px;
+    }
     .content-wrapper {
-      padding: 20px;
+      padding: 15px;
       -ms-overflow-style: none;  
       scrollbar-width: none;  
     }
@@ -113,3 +107,11 @@
     }
   }
   
+  @media screen and (max-width: 420px) {
+    .content-wrapper-header {
+      padding: 10px;
+    }
+    .content-wrapper {
+      padding: 10px;
+    }
+  }
