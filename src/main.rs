@@ -3,7 +3,6 @@ use sycamore::prelude::*;
 use sycamore_router::{Route};
 use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::Closure;
-use web_sys::console;
 
 mod pages;
 mod context;
@@ -121,7 +120,7 @@ fn main() {
             let mut height: f64 =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-188.0;
             let width: f64 = web_sys::window().unwrap().inner_width().unwrap().unchecked_into_f64();
 
-            console::log_1(&format!("window_resize_closure").as_str().into());
+            //console::log_1(&format!("window_resize_closure").as_str().into());
 
             let chat_content = web_sys::window().unwrap().document().unwrap().get_element_by_id("chat-content");
             if chat_content.is_some() {

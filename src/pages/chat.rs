@@ -23,7 +23,7 @@ pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
                 "header"
             }
             div(id="chat-content", class="chat-content", style=get_chat_area_style()) {
-                div(){"opponent side halo"}
+                div(){"1 opponent side halo"}
                 div(){"my side of message"}
                 div(){"opponent side halo"}
                 div(){"my side of message"}
@@ -55,7 +55,7 @@ pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
                 div(){"my side of message1"}
                 div(){"my side of message2"}
                 div(){"my side of message3"}
-                div(){"my side of message4"}
+                div(){"99my side of message4"}
             }
             div(class="chat-footer") {
                 span(class="optinal-button", dangerously_set_inner_html=VIDEO_SVG)

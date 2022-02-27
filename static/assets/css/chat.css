@@ -10,7 +10,8 @@
 }
 .chat-header {
     height: 58px;
-    border: 1px solid red;
+    border-bottom: 0px solid var(--border-color);
+    z-index: 100;
 }
 .chat-content {
     position: relative;
@@ -18,9 +19,12 @@
     justify-content: flex-start; 
     width: calc(100vw-480);
     padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    z-index: 1;
 }
 .chat-footer {
     position: fixed;
@@ -38,6 +42,7 @@
     width: calc(100vw-480);
     margin-left: 255px;
     margin-right: 255px;
+    z-index: 100;
 }
   
 .chat-footer svg {
