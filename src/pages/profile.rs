@@ -1,7 +1,7 @@
 use sycamore::prelude::*;
 use web_sys::{console, Event};
 
-use crate::{components::footer, context::DarkMode, svg::{CLOUD_MOON_SVG, LIGHT_BULB_SVG}};
+use crate::{components::footer, context::DarkMode};
 
 
 #[component]
@@ -102,7 +102,7 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
                                 div(class="col-4 left nowrap") { "Appearance:" }
                                 div(class="col-8 right nowrap") {
                                     label(class="theme-switch", for="chkSwitch") {
-                                        input(id="chkSwitch", type="checkbox", checked=*dark_mode.get(), on:click=toggle, dangerously_set_inner_html=if *dark_mode.get() { CLOUD_MOON_SVG } else { LIGHT_BULB_SVG })
+                                        input(id="chkSwitch", type="checkbox", checked=*dark_mode.get(), on:click=toggle)
                                         div(class="theme-switch-slider round")
                                     }
                                 }
@@ -125,24 +125,6 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
                     }
                 }
             }
-            /*
-            div(class="content-wrapper-header") {
-                div(class="content-wrapper-context") {
-                    h3(class="img-content") {
-                        span(dangerously_set_inner_html=HOME_CONTENT_HEADER_SVG)
-                        "Adobe Stock"
-                        
-                    }
-                    div(class="content-text") {
-                        "Grab yourself 10 free images from Adobe Stock in a 30-day free trial plan and find perfect image, that will help you with your new project."
-                    }
-                    button(class="content-button") {
-                        "Start free trial"
-                    }
-                }
-                img(class="content-wrapper-img", src="https://assets.codepen.io/3364143/glass.png", alt="")
-            }
-            */
             footer::ContentFooter()
         }
     }

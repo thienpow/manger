@@ -23,7 +23,7 @@
 }
 
 .theme-switch-slider:before {
-    border: 2px solid var(--menu-underline-color);
+    border: 2px solid var(--highlight-color);
     bottom: 4px;
     content: "";
     height: 26px;

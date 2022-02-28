@@ -9,7 +9,7 @@
   --theme-bg-color: rgba(16 18 27 / 40%);
   --border-color: rgba(113 119 144 / 25%);
   --theme-color: #f9fafb;
-  --menu-underline-color: #8d939b;
+  --highlight-color: #8d939b;
   --inactive-color: rgb(113 119 144 / 78%);
   --body-font: "Poppins", sans-serif;
   --hover-menu-bg: rgba(12 15 25 / 30%);
@@ -46,7 +46,7 @@
 .light-mode {
   --theme-bg-color: rgb(255 255 255 / 31%);
   --theme-color: #3c3a3a;
-  --menu-underline-color: #5ac950;
+  --highlight-color: #5ac950;
   --inactive-color: #333333;
   --button-inactive: #3c3a3a;
   --search-bg: rgb(255 255 255 / 31%);
@@ -85,32 +85,6 @@ img {
   max-width: 100%;
 }
 
-.dark-light {
-  border: 0;
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  background-color: var(--dropdown-bg);
-  box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.2);
-  padding: 8px;
-  border-radius: 50%;
-  z-index: 3;
-  cursor: pointer;
-}
-.dark-light svg {
-  width: 24px;
-  flex-shrink: 0;
-  fill: #ffce45;
-  stroke: #ffce45;
-  transition: 0.1s;
-  
-}
-.dark-light:not(.open):hover {
-  opacity: .7;
-}
-.dark-light:active:hover{
-  opacity: 1;
-}
 .light-mode .dark-light svg {
   fill: transparent;
   stroke: var(--theme-color);
@@ -609,4 +583,7 @@ body.light-mode .video-bg:before {
   border-bottom: 1px solid var(--border-color);
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.menu-gap {
+  width: 100%;
 }

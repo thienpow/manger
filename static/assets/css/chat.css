@@ -8,11 +8,6 @@
     color: var(--theme-color);
     height: 100vh;
 }
-.chat-header {
-    height: 58px;
-    border-bottom: 0px solid var(--border-color);
-    z-index: 100;
-}
 .chat-content {
     position: relative;
     top: 0px;
@@ -24,6 +19,7 @@
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    height: 100vh;
     z-index: 1;
 }
 .chat-footer {
@@ -46,7 +42,7 @@
 }
   
 .chat-footer svg {
-    color: var(--settings-icon-color);
+    color: var(--theme-color);
     width: 20px;
     margin-left: 4px;
     margin-right: 4px;
@@ -55,7 +51,7 @@
 }
 
 .chat-footer svg:hover {
-    color: var(--settings-icon-hover);
+    color: var(--highlight-color);
 }
 
 .chat-footer svg + svg {

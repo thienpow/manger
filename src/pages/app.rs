@@ -2,7 +2,7 @@ use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
 use crate::{components::{header::Header, sidebar::SidebarLeft, contactbar::ContactBar, tabbar::TabBar}, AppRoutes, context::CurrentRoute};
-use crate::pages::{home::Home, profile::Profile, chat::Chat};
+use crate::pages::{home::Home, profile::Profile, chat::chat::Chat};
 
 #[component]
 pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {

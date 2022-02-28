@@ -1,6 +1,6 @@
 use sycamore::prelude::*;
-use crate::{svg::{VIDEO_SVG, IMAGE_SVG, PAPER_CLIP_SVG, SMILE_SVG, THUMBS_UP_SVG}};
-
+use crate::{svg::{IMAGE_SVG, PAPER_CLIP_SVG, SMILE_SVG, THUMBS_UP_SVG}};
+use crate::pages::chat::navbar::NavBar;
 
 #[component]
 pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
@@ -19,10 +19,12 @@ pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
 
     view! { ctx,
         div(class="chat-wrapper") { 
-            div(class="chat-header") {
-                "header"
-            }
-            div(id="chat-content", class="chat-content", style=get_chat_area_style()) {
+            NavBar()
+            div(
+                id="chat-content", 
+                class="chat-content", 
+                style=get_chat_area_style()
+            ) {
                 div(){"1 opponent side halo"}
                 div(){"my side of message"}
                 div(){"opponent side halo"}
@@ -58,7 +60,6 @@ pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
                 div(){"99my side of message4"}
             }
             div(class="chat-footer") {
-                span(class="optinal-button", dangerously_set_inner_html=VIDEO_SVG)
                 span(class="optinal-button", dangerously_set_inner_html=IMAGE_SVG)
                 //span(dangerously_set_inner_html=PLUG_CIRCLE_SVG)
                 span(dangerously_set_inner_html=PAPER_CLIP_SVG)

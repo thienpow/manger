@@ -40,10 +40,10 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
     view! { ctx,
 
         div(ref=header_ref, id="header", class="header") {
-            div(ref=left_menu_ref, class="menu-left") {
+            div(ref=left_menu_ref, class="header-menu-left") {
                 a(class="logo", aria-label="Manger Home Page", href="/", dangerously_set_inner_html=LOGO_SVG) 
             }
-            
+            div(class="menu-gap")
             div(class="header-menu") {
                 a(class=(match *current_route.get() {AppRoutes::Home => "is-active", _ => ""}), href="/") {"Home"}
                 a(class=(match *current_route.get() {AppRoutes::BibleStudy => "is-active", _ => ""}), href="/bible") {"Bible Study"}
@@ -53,14 +53,7 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
             div(class="search-bar") {
                 input(type="text", placeholder="Search", on:focus=handle_search_focus, on:blur=handle_search_blur)
             }
-
-            /*
-            SearchBar(SearchBar{
-                focus: Box::new(handle_search_focus),
-                blur: Box::new(handle_search_blur)
-            })
-            */
-
+            div(class="menu-gap")
             div(class="header-profile") {
                 div(class="notification") {
                     span(class="notification-number") {(10)}

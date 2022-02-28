@@ -24,7 +24,7 @@
 
 .header-menu a.is-active, .header-menu a:hover {
     color: var(--theme-color);
-    border-bottom: 2px solid var(--menu-underline-color);
+    border-bottom: 2px solid var(--highlight-color);
 }
 
 .logo {
@@ -32,14 +32,12 @@
     cursor: pointer;
 }
 
-.menu-left {
+.header-menu-left {
     background-color: transparent;
     border: none;
     display: flex;
     padding-left: 16px;
-    min-width: 230px;
 }
-
 .header-profile {
     display: flex;
     align-items: center;
