@@ -283,6 +283,7 @@ dependencies = [
 name = "manger"
 version = "0.1.0"
 dependencies = [
+ "js-sys",
  "reqwasm",
  "rexie",
  "serde",

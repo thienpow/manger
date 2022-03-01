@@ -1,24 +1,16 @@
 use sycamore::prelude::*;
-use web_sys::{console, Event};
+use web_sys::{Event};
 
-use crate::{components::footer, context::DarkMode};
+use crate::{components::footer, context::{AppState}};
 
 
 #[component]
 pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
 
-    let handle_click_bible = move |_e: Event| {
-        console::log_1(&format!("clicked").as_str().into());
-    };
+    let app_state = ctx.use_context::<AppState>();
     
-
-    let DarkMode(dark_mode) = ctx.use_context::<DarkMode>();
-    let toggle = |_| {
-        dark_mode.set(!*dark_mode.get());
-
-        let document = web_sys::window().unwrap().document().unwrap();
-        document.body().unwrap().class_list().toggle("light-mode").expect("");
-
+    let handle_click_bible = move |_: Event| {
+        //console::log_1(&format!("clicked").as_str().into());
     };
 
     view! { ctx,
@@ -95,7 +87,9 @@ pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
                                         div(class="col-4 left nowrap") { "Appearance:" }
                                         div(class="col-8 right nowrap") {
                                             label(class="theme-switch", for="chkSwitch") {
-                                                input(id="chkSwitch", type="checkbox", checked=*dark_mode.get(), on:click=toggle)
+                                                input(id="chkSwitch", type="checkbox", 
+                                                    checked=*app_state.dark_mode.get(), 
+                                                    on:click=move |_| app_state.toggle_dark_mode())
                                                 div(class="theme-switch-slider round")
                                             }
                                         }

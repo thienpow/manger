@@ -1,16 +1,11 @@
 use serde::{Deserialize, Serialize};
 use reqwasm::http::Request;
 
-#[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
-pub struct TableOfContents {
-    pub books: Vec<Book>
-}
+use crate::context::BibleBookItem;
 
 #[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
-pub struct Book {
-    pub book_id: i32,
-    pub book_name: String,
-    pub chapters: i32,
+pub struct TableOfContents {
+    pub books: Vec<BibleBookItem>
 }
 
 //const API_BASE_URL: &str = "https://manger.aadi.my";

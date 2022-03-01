@@ -14,10 +14,11 @@ wasm-bindgen = { version = "0.2.79", features = ["serde-serialize"]  }
 wasm-bindgen-futures = "0.4.29"
 rexie = "0.2.1"
 reqwasm = "0.4.0"
+js-sys = "0.3.56"
 
 [dependencies.web-sys]
 features = [
-    "InputEvent", "KeyboardEvent", "Location", "MediaQueryList", "Storage",
+    "InputEvent", "KeyboardEvent", "Location", "MediaQueryList", "Storage",  "ScrollIntoViewOptions", "ScrollBehavior", "Element", "ScrollToOptions",
     "Window"
 ]
 version = "0.3.56"

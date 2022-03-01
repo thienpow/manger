@@ -10,7 +10,24 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
         div(class="wrapper") {
 
             div(class="main-container") {
-                TOC()
+
+                div(class="row nowrap") {
+                    div(class="col-2 left nowrap"){
+                        TOC()
+                    }
+                    div(class="col-10 left nowrap") {
+                        div(class="bible-content-area") {
+                            "aahelo"
+                            
+                        }
+                    }
+                }
+
+                
+
+                
+                
+                
             }
 
         }

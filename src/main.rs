@@ -11,10 +11,10 @@ mod svg;
 mod components;
 mod global;
 use crate::components::{background::Background};
-use crate::context::{DarkMode, CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo, BibleBook, SelectedBibleBook, AppState, ChapterItem, VerseItem};
+use crate::context::{CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo, BibleBookItem, AppState, ChapterItem, VerseItem};
 use crate::pages::app::App;
 
-#[derive(Debug, Route)]
+#[derive(Debug, Clone, Route)]
 pub  enum AppRoutes {
     #[to("/")]
     Home,
@@ -55,33 +55,17 @@ fn main() {
             .unwrap()
             .matches();
             
-        let dark_mode = if let Some(local_storage) = &local_storage {
+        let is_dark_mode = if let Some(local_storage) = &local_storage {
             let dark_mode_ls = local_storage.get_item("dark_mode").unwrap();
             dark_mode_ls.as_deref() == Some("true") || (dark_mode_ls.is_none() && dark_mode_mq)
         } else {
             dark_mode_mq
         };
         
-        if !dark_mode {
+        if !is_dark_mode {
             let document = web_sys::window().unwrap().document().unwrap();
             document.body().unwrap().class_list().toggle("light-mode").expect("");
         }
-
-        let dark_mode = DarkMode(create_rc_signal(dark_mode));
-        ctx.provide_context(dark_mode);
-
-        let DarkMode(dark_mode) = ctx.use_context::<DarkMode>();
-
-        ctx.create_effect(move || {
-            if let Some(local_storage) = &local_storage {
-                local_storage
-                    .set_item("dark_mode", &*dark_mode.get().to_string())
-                    .unwrap();
-            }
-        });
-
-        let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
-        ctx.provide_context(current_route);
 
         let left_menu_opened = LeftMenuOpened(create_rc_signal(false));
         ctx.provide_context(left_menu_opened);
@@ -115,9 +99,6 @@ fn main() {
         let background_video = BackgroundVideo(create_rc_signal("".to_string()));
         ctx.provide_context(background_video);
 
-        let selected_bible_book = SelectedBibleBook(create_rc_signal(BibleBook {id: 0, name: "".to_string(), chapters: 0 }));
-        ctx.provide_context(selected_bible_book);
-
 
             
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
@@ -144,22 +125,41 @@ fn main() {
 
 
 
+        let bible_books: RcSignal<Vec<RcSignal<BibleBookItem>>> = create_rc_signal(Vec::new());
         let chapters: RcSignal<Vec<RcSignal<ChapterItem>>> = create_rc_signal(Vec::new());
         let verses: RcSignal<Vec<RcSignal<VerseItem>>> = create_rc_signal(Vec::new());
+        let dark_mode: RcSignal<bool> = create_rc_signal(is_dark_mode);
+        let selected_bible_book: RcSignal<BibleBookItem> = create_rc_signal(BibleBookItem {book_id: 0, book_name: "".to_string(), chapters: 0 });
+
+        let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
+        ctx.provide_context(current_route);
 
         let app_state = AppState {
+            bible_books,
             chapters,
-            verses
+            verses,
+            dark_mode,
+            selected_bible_book
         };
         ctx.provide_context(app_state);
 
         ctx.create_effect(move || {
             let app_state = ctx.use_context::<AppState>();
+            /*
+            for bible_books in app_state.bible_books.get().iter() {
+                bible_books.track();
+            }
+            */
             for chapter in app_state.chapters.get().iter() {
                 chapter.track();
             }
             for verse in app_state.verses.get().iter() {
                 verse.track();
+            }
+            if let Some(local_storage) = &local_storage {
+                local_storage
+                    .set_item("dark_mode", &*app_state.dark_mode.get().to_string())
+                    .unwrap();
             }
         });
 

@@ -6,11 +6,44 @@ use crate::{AppRoutes};
 
 #[derive(Debug, Default, Clone)]
 pub struct AppState {
+    pub bible_books: RcSignal<Vec<RcSignal<BibleBookItem>>>,
     pub chapters: RcSignal<Vec<RcSignal<ChapterItem>>>,
     pub verses: RcSignal<Vec<RcSignal<VerseItem>>>,
+    pub dark_mode: RcSignal<bool>,
+    pub selected_bible_book: RcSignal<BibleBookItem>,
 }
 
 impl AppState {
+
+    pub fn toggle_dark_mode(&self) {
+        self.dark_mode.set(!*self.dark_mode.get());
+
+        let document = web_sys::window().unwrap().document().unwrap();
+        document.body().unwrap().class_list().toggle("light-mode").expect("");
+
+    }
+
+    pub fn init_bible_books(&self, bible_books: Vec<BibleBookItem>) {
+
+        self.bible_books.set(Vec::new());
+        for b in bible_books.iter() {
+            self.bible_books.set(
+                self.bible_books
+                    .get()
+                    .as_ref()
+                    .clone()
+                    .into_iter()
+                    .chain(Some(create_rc_signal(BibleBookItem {
+                        book_id: b.book_id,
+                        book_name: b.book_name.clone(),
+                        chapters: b.chapters
+                    })))
+                    .collect()
+            )
+        }
+        
+    }
+
     pub fn reset_chapters(&self, total: i32) {
 
         self.chapters.set(Vec::new());
@@ -31,13 +64,37 @@ impl AppState {
         }
         
     }
+
+    pub fn reset_verses(&self, chapter: i32, total: i32) {
+
+        self.verses.set(Vec::new());
+
+        for n in 1..total+1 {
+            self.verses.set(
+                self.verses
+                    .get()
+                    .as_ref()
+                    .clone()
+                    .into_iter()
+                    .chain(Some(create_rc_signal(VerseItem {
+                        chapter: chapter,
+                        verse: n,
+                        text: n.to_string(),
+                    })))
+                    .collect()
+            )
+        }
+        
+    }
 }
 
-#[derive(Clone)]
+#[derive(Debug, Default, Clone)]
 pub struct DarkMode(pub RcSignal<bool>);
 
-#[derive(Clone)]
+
+#[derive(Debug, Clone)]
 pub struct CurrentRoute(pub RcSignal<AppRoutes>);
+
 
 #[derive(Clone)]
 pub struct LeftMenuOpened(pub RcSignal<bool>);
@@ -51,14 +108,13 @@ pub struct BackgroundVideo(pub RcSignal<String>);
 
 
 
-pub struct BibleBook {
-    pub id: i32,
-    pub name: String,
+
+#[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
+pub struct BibleBookItem {
+    pub book_id: i32,
+    pub book_name: String,
     pub chapters: i32,
 }
-
-#[derive(Clone)]
-pub struct SelectedBibleBook(pub RcSignal<BibleBook>);
 
 
 #[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
