@@ -7,13 +7,8 @@
       margin-top: 20px;
       margin-left: 0px;
     }
-    .side-bar-contact {
-      display: none;
-    }
     .chat-footer {
       width: calc(100vw-270);
-      margin-left: 255px;
-      margin-right: 15px;
     }
 }
   
@@ -35,8 +30,6 @@
     }
     .chat-footer {
       width: calc(100vw-30);
-      margin-left: 15px;
-      margin-right: 15px;
     }
     .menu-left {
       display: none;
@@ -108,6 +101,9 @@
       display: none;
     }
     .chat-content::-webkit-scrollbar {
+      display: none;
+    }
+    .side-bar-contact {
       display: none;
     }
 }

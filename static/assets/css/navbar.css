@@ -12,12 +12,11 @@
     display: none;
     align-items: center;
     border: none;
-    padding-left: 2px;
+    padding-left: 12px;
     flex-shrink: 0;
 }
 
 .navbar-menu-left svg {
-    margin-left: 12px;
     width: 22px;
     color: var(--theme-color);
     flex-shrink: 0;
@@ -26,12 +25,11 @@
 .navbar-menu-right {
     display: flex;
     align-items: center;
-    padding-right: 20px;
+    padding-right: 12px;
     flex-shrink: 0;
 }
 
 .navbar-menu-right svg {
-    margin-left: 12px;
     width: 22px;
     color: var(--theme-color);
     flex-shrink: 0;

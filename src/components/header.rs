@@ -46,7 +46,7 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
             div(class="menu-gap")
             div(class="header-menu") {
                 a(class=(match *current_route.get() {AppRoutes::Home => "is-active", _ => ""}), href="/") {"Home"}
-                a(class=(match *current_route.get() {AppRoutes::BibleStudy => "is-active", _ => ""}), href="/bible") {"Bible Study"}
+                a(class=(match *current_route.get() {AppRoutes::Bible => "is-active", _ => ""}), href="/bible") {"Bible Study"}
                 a(class=(match *current_route.get() {AppRoutes::Community => "is-active", _ => ""}), href="/community") {"Community"}
             }
             
@@ -59,6 +59,7 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
                     span(class="notification-number") {(10)}
                     span(dangerously_set_inner_html=NOTIF_SVG) 
                 }
+                div(class="icon-gap")
                 div() {
                     a(class=(match *current_route.get() {AppRoutes::Profile => "is-active", _ => ""}), href="/profile", alt="Profile") {
                         img(class="profile-img", loading="lazy",

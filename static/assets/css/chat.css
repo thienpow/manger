@@ -23,7 +23,7 @@
     z-index: 1;
 }
 .chat-footer {
-    position: fixed;
+    position: relative;
     display: flex;
     justify-self: flex-end;
     border-radius: 12px;
@@ -32,12 +32,12 @@
     padding: 0px 20px;
     align-items: center;
     background-color: var(--theme-bg-color);
-    bottom: 25px;
-    left: 0;
-    right: 0;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     width: calc(100vw-480);
-    margin-left: 255px;
-    margin-right: 255px;
+    margin-left: 12px;
+    margin-right: 12px;
     z-index: 100;
 }
   

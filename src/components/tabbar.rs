@@ -20,8 +20,8 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
                 AppRoutes::Home => button_active_class, 
                 _ => button_empty_class
             },
-            AppRoutes::BibleStudy => match route {
-                AppRoutes::BibleStudy => button_active_class, 
+            AppRoutes::Bible => match route {
+                AppRoutes::Bible => button_active_class, 
                 _ => button_empty_class
             },
             AppRoutes::Love => match route {
@@ -56,7 +56,7 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
                     a(class=get_a_class(&AppRoutes::Home, &*current_route.get()), aria-label="Manger Home Page", href="/", dangerously_set_inner_html=HOME_SVG) 
                 }
                 li()  {
-                    a(class=get_a_class(&AppRoutes::BibleStudy, &*current_route.get()), aria-label="Bible Study Page", href="/bible", dangerously_set_inner_html=BIBLE_SVG) 
+                    a(class=get_a_class(&AppRoutes::Bible, &*current_route.get()), aria-label="Bible Study Page", href="/bible", dangerously_set_inner_html=BIBLE_SVG) 
                 }
                 li() {
                     a(class=get_a_class(&AppRoutes::Love, &*current_route.get()), aria-label="Love in Action", href="/love") {

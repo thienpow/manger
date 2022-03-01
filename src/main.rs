@@ -4,13 +4,14 @@ use sycamore_router::{Route};
 use wasm_bindgen::JsCast;
 use wasm_bindgen::prelude::Closure;
 
+mod api;
 mod pages;
 mod context;
 mod svg;
 mod components;
 mod global;
 use crate::components::{background::Background};
-use crate::context::{DarkMode, CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo};
+use crate::context::{DarkMode, CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo, BibleBook, SelectedBibleBook, AppState, ChapterItem, VerseItem};
 use crate::pages::app::App;
 
 #[derive(Debug, Route)]
@@ -18,7 +19,7 @@ pub  enum AppRoutes {
     #[to("/")]
     Home,
     #[to("/bible")]
-    BibleStudy,
+    Bible,
     #[to("/love")]
     Love,
     #[to("/community")]
@@ -114,6 +115,10 @@ fn main() {
         let background_video = BackgroundVideo(create_rc_signal("".to_string()));
         ctx.provide_context(background_video);
 
+        let selected_bible_book = SelectedBibleBook(create_rc_signal(BibleBook {id: 0, name: "".to_string(), chapters: 0 }));
+        ctx.provide_context(selected_bible_book);
+
+
             
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
 
@@ -136,6 +141,27 @@ fn main() {
         web_sys::window().unwrap().add_event_listener_with_callback("resize", window_resize_closure.as_ref().unchecked_ref()).unwrap();
         window_resize_closure.forget();
         
+
+
+
+        let chapters: RcSignal<Vec<RcSignal<ChapterItem>>> = create_rc_signal(Vec::new());
+        let verses: RcSignal<Vec<RcSignal<VerseItem>>> = create_rc_signal(Vec::new());
+
+        let app_state = AppState {
+            chapters,
+            verses
+        };
+        ctx.provide_context(app_state);
+
+        ctx.create_effect(move || {
+            let app_state = ctx.use_context::<AppState>();
+            for chapter in app_state.chapters.get().iter() {
+                chapter.track();
+            }
+            for verse in app_state.verses.get().iter() {
+                verse.track();
+            }
+        });
 
         view! { ctx, 
             Background()

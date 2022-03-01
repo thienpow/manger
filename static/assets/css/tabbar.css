@@ -7,6 +7,9 @@
 }
 
 .tab-bar {
+    display: none;
+    position: relative;
+    justify-self: flex-end;
     padding-top: 6px;
     padding-left: 8px;
     padding-right: 8px;
@@ -15,8 +18,11 @@
     border-top-width: 1px;
     width: 100vw;
     height: 46px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     background-color: var(--theme-bg-color);
-    display: none;
+    z-index: 100;
 }
   
 .tab-bar ul {

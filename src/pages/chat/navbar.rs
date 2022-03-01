@@ -2,14 +2,10 @@
 
 use sycamore::prelude::*;
 
-use crate::AppRoutes;
-use crate::context::{CurrentRoute};
 use crate::svg::{BACK_SVG, VIDEO_SVG, PHONE_SVG};
 
 #[component]
 pub fn NavBar<G: Html>(ctx: ScopeRef) -> View<G> {
-
-    let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
 
     view! { ctx,
 
@@ -28,6 +24,7 @@ pub fn NavBar<G: Html>(ctx: ScopeRef) -> View<G> {
                     //on:click=toggle,
                     dangerously_set_inner_html=VIDEO_SVG,
                 )
+                div(class="icon-gap")
                 span(
                     //on:click=toggle,
                     dangerously_set_inner_html=PHONE_SVG,
