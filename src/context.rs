@@ -11,6 +11,7 @@ pub struct AppState {
     pub verses: RcSignal<Vec<RcSignal<VerseItem>>>,
     pub dark_mode: RcSignal<bool>,
     pub selected_bible_book: RcSignal<BibleBookItem>,
+    pub selected_bible_chapter: RcSignal<ChapterItem>,
 }
 
 impl AppState {

@@ -130,6 +130,7 @@ fn main() {
         let verses: RcSignal<Vec<RcSignal<VerseItem>>> = create_rc_signal(Vec::new());
         let dark_mode: RcSignal<bool> = create_rc_signal(is_dark_mode);
         let selected_bible_book: RcSignal<BibleBookItem> = create_rc_signal(BibleBookItem {book_id: 0, book_name: "".to_string(), chapters: 0 });
+        let selected_bible_chapter: RcSignal<ChapterItem> = create_rc_signal(ChapterItem {id: 0, name: "".to_string() });
 
         let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
         ctx.provide_context(current_route);
@@ -139,7 +140,8 @@ fn main() {
             chapters,
             verses,
             dark_mode,
-            selected_bible_book
+            selected_bible_book,
+            selected_bible_chapter
         };
         ctx.provide_context(app_state);
 
@@ -149,13 +151,15 @@ fn main() {
             for bible_books in app_state.bible_books.get().iter() {
                 bible_books.track();
             }
-            */
+            
             for chapter in app_state.chapters.get().iter() {
                 chapter.track();
             }
             for verse in app_state.verses.get().iter() {
                 verse.track();
             }
+            */
+            
             if let Some(local_storage) = &local_storage {
                 local_storage
                     .set_item("dark_mode", &*app_state.dark_mode.get().to_string())

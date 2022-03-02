@@ -5,6 +5,7 @@
     height: 100%;
     border: 0px solid red;
     overflow: none;
+    user-select: none;
 }
 
 .bible-content-area {
@@ -26,6 +27,8 @@
     scroll-snap-type: y mandatory;
     scroll-snap-align: center;
     scroll-behavior: smooth;
+    user-select: none;
+    touch-action: pan-y;
 }
 .toc-wrapper::-webkit-scrollbar {
     display: none;
