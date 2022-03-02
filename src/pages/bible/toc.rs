@@ -1,17 +1,10 @@
 
 use gloo_timers::future::TimeoutFuture;
 use sycamore::futures::ScopeSpawnFuture;
-use js_sys::*;
-use serde::Deserialize;
-use serde::Serialize;
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
 use wasm_bindgen::JsCast;
-use wasm_bindgen::JsValue;
-use wasm_bindgen::UnwrapThrowExt;
 use web_sys::Element;
-use web_sys::Event;
-use web_sys::console;
 use crate::api::bible::get_toc;
 use crate::context::AppState;
 use crate::context::BibleBookItem;
@@ -29,7 +22,7 @@ fn clear_selected_button(selector: &str) {
 }
 
 #[component]
-pub fn TOCItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G> {
+pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G> {
 
     let app_state = ctx.use_context::<AppState>();
 
@@ -49,14 +42,17 @@ pub fn TOCItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G>
         toc_item_ref.set_class_name("toc-menu-selected");
         
         
-        let book_list = document.get_element_by_id("book_list").unwrap();
-        book_list.set_scroll_top(((id-1) * toc_item_ref.client_height())+15);
+        let list = document.get_element_by_id("book_list").unwrap();
+        list.set_scroll_top(((id-1) * toc_item_ref.client_height())+15);
         //console::log_1(&format!("book_list.scroll_top() == {}",  i).as_str().into());
 
         app_state.selected_bible_book.set(BibleBookItem {book_id: id, book_name: book_name, chapters: chapters});
         app_state.reset_chapters(chapters);
         app_state.selected_bible_chapter.set(ChapterItem {id: 0, name: "".to_string()});
         clear_selected_button(".chapter-menu-selected");
+
+        let list = document.get_element_by_id("chapter_list").unwrap();
+        list.set_scroll_top(53+15);
     };
  
     let span_style = if app_state.selected_bible_book.get().book_id == id {"toc-menu-selected"} else {""};
@@ -72,7 +68,7 @@ pub fn TOCItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G>
 }
 
 #[component]
-async fn TOCList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
+async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
 
     if app_state.bible_books.get().len() == 0 {
@@ -97,7 +93,7 @@ async fn TOCList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
             view: |ctx, book | 
 
                 view! { ctx,
-                    TOCItem(book)
+                    BookItem(book)
                 },
 
             key: |book| book.get().book_id,
@@ -177,8 +173,8 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
 #[component]
 pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
-    let book_list_ref = ctx.create_node_ref();
 
+    let book_list_ref = ctx.create_node_ref();
 
     ctx.spawn_future(async move {
         loop {
@@ -191,10 +187,18 @@ pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
                 list.set_scroll_top(((app_state.selected_bible_book.get().book_id-1) * 53)+15);
                 app_state.reset_chapters(app_state.selected_bible_book.get().chapters);
             
-                //TimeoutFuture::new(1200).await;
+                
                 let list = document.get_element_by_id("chapter_list").unwrap();
-                list.set_scroll_top(((app_state.selected_bible_chapter.get().id-1) * 53)+15);
+                let id = app_state.selected_bible_chapter.get().id;
+                if id > 0 {
+                    list.set_scroll_top(((id-1) * 53)+15);
+                } else {
+                    list.set_scroll_top(53+15);
+                }
+                
                 //TODO: reset verses here
+
+
                 break;
             }
             
@@ -204,35 +208,44 @@ pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
 
     });
 
-    let mouse_move_handler = |e: Event| {
 
+    let show_bar = move |show: bool| {
+        let window = web_sys::window().unwrap();
+        if window.inner_width().unwrap().as_f64().unwrap() <= 540.0 {
+            let document = window.document().unwrap();
+            let element = document.query_selector(".toc-bar-left").unwrap().unwrap();
+
+            if app_state.selected_bible_book.get().book_id == 0 || app_state.selected_bible_chapter.get().id == 0 {
+                element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
+            } else {
+                if show {
+                    element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
+                } else {
+                    element.set_attribute("style", "position:absolute; left: -145px;transition: 0.1s;").unwrap();
+                }
+            }
+
+        }
     };
-
-    let mouse_up_handler = |e: Event| {
-        
-    };
-
-    let handle_book_mousedown = move |e: Event| {
-        let bnode = book_list_ref.get::<DomNode>();
-        //bnode.event(ctx, "mousemove", Box::new(mouse_move_handler));
-        //bnode.event(ctx, "mousemove", Box::new(mouse_up_handler));
-        
-    };
-
 
     view! { ctx,
         
-        div(class="toc-bar-left") {
+        div(class="toc-bar-left", 
+            style=(if app_state.selected_bible_book.get().book_id == 0 {"left: 0px;"} else {""}),
+            on:mouseenter=move |_| show_bar(true),
+            on:mouseleave=move |_| show_bar(false)
+        ) {
 
             div(class="toc-title-left") {
-                "TABLE OF CONTENTS"
+                "BOOKS"
             }
-            div(ref=book_list_ref, id="book_list", class="toc-wrapper", on:mousedown=handle_book_mousedown) {
+            div(class="row")
+            div(ref=book_list_ref, id="book_list", class="toc-wrapper") {
 
                 div(class="toc-menu") {
                     Suspense {
                         fallback: view! { ctx, "Loading..." },
-                        TOCList {}
+                        BookList {}
                     }
                 }
                 
@@ -243,6 +256,7 @@ pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
             div(class="toc-title-left") {
                 "CHAPTERS"
             }
+            div(class="row")
             div(id="chapter_list", class="toc-wrapper") {
 
                 div(class="toc-menu") {

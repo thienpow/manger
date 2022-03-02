@@ -106,6 +106,18 @@
     .side-bar-contact {
       display: none;
     }
+    .toc-bar-left {
+      padding: 56px 20px;
+      position: absolute;
+      left: -145px;
+      transition: 0.1s;
+    }
+    .toc-bar-left:hover {
+      position: relative;
+      left: 0px;
+      transition: 0.1s;
+    }
+    
 }
   
 @media screen and (max-width: 420px) {

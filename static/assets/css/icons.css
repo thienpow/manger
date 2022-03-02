@@ -1,0 +1,231 @@
+.gg-home {
+    background:
+        linear-gradient(to left,
+            currentColor 5px,transparent 0)
+            no-repeat 0 bottom/4px 2px,
+        linear-gradient(to left,
+            currentColor 5px,transparent 0)
+            no-repeat right bottom/4px 2px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 18px;
+    height: 14px;
+    border: 2px solid;
+    border-top: 0;
+    border-bottom: 0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-top: 7px;
+    color: var(--theme-color);
+}
+
+.gg-home::after,
+.gg-home::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.gg-home::before {
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-top-left-radius: 4px;
+    transform: rotate(45deg);
+    top: -5px;
+    border-radius: 3px;
+    width: 14px;
+    height: 14px;
+    left: 0;
+}
+
+.gg-home::after {
+    width: 8px;
+    height: 10px;
+    border: 2px solid;
+    border-radius: 100px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+    left: 3px;
+    bottom: 0;
+}
+
+.gg-home:hover {
+    color: var(--highlight-color);
+}
+
+.gg-readme {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    transform: scale(var(--ggs,1));
+    width: 2px;
+    height: 17px;
+    border-bottom: 4px solid;
+    border-radius: 4px;
+    color: var(--theme-color);
+}
+
+.gg-readme::after,
+.gg-readme::before {
+    content: "";
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    width: 8px;
+    height: 12px;
+    box-shadow: 0 0 0 2px;
+    border-radius: 1px;
+    bottom: -1px;
+    background:
+        linear-gradient(to left,
+            currentColor 4px,transparent 0)
+            no-repeat center 5px/4px 2px,
+        linear-gradient(to left,
+            currentColor 4px,transparent 0)
+            no-repeat center 2px/4px 2px,
+        linear-gradient(to left,
+            currentColor 4px,transparent 0)
+            no-repeat center 8px/4px 2px;
+}
+
+.gg-readme::before {
+    border-top-right-radius: 3px;
+    left: -8px;
+}
+
+.gg-readme::after {
+    border-top-left-radius: 3px;
+    right: -8px;
+}
+
+.gg-readme:hover {
+    color: var(--highlight-color);
+}
+
+.gg-add-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs,1));
+    border-radius: 4px;
+    color: var(--theme-color);
+ }
+ 
+ .gg-add-r::after,
+ .gg-add-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px;
+}
+ 
+.gg-add-r::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px;
+}
+
+.gg-add-r:hover {
+    color: var(--highlight-color);
+}
+
+.gg-smile {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-radius: 100px;
+    color: var(--theme-color);
+}
+
+.gg-smile::after,
+.gg-smile::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 4px;
+}
+
+.gg-smile::before {
+    background: currentColor;
+    box-shadow: 6px 0 0;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    top: 5px;
+}
+
+.gg-smile::after {
+    width: 8px;
+    height: 4px;
+    border-radius: 150px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: 2px solid;
+    border-top-color: transparent;
+    top: 9px;
+}
+
+.gg-smile:hover {
+    color: var(--highlight-color);
+}
+
+.gg-profile,
+.gg-profile::after,
+.gg-profile::before {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid;
+    border-radius: 100px;
+}
+
+.gg-profile {
+    overflow: hidden;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px;
+    position: relative;
+    color: var(--theme-color);
+}
+
+.gg-profile::after,
+.gg-profile::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+}
+
+.gg-profile::after {
+    border-radius: 200px;
+    top: 11px;
+    left: 0px;
+    width: 18px;
+    height: 18px;
+}
+
+.gg-profile:hover {
+    color: var(--highlight-color);
+}

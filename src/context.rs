@@ -66,7 +66,7 @@ impl AppState {
         
     }
 
-    pub fn reset_verses(&self, chapter: i32, total: i32) {
+    pub fn _reset_verses(&self, chapter: i32, total: i32) {
 
         self.verses.set(Vec::new());
 
