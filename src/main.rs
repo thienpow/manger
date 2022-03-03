@@ -141,10 +141,10 @@ fn main() {
             verses,
             dark_mode,
             selected_bible_book,
-            selected_bible_chapter
+            selected_bible_chapter,
         };
         ctx.provide_context(app_state);
-
+    
         ctx.create_effect(move || {
             let app_state = ctx.use_context::<AppState>();
             /*

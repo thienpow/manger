@@ -1,6 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 use sycamore::prelude::{RcSignal, create_rc_signal};
+use web_sys::console;
 use crate::{AppRoutes};
 
 
@@ -45,11 +46,10 @@ impl AppState {
         
     }
 
-    pub fn reset_chapters(&self, total: i32) {
-
+    
+    pub fn init_chapters(&self, max: i32) {
         self.chapters.set(Vec::new());
-
-        for n in 1..total+1 {
+        for n in 1..max+1 {
             self.chapters.set(
                 self.chapters
                     .get()
@@ -62,8 +62,7 @@ impl AppState {
                     })))
                     .collect()
             )
-        }
-        
+        };
     }
 
     pub fn _reset_verses(&self, chapter: i32, total: i32) {

@@ -3,8 +3,7 @@ use gloo_timers::future::TimeoutFuture;
 use sycamore::futures::ScopeSpawnFuture;
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
-use wasm_bindgen::JsCast;
-use web_sys::Element;
+use web_sys::console;
 use crate::api::bible::get_toc;
 use crate::context::AppState;
 use crate::context::BibleBookItem;
@@ -14,10 +13,11 @@ use crate::context::ChapterItem;
 fn clear_selected_button(selector: &str) {
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
-    let element = document.query_selector(selector).unwrap();
-    if element.is_some() {
-        let element = element.unwrap();
-        element.set_class_name("");
+    match document.query_selector(selector).unwrap() {
+        Some(element) => {
+            element.set_class_name("");
+        },
+        _ => ()
     }
 }
 
@@ -36,30 +36,29 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
     let handle_toc_click = |id: i32, book_name:  String, chapters: i32| {
         let window = web_sys::window().unwrap();
         let document = window.document().unwrap();
-        clear_selected_button(".toc-menu-selected");
         
-        let toc_item_ref = toc_item_ref.get::<DomNode>().inner_element().dyn_into::<Element>().unwrap();
-        toc_item_ref.set_class_name("toc-menu-selected");
-        
-        
-        let list = document.get_element_by_id("book_list").unwrap();
-        list.set_scroll_top(((id-1) * toc_item_ref.client_height())+15);
-        //console::log_1(&format!("book_list.scroll_top() == {}",  i).as_str().into());
-
         app_state.selected_bible_book.set(BibleBookItem {book_id: id, book_name: book_name, chapters: chapters});
-        app_state.reset_chapters(chapters);
+        match document.get_element_by_id("book_list") {
+            Some(list) => {
+                list.set_scroll_top(((id-1) * 53)+15);
+            },
+            _ => {}
+        }
+        
         app_state.selected_bible_chapter.set(ChapterItem {id: 0, name: "".to_string()});
-        clear_selected_button(".chapter-menu-selected");
-
-        let list = document.get_element_by_id("chapter_list").unwrap();
-        list.set_scroll_top(53+15);
+        match document.get_element_by_id("chapter_list") {
+            Some(list) => {
+                list.set_scroll_top(53+15);
+            },
+            _ => {}
+        }
+        
+        
     };
- 
-    let span_style = if app_state.selected_bible_book.get().book_id == id {"toc-menu-selected"} else {""};
 
     view! { ctx,
         span(ref=toc_item_ref, 
-            class=span_style,
+            class=if app_state.selected_bible_book.get().book_id == id {"toc-menu-selected"} else {""},
             on:click=move |_| handle_toc_click(id, book_name.clone(), chapters)
         ) {
             (book_name_span)
@@ -104,39 +103,26 @@ async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
 }
 
 #[component]
-fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<crate::context::ChapterItem>) -> View<G> {
+fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: &RcSignal<ChapterItem>) -> View<G> {
+    let id = chapter.get().id;
     let app_state = ctx.use_context::<AppState>();
-
-    // Make `todo` live as long as the scope.
-    let chapter = ctx.create_ref(chapter);
-
-    let chapter_item_ref = ctx.create_node_ref();
-
-
+    
     let handle_chapter_click = |id: i32| {
         let window = web_sys::window().unwrap();
         let document = window.document().unwrap();
-        clear_selected_button(".chapter-menu-selected");
-
-        let chapter_item_ref = chapter_item_ref.get::<DomNode>().inner_element().dyn_into::<Element>().unwrap();
-        chapter_item_ref.set_class_name("chapter-menu-selected");
         
         let book_list = document.get_element_by_id("chapter_list").unwrap();
-        book_list.set_scroll_top(((id-1) * chapter_item_ref.client_height())+15);
+        book_list.set_scroll_top(((id-1) * 53)+15);
 
         app_state.selected_bible_chapter.set(ChapterItem {id: id, name: id.to_string()});
     };
- 
-
-    let span_style = if app_state.selected_bible_chapter.get().id == chapter.get().id {"chapter-menu-selected"} else {""};
 
     view! { ctx,
         span(
-            ref=chapter_item_ref, 
-            class=span_style,
-            on:click=move |_| handle_chapter_click(chapter.get().id)
+            class=if app_state.selected_bible_chapter.get().id == id {"chapter-menu-selected"} else {""},
+            on:click=move |_| handle_chapter_click(id)
         ) {
-            (chapter.get().id)
+            (id)
         }
     }
 }
@@ -146,11 +132,16 @@ fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<crate::context::Chapter
 fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
 
+    if app_state.chapters.get().len() == 0 {
+        app_state.init_chapters(150);
+    }
+    
     let filtered_chapters = ctx.create_memo(|| {
         app_state
             .chapters
             .get()
             .iter()
+            .filter(|chapter| app_state.selected_bible_book.get().chapters >= chapter.get().id)
             .cloned()
             .collect::<Vec<_>>()
     });
@@ -160,7 +151,7 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
         Keyed {
             iterable: filtered_chapters,
             view: |ctx, chapter| view! { ctx,
-                ChapterItem(chapter)
+                ChapterItem(&chapter)
             },
             key: |chapter| chapter.get().id,
         }
@@ -173,34 +164,44 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
 #[component]
 pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
-
+    
     let book_list_ref = ctx.create_node_ref();
 
     ctx.spawn_future(async move {
         loop {
+            //console::log_1(&format!("TimeoutFuture").as_str().into());
             TimeoutFuture::new(60).await;
 
             if app_state.selected_bible_book.get().book_id > 0 {
                 let window = web_sys::window().unwrap();
                 let document = window.document().unwrap();
-                let list = document.get_element_by_id("book_list").unwrap();
-                list.set_scroll_top(((app_state.selected_bible_book.get().book_id-1) * 53)+15);
-                app_state.reset_chapters(app_state.selected_bible_book.get().chapters);
-            
                 
-                let list = document.get_element_by_id("chapter_list").unwrap();
-                let id = app_state.selected_bible_chapter.get().id;
-                if id > 0 {
-                    list.set_scroll_top(((id-1) * 53)+15);
-                } else {
-                    list.set_scroll_top(53+15);
+                match document.get_element_by_id("book_list") {
+                    Some(list) => {
+                        list.set_scroll_top(((app_state.selected_bible_book.get().book_id-1) * 53)+15);
+                    },
+                    _ => break
                 }
+
+                match document.get_element_by_id("chapter_list") {
+                    Some(list) => {
+                        let id = app_state.selected_bible_chapter.get().id;
+                        if id > 0 {
+                            list.set_scroll_top(((id-1) * 53)+15);
+                        } else {
+                            list.set_scroll_top(53+15);
+                        }
+                    },
+                    _ => ()
+                }
+                
                 
                 //TODO: reset verses here
 
 
                 break;
             }
+            
             
         };
         
@@ -213,24 +214,29 @@ pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
         let window = web_sys::window().unwrap();
         if window.inner_width().unwrap().as_f64().unwrap() <= 540.0 {
             let document = window.document().unwrap();
-            let element = document.query_selector(".toc-bar-left").unwrap().unwrap();
-
-            if app_state.selected_bible_book.get().book_id == 0 || app_state.selected_bible_chapter.get().id == 0 {
-                element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
-            } else {
-                if show {
-                    element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
-                } else {
-                    element.set_attribute("style", "position:absolute; left: -145px;transition: 0.1s;").unwrap();
-                }
+            match document.get_element_by_id("toc-bar-left") {
+                Some(element) => {
+                    if app_state.selected_bible_book.get().book_id == 0 || app_state.selected_bible_chapter.get().id == 0 {
+                        element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
+                    } else {
+                        if show {
+                            element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
+                        } else {
+                            element.set_attribute("style", "position:absolute; left: -145px;transition: 0.1s;").unwrap();
+                        }
+                    }
+                },
+                _ => ()
             }
+
 
         }
     };
 
+
     view! { ctx,
         
-        div(class="toc-bar-left", 
+        div(id="toc-bar-left", class="toc-bar-left", 
             style=(if app_state.selected_bible_book.get().book_id == 0 {"left: 0px;"} else {""}),
             on:mouseenter=move |_| show_bar(true),
             on:mouseleave=move |_| show_bar(false)

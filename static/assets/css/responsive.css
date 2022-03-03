@@ -110,12 +110,11 @@
       padding: 56px 20px;
       position: absolute;
       left: -145px;
-      transition: 0.1s;
+      background-color: var(--content-bg);
     }
     .toc-bar-left:hover {
       position: relative;
       left: 0px;
-      transition: 0.1s;
     }
     
 }

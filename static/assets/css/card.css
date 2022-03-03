@@ -18,7 +18,8 @@
     border: 1px solid var(--theme-bg-color);
     padding: 20px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.1s ease;
+    min-width: 188px;
 }
 
 .card:hover {
