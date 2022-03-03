@@ -8,6 +8,10 @@
     White-space: nowrap;
     transition: 0.1s;
 }
+.toc-bar-left-hide {
+    position: absolute;
+    left: -145px;
+}
 
 .bible-content-area {
     padding: 12px;

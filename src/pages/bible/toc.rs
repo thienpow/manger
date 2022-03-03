@@ -3,14 +3,13 @@ use gloo_timers::future::TimeoutFuture;
 use sycamore::futures::ScopeSpawnFuture;
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
-use web_sys::console;
 use crate::api::bible::get_toc;
 use crate::context::AppState;
 use crate::context::BibleBookItem;
 use crate::context::ChapterItem;
 
 
-fn clear_selected_button(selector: &str) {
+fn _clear_selected_button(selector: &str) {
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
     match document.query_selector(selector).unwrap() {
@@ -164,7 +163,8 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
 #[component]
 pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
-    
+    let mouse_entered = ctx.create_signal(false);
+
     let book_list_ref = ctx.create_node_ref();
 
     ctx.spawn_future(async move {
@@ -210,36 +210,30 @@ pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
     });
 
 
-    let show_bar = move |show: bool| {
+    
+    let get_class = move || {
         let window = web_sys::window().unwrap();
         if window.inner_width().unwrap().as_f64().unwrap() <= 540.0 {
-            let document = window.document().unwrap();
-            match document.get_element_by_id("toc-bar-left") {
-                Some(element) => {
-                    if app_state.selected_bible_book.get().book_id == 0 || app_state.selected_bible_chapter.get().id == 0 {
-                        element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
-                    } else {
-                        if show {
-                            element.set_attribute("style", "position:relative; left: 0px;transition: 0.1s;").unwrap();
-                        } else {
-                            element.set_attribute("style", "position:absolute; left: -145px;transition: 0.1s;").unwrap();
-                        }
-                    }
-                },
-                _ => ()
+            if app_state.selected_bible_book.get().book_id == 0 || app_state.selected_bible_chapter.get().id == 0 {
+                "toc-bar-left"
+            } else {
+                if *mouse_entered.get() {
+                    "toc-bar-left"
+                } else {
+                    "toc-bar-left toc-bar-left-hide"
+                }
             }
-
-
+        } else {
+            "toc-bar-left"
         }
     };
 
 
     view! { ctx,
         
-        div(id="toc-bar-left", class="toc-bar-left", 
-            style=(if app_state.selected_bible_book.get().book_id == 0 {"left: 0px;"} else {""}),
-            on:mouseenter=move |_| show_bar(true),
-            on:mouseleave=move |_| show_bar(false)
+        div(id="toc-bar-left", class=get_class(), 
+            on:mouseenter=move |_| mouse_entered.set(true),
+            on:mouseleave=move |_| mouse_entered.set(false)
         ) {
 
             div(class="toc-title-left") {

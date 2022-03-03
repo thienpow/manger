@@ -108,11 +108,9 @@
     }
     .toc-bar-left {
       padding: 56px 20px;
-      position: absolute;
-      left: -145px;
       background-color: var(--content-bg);
     }
-    .toc-bar-left:hover {
+    .toc-bar-left-hide:hover {
       position: relative;
       left: 0px;
     }

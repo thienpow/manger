@@ -1,7 +1,6 @@
 
 use serde::{Serialize, Deserialize};
 use sycamore::prelude::{RcSignal, create_rc_signal};
-use web_sys::console;
 use crate::{AppRoutes};
 
 
