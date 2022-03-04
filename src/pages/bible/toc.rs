@@ -1,27 +1,11 @@
 
-use gloo_timers::future::TimeoutFuture;
-use sycamore::futures::ScopeSpawnFuture;
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
-use web_sys::Element;
-use web_sys::console;
 use crate::api::bible::get_toc;
 use crate::context::AppState;
 use crate::context::BibleBookItem;
 use crate::context::ChapterItem;
 use crate::pages::bible;
-
-
-fn _clear_selected_button(selector: &str) {
-    let window = web_sys::window().unwrap();
-    let document = window.document().unwrap();
-    match document.query_selector(selector).unwrap() {
-        Some(element) => {
-            element.set_class_name("");
-        },
-        _ => ()
-    }
-}
 
 #[component]
 pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G> {

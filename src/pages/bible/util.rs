@@ -1,7 +1,7 @@
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
 
-use crate::context::{AppState, ChapterItem};
+use crate::context::{AppState};
 
 
 pub fn scroll_to_selected(ctx: ScopeRef) {

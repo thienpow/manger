@@ -42,17 +42,6 @@ pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
                                     button(class="cbutton status-button", on:click=handle_click_bible) {"Nothing"}
                                 }
                             }
-                        }
-                    }
-                }
-
-
-                div(class="content-wrapper") {
-                    div(class="content-section") {
-                        div(class="content-section-title") {
-                            "CHOOSE A BIBLE"
-                        }
-                        div(class="card-wrapper") {
                             div(class="card") {
                                 span() {"Bible image here"}
                                 div(class="card__subtext") {"Please choose a preferred Bible language."}
@@ -62,8 +51,11 @@ pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
                                 }
                             }
                         }
+                        
                     }
+                    
                 }
+
 
             }
 
