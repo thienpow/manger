@@ -11,7 +11,7 @@ mod svg;
 mod components;
 mod global;
 use crate::components::{background::Background};
-use crate::context::{CurrentRoute, LeftMenuOpened, BackgroundImage, BackgroundVideo, BibleBookItem, AppState, ChapterItem, VerseItem};
+use crate::context::{CurrentRoute, LeftMenuOpened, BibleBookItem, AppState, ChapterItem, VerseItem};
 use crate::pages::app::App;
 
 #[derive(Debug, Clone, Route)]
@@ -45,11 +45,13 @@ fn main() {
     sycamore::render(|ctx| {
 
         
-        let local_storage = web_sys::window().unwrap().local_storage().unwrap();
+        let window = web_sys::window().unwrap();
+        let document = window.document().unwrap();
+        
+        let local_storage = window.local_storage().unwrap();
         
         // Get dark mode from media query.
-        let dark_mode_mq = web_sys::window()
-            .unwrap()
+        let dark_mode_mq = window
             .match_media("(prefers-color-scheme: light)")
             .unwrap()
             .unwrap()
@@ -63,14 +65,13 @@ fn main() {
         };
         
         if !is_dark_mode {
-            let document = web_sys::window().unwrap().document().unwrap();
             document.body().unwrap().class_list().toggle("light-mode").expect("");
         }
 
         let left_menu_opened = LeftMenuOpened(create_rc_signal(false));
         ctx.provide_context(left_menu_opened);
 
-        let local_storage = web_sys::window().unwrap().local_storage().unwrap();
+        /* 
         let _background_image = if let Some(local_storage) = &local_storage {
             let background_image_ls = local_storage.get_item("background_image").unwrap();
             if background_image_ls.is_none() {
@@ -99,6 +100,8 @@ fn main() {
         let background_video = BackgroundVideo(create_rc_signal("".to_string()));
         ctx.provide_context(background_video);
 
+        */
+        
 
             
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
@@ -141,31 +144,10 @@ fn main() {
             verses,
             dark_mode,
             selected_bible_book,
-            selected_bible_chapter,
+            selected_bible_chapter
         };
         ctx.provide_context(app_state);
-    
-        ctx.create_effect(move || {
-            let app_state = ctx.use_context::<AppState>();
-            /*
-            for bible_books in app_state.bible_books.get().iter() {
-                bible_books.track();
-            }
-            
-            for chapter in app_state.chapters.get().iter() {
-                chapter.track();
-            }
-            for verse in app_state.verses.get().iter() {
-                verse.track();
-            }
-            */
-            
-            if let Some(local_storage) = &local_storage {
-                local_storage
-                    .set_item("dark_mode", &*app_state.dark_mode.get().to_string())
-                    .unwrap();
-            }
-        });
+
 
         view! { ctx, 
             Background()

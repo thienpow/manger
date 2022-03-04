@@ -32,6 +32,24 @@ pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
                 div(class="content-wrapper") {
                     div(class="content-section") {
                         div(class="content-section-title") {
+                            "Welcome to use Manger"
+                        }
+                        div(class="card-wrapper") {
+                            div(class="card") {
+                                span() {"v0.0.1"}
+                                div(class="card__subtext") {"Just a version indicator here."}
+                                div(class="card-buttons") {
+                                    button(class="cbutton status-button", on:click=handle_click_bible) {"Nothing"}
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                div(class="content-wrapper") {
+                    div(class="content-section") {
+                        div(class="content-section-title") {
                             "CHOOSE A BIBLE"
                         }
                         div(class="card-wrapper") {

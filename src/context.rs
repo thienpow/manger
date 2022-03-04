@@ -1,6 +1,7 @@
 
 use serde::{Serialize, Deserialize};
-use sycamore::prelude::{RcSignal, create_rc_signal};
+use sycamore::prelude::{RcSignal, create_rc_signal, ScopeRef, ReadSignal, Scope};
+use web_sys::console;
 use crate::{AppRoutes};
 
 
@@ -22,6 +23,13 @@ impl AppState {
         let document = web_sys::window().unwrap().document().unwrap();
         document.body().unwrap().class_list().toggle("light-mode").expect("");
 
+        let local_storage = web_sys::window().unwrap().local_storage().unwrap();
+        if let Some(local_storage) = &local_storage {
+            console::log_1(&format!("create_effect").as_str().into());
+            local_storage
+                .set_item("dark_mode", &*self.dark_mode.get().to_string())
+                .unwrap();
+        }
     }
 
     pub fn init_bible_books(&self, bible_books: Vec<BibleBookItem>) {
@@ -86,6 +94,7 @@ impl AppState {
         
     }
 }
+
 
 #[derive(Debug, Default, Clone)]
 pub struct DarkMode(pub RcSignal<bool>);

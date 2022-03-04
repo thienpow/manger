@@ -4,9 +4,26 @@ use sycamore_router::{HistoryIntegration, Router};
 use crate::{components::{header::Header, tabbar::TabBar}, AppRoutes, context::CurrentRoute};
 use crate::pages::{home::home::Home, bible::bible::Bible, chat::chat::Chat, profile::Profile};
 
+use crate::pages::{bible};
+
 #[component]
 pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {
     
+
+    let home_page = view! { ctx, 
+        Home()
+    };
+    let bible_page = view! { ctx, 
+        Bible()
+    };
+    let chat_page = view! { ctx, 
+        Chat()
+    };
+
+    let profile_page = view! { ctx, 
+        Profile()
+    };
+
     view! { ctx,
         
         Router {
@@ -23,15 +40,12 @@ pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {
                         (match route.get().as_ref() {
                             AppRoutes::Home => {
                                 current_route.set(AppRoutes::Home);
-                                view! { ctx, 
-                                    Home()
-                                }
+                                home_page.clone()
                             },
                             AppRoutes::Bible => {
                                 current_route.set(AppRoutes::Bible);
-                                view! { ctx, 
-                                    Bible()
-                                }
+                                bible::util::scroll_to_selected(ctx);
+                                bible_page.clone()
                             },
                             AppRoutes::Love => {
                                 current_route.set(AppRoutes::Love);
@@ -45,15 +59,11 @@ pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {
                             }},
                             AppRoutes::Chat(cid) => {
                                 current_route.set(AppRoutes::Chat(cid.to_string()));
-                                view! { ctx,
-                                    Chat()
-                                }
+                                chat_page.clone()
                             },
                             AppRoutes::Profile => {
                                 current_route.set(AppRoutes::Profile);
-                                view! { ctx, 
-                                    Profile()
-                                }
+                                profile_page.clone()
                             },
                             AppRoutes::NotFound => {
                                 current_route.set(AppRoutes::NotFound);
