@@ -131,9 +131,13 @@ fn main() {
         let bible_books: RcSignal<Vec<RcSignal<BibleBookItem>>> = create_rc_signal(Vec::new());
         let chapters: RcSignal<Vec<RcSignal<ChapterItem>>> = create_rc_signal(Vec::new());
         let verses: RcSignal<Vec<RcSignal<VerseItem>>> = create_rc_signal(Vec::new());
+        let loaded_verses: RcSignal<Vec<VerseItem>> = create_rc_signal(Vec::new());
+        let loaded_book: RcSignal<i32> = create_rc_signal(0);
         let dark_mode: RcSignal<bool> = create_rc_signal(is_dark_mode);
         let selected_bible_book: RcSignal<BibleBookItem> = create_rc_signal(BibleBookItem {book_id: 0, book_name: "".to_string(), chapters: 0 });
         let selected_bible_chapter: RcSignal<ChapterItem> = create_rc_signal(ChapterItem {id: 0, name: "".to_string() });
+        let show_bible_toc: RcSignal<bool> = create_rc_signal(false);
+        let pin_bible_toc: RcSignal<bool> = create_rc_signal(false);
 
         let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
         ctx.provide_context(current_route);
@@ -142,9 +146,13 @@ fn main() {
             bible_books,
             chapters,
             verses,
+            loaded_verses,
+            loaded_book,
             dark_mode,
             selected_bible_book,
-            selected_bible_chapter
+            selected_bible_chapter,
+            show_bible_toc,
+            pin_bible_toc
         };
         ctx.provide_context(app_state);
 

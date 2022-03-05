@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 16},
     "verses":[
         {"chapter":1,"verse":1,"text":"The words of Nehemiah the son of Hachaliah. And it came to pass in the month Chisleu, in the twentieth year, as I was in Shushan the palace,"},
         {"chapter":1,"verse":2,"text":"That Hanani, one of my brethren, came, he and [certain] men of Judah; and I asked them concerning the Jews that had escaped, which were left of the captivity, and concerning Jerusalem."},

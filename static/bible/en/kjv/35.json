@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 35},
     "verses":[
         {"chapter":1,"verse":1,"text":"The burden which Habakkuk the prophet did see."},
         {"chapter":1,"verse":2,"text":"O LORD, how long shall I cry, and thou wilt not hear! [even] cry out unto thee [of] violence, and thou wilt not save!"},

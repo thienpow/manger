@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 44},
     "verses":[
         {"chapter":1,"verse":1,"text":"The former treatise have I made, O Theophilus, of all that Jesus began both to do and teach,"},
         {"chapter":1,"verse":2,"text":"Until the day in which he was taken up, after that he through the Holy Ghost had given commandments unto the apostles whom he had chosen:"},

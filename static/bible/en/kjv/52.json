@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 52},
     "verses":[
         {"chapter":1,"verse":1,"text":"Paul, and Silvanus, and Timotheus, unto the church of the Thessalonians [which is] in God the Father and [in] the Lord Jesus Christ: Grace [be] unto you, and peace, from God our Father, and the Lord Jesus Christ."},
         {"chapter":1,"verse":2,"text":"We give thanks to God always for you all, making mention of you in our prayers;"},

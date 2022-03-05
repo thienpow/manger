@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 43},
     "verses":[
         {"chapter":1,"verse":1,"text":"In the beginning was the Word, and the Word was with God, and the Word was God."},
         {"chapter":1,"verse":2,"text":"The same was in the beginning with God."},

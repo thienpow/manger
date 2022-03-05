@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","book_name":"Obadiah","book_id":31},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","book_id":31,"book_name":"Obadiah"},
     "verses":[
         {"chapter":1,"verse":1,"text":"The vision of Obadiah. Thus saith the Lord GOD concerning Edom; We have heard a rumour from the LORD, and an ambassador is sent among the heathen, Arise ye, and let us rise up against her in battle."},
         {"chapter":1,"verse":2,"text":"Behold, I have made thee small among the heathen: thou art greatly despised."},

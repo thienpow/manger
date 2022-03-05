@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 65},
     "verses":[
         {"chapter":1,"verse":1,"text":"Jude, the servant of Jesus Christ, and brother of James, to them that are sanctified by God the Father, and preserved in Jesus Christ, [and] called:"},
         {"chapter":1,"verse":2,"text":"Mercy unto you, and peace, and love, be multiplied."},

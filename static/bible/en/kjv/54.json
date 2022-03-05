@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 54},
     "verses":[
         {"chapter":1,"verse":1,"text":"Paul, an apostle of Jesus Christ by the commandment of God our Saviour, and Lord Jesus Christ, [which is] our hope;"},
         {"chapter":1,"verse":2,"text":"Unto Timothy, [my] own son in the faith: Grace, mercy, [and] peace, from God our Father and Jesus Christ our Lord."},

@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 21},
     "verses":[
         {"chapter":1,"verse":1,"text":"The words of the Preacher, the son of David, king in Jerusalem."},
         {"chapter":1,"verse":2,"text":"Vanity of vanities, saith the Preacher, vanity of vanities; all [is] vanity."},

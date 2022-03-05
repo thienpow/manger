@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 61},
     "verses":[
         {"chapter":1,"verse":1,"text":"Simon Peter, a servant and an apostle of Jesus Christ, to them that have obtained like precious faith with us through the righteousness of God and our Saviour Jesus Christ:"},
         {"chapter":1,"verse":2,"text":"Grace and peace be multiplied unto you through the knowledge of God, and of Jesus our Lord,"},

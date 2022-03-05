@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 34},
     "verses":[
         {"chapter":1,"verse":1,"text":"The burden of Nineveh. The book of the vision of Nahum the Elkoshite."},
         {"chapter":1,"verse":2,"text":"God [is] jealous, and the LORD revengeth; the LORD revengeth, and [is] furious; the LORD will take vengeance on his adversaries, and he reserveth [wrath] for his enemies."},

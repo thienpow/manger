@@ -54,7 +54,9 @@
     color: var(--inactive-color);
     transition: 0.1s;
 }
-
+.navbar-menu-home {
+    display: inline-block;
+}
 .navbar-menu a.is-active, .navbar-menu a:hover {
     color: var(--theme-color);
 }
@@ -62,3 +64,4 @@
 .navbar-menu-right svg:hover {
     color: var(--highlight-color);
 }
+

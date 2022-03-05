@@ -45,7 +45,7 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
             }
             div(class="menu-gap")
             div(class="header-menu") {
-                a(class=(match *current_route.get() {AppRoutes::Home => "is-active", _ => ""}), href="/") {"Home"}
+                a(class=(match *current_route.get() {AppRoutes::Home => "navbar-menu-home is-active", _ => "navbar-menu-home"}), href="/") {"Home"}
                 a(class=(match *current_route.get() {AppRoutes::Bible => "is-active", _ => ""}), href="/bible") {"Bible Study"}
                 a(class=(match *current_route.get() {AppRoutes::Community => "is-active", _ => ""}), href="/community") {"Community"}
             }

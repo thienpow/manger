@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 46},
     "verses":[
         {"chapter":1,"verse":1,"text":"Paul, called [to be] an apostle of Jesus Christ through the will of God, and Sosthenes [our] brother,"},
         {"chapter":1,"verse":2,"text":"Unto the church of God which is at Corinth, to them that are sanctified in Christ Jesus, called [to be] saints, with all that in every place call upon the name of Jesus Christ our Lord, both theirs and ours:"},

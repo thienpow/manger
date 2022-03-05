@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 45},
     "verses":[
         {"chapter":1,"verse":1,"text":"Paul, a servant of Jesus Christ, called [to be] an apostle, separated unto the gospel of God,"},
         {"chapter":1,"verse":2,"text":"(Which he had promised afore by his prophets in the holy scriptures,)"},

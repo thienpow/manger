@@ -3,7 +3,14 @@ use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
 
 use crate::context::{AppState};
 
+pub fn reload_chapter_data(ctx: ScopeRef) {
 
+    ctx.spawn_future(async move {
+        let app_state = ctx.use_context::<AppState>();
+        app_state.load_chapter_data().await;
+    });
+
+}
 pub fn scroll_to_selected(ctx: ScopeRef) {
 
     ctx.spawn_future(async move {

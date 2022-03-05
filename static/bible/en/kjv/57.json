@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 57},
     "verses":[
         {"chapter":1,"verse":1,"text":"Paul, a prisoner of Jesus Christ, and Timothy [our] brother, unto Philemon our dearly beloved, and fellowlabourer,"},
         {"chapter":1,"verse":2,"text":"And to [our] beloved Apphia, and Archippus our fellowsoldier, and to the church in thy house:"},

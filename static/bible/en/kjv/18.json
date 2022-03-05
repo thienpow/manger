@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 18},
     "verses":[
         {"chapter":1,"verse":1,"text":"There was a man in the land of Uz, whose name [was] Job; and that man was perfect and upright, and one that feared God, and eschewed evil."},
         {"chapter":1,"verse":2,"text":"And there were born unto him seven sons and three daughters."},

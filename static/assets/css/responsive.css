@@ -4,7 +4,7 @@
       width: calc(50% - 20px);
     }
     .card:last-child {
-      margin-top: 20px;
+      margin-top: 0px;
       margin-left: 0px;
     }
     .chat-footer {
@@ -12,7 +12,10 @@
     }
 }
   
-@media screen and (max-width: 1055px) {
+@media screen and (max-width: 1080px) {
+    .navbar-menu-home {
+      display: none;
+    }
     .notify {
       display: none;
     }
