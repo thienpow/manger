@@ -1,6 +1,6 @@
 
 .toc-bar-left {
-    padding: 26px 20px;
+    padding: 26px 12px;
     width: 188px;
     height: 100vh;
     overflow: none;
@@ -10,11 +10,11 @@
 }
 .toc-bar-left-hide {
     position: absolute;
-    left: -145px;
+    left: -185px;
 }
 
 .bible-content {
-    padding: 12px 0px 58px 12px;
+    padding: 12px 0px 58px 0px;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -23,6 +23,8 @@
     background-color: transparent;
 }
 .bible-verse-content-wrapper {
+    display: flex;
+    flex-direction: column;
     background-color: transparent;
     position: relative;
     justify-content: center;
