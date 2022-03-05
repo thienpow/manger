@@ -39,23 +39,23 @@ impl AppState {
 
 
     pub async fn load_chapter_data(&self) {
-        console::log_1(&format!("book_id: {}", self.selected_bible_book.get().book_id).into());
+        //console::log_1(&format!("book_id: {}", self.selected_bible_book.get().book_id).into());
         let book_id = self.selected_bible_book.get().book_id;
         if *self.loaded_book.get() != book_id {
-            console::log_1(&"11loaded".into());
+            //console::log_1(&"11loaded".into());
             let loaded_verses = api::bible::get_book_data("en/kjv".to_string(), book_id).await.unwrap().verses;
             self.loaded_book.set(book_id);
             self.loaded_verses.set(loaded_verses);
-            console::log_1(&"loaded".into());
+            //console::log_1(&"loaded".into());
         }
-        console::log_1(&"21loaded".into());
+        //console::log_1(&"21loaded".into());
 
         let chapter_id = self.selected_bible_chapter.get().id;
         let loaded_verses = self.loaded_verses.get().iter().cloned().filter(|v| v.chapter == chapter_id).collect::<Vec<VerseItem>>();
 
         self.verses.set(Vec::new());
         for v in loaded_verses.iter() {
-            console::log_1(&"iter".into());
+            //console::log_1(&"iter".into());
             self.verses.set(
                 self.verses
                     .get()

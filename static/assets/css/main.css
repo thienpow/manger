@@ -10,12 +10,14 @@
   --tabbar-bg-color: rgba(16 18 27 / 55%);
   --border-color: rgba(113 119 144 / 25%);
   --theme-color: #f9fafb;
+  --theme-text-color: #d5d5d5;
   --highlight-color: #8d939b;
   --inactive-color: rgb(113 119 144 / 78%);
   --body-font: "Poppins", sans-serif;
   --hover-menu-bg: rgba(12 15 25 / 30%);
   --content-title-color: #999ba5;
   --content-bg: rgb(146 151 179 / 13%);
+  --content-text-bg: #48484a;
   --button-inactive: rgb(249 250 251 / 55%);
   --dropdown-bg: #21242d;
   --dropdown-hover: rgb(42 46 60);
@@ -29,6 +31,7 @@
   --theme-bg-color: rgb(255 255 255 / 31%);
   --tabbar-bg-color: rgb(255 255 255 / 55%);
   --theme-color: #3c3a3a;
+  --theme-text-color: #272727;
   --highlight-color: #5ac950;
   --inactive-color: #333333;
   --button-inactive: #3c3a3a;
@@ -41,6 +44,7 @@
   --hover-menu-bg: rgba(255 255 255 / 35%);
   --scrollbar-bg: rgb(255 253 253 / 57%);
   --content-title-color: --theme-color;
+  --content-text-bg: #e8f1e8;
 }
 
 .app {

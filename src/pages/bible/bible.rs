@@ -4,11 +4,15 @@ use crate::context;
 
 #[component]
 fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<context::VerseItem>) -> View<G> {
-    
+    let verse =  verse.get();
+    let prefix = format!("[{}:{}]  ", verse.chapter, verse.verse);
+
     view! { ctx,
-        span(style="padding-left: 25px;"
+        span() {(prefix)}
+        span(
         ) {
-            (verse.get().text)
+            (verse.text)
+            br()br()
         }
     }
 }
@@ -46,15 +50,18 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                                 format!("{}{}{}{}", if *app_state.pin_bible_toc.get() {">> "} else {"<< "},app_state.selected_bible_book.get().book_name, " >> ", chapter_text)
                             } else {"".to_string()})
                         }
-                        div(class="bible-verse-content") {
-                            Keyed {
-                                iterable: get_filtered_verses,
-                                view: |ctx, verse| view! { ctx,
-                                    VerseItem(verse)
-                                },
-                                key: |verse| verse.get().verse,
+                        div(class="bible-verse-content-wrapper") {
+                            div(class="bible-verse-content") {
+                                Keyed {
+                                    iterable: get_filtered_verses,
+                                    view: |ctx, verse| view! { ctx,
+                                        VerseItem(verse)
+                                    },
+                                    key: |verse| verse.get().verse,
+                                }
                             }
                         }
+                        
                         
                     }
                 }

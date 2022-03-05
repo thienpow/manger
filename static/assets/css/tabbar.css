@@ -3,13 +3,13 @@
     position: absolute;
     justify-content: center;
     align-items: center;
-    margin-left: 24px;
-    margin-right: 24px;
+    margin-left: 12px;
+    margin-right: 12px;
     border-top-style: solid;
     border-top-width: 1px;
     height: 46px;
     bottom: 12px;
-    width: calc(100% - 48px);
+    width: calc(100% - 24px);
     background-color: var(--tabbar-bg-color);
     border-radius: 12px;
     border: 1px solid var(--theme-bg-color);
