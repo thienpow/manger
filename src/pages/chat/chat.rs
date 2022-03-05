@@ -64,21 +64,22 @@ pub fn Chat<G: Html>(ctx: ScopeRef) -> View<G> {
                         div(){"my side of message3"}
                         div(){"99my side of message4"}
                     }
-                    div(class="chat-footer") {
-                        span(class="optinal-button", dangerously_set_inner_html=IMAGE_SVG)
-                        //span(dangerously_set_inner_html=PLUG_CIRCLE_SVG)
-                        span(dangerously_set_inner_html=PAPER_CLIP_SVG)
-            
-                        input(type="text", placeholder="Type something here...")
-            
-                        span(dangerously_set_inner_html=SMILE_SVG)
-                        span(class="optinal-button", dangerously_set_inner_html=THUMBS_UP_SVG)
-                    }
+                    
                 }
                 
             }
 
             ContactBar()
+            div(class="chat-footer") {
+                span(class="optinal-button", dangerously_set_inner_html=IMAGE_SVG)
+                //span(dangerously_set_inner_html=PLUG_CIRCLE_SVG)
+                span(dangerously_set_inner_html=PAPER_CLIP_SVG)
+    
+                input(type="text", placeholder="Type something here...")
+    
+                span(dangerously_set_inner_html=SMILE_SVG)
+                span(class="optinal-button", dangerously_set_inner_html=THUMBS_UP_SVG)
+            }
         }
 
         

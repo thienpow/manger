@@ -44,7 +44,7 @@
   --hover-menu-bg: rgba(255 255 255 / 35%);
   --scrollbar-bg: rgb(255 253 253 / 57%);
   --content-title-color: --theme-color;
-  --content-text-bg: #e8f1e8;
+  --content-text-bg: #ffffff;
 }
 
 .app {

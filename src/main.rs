@@ -72,38 +72,6 @@ fn main() {
         ctx.provide_context(left_menu_opened);
 
         /* 
-        let _background_image = if let Some(local_storage) = &local_storage {
-            let background_image_ls = local_storage.get_item("background_image").unwrap();
-            if background_image_ls.is_none() {
-                "".to_string()
-            } else {
-                background_image_ls.unwrap()
-            }
-        } else { 
-            "".to_string()
-        };
-
-        let background_image = BackgroundImage(create_rc_signal("".to_string()));
-        ctx.provide_context(background_image);
-
-        let _background_video = if let Some(local_storage) = &local_storage {
-            let background_video_ls = local_storage.get_item("background_video").unwrap();
-            if background_video_ls.is_none() {
-                "".to_string()
-            } else {
-                background_video_ls.unwrap()
-            }
-        } else { 
-            "".to_string()
-        };
-
-        let background_video = BackgroundVideo(create_rc_signal("".to_string()));
-        ctx.provide_context(background_video);
-
-        */
-        
-
-            
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
 
             let mut height: f64 =  web_sys::window().unwrap().inner_height().unwrap().unchecked_into_f64()-188.0;
@@ -121,10 +89,11 @@ fn main() {
                 }
                 chat_content.set_attribute("style", format!("height:{}px;", height).as_str()).unwrap();
             }
+            
         }) as Box<dyn FnMut(_)>);
         web_sys::window().unwrap().add_event_listener_with_callback("resize", window_resize_closure.as_ref().unchecked_ref()).unwrap();
         window_resize_closure.forget();
-        
+        */
 
 
 

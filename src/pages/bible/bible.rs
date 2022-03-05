@@ -9,7 +9,7 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<context::VerseItem>) -> Vie
 
     view! { ctx,
         span() {(prefix)}
-        span(
+        span(style=""
         ) {
             (verse.text)
             br()br()
@@ -39,10 +39,10 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
 
                 div(style="display: flex;") {
                     TOC()
-                    div(class="bible-content-area") {
+                    div(class="bible-content") {
 
                         div(class="content-section-title", 
-                            style="justify-self: center; align-items: center; width: 100%;transition: 0.1s;",
+                            style="padding-left: 25px; justify-self: center; align-items: center; width: 100%;transition: 0.1s;height: 24px;",
                             on:click=move |_| app_state.pin_bible_toc.set(!*app_state.pin_bible_toc.get()),
                         ){
                             (if app_state.selected_bible_book.get().book_id > 0 {

@@ -7,9 +7,6 @@
       margin-top: 0px;
       margin-left: 0px;
     }
-    .chat-footer {
-      width: calc(100vw-270);
-    }
 }
   
 @media screen and (max-width: 1080px) {
@@ -30,9 +27,6 @@
 @media screen and (max-width: 945px) {
     .side-bar-left {
       display: none;
-    }
-    .chat-footer {
-      width: calc(100vw-30);
     }
     .menu-left {
       display: none;
@@ -103,9 +97,7 @@
     .content-wrapper::-webkit-scrollbar {
       display: none;
     }
-    .chat-content::-webkit-scrollbar {
-      display: none;
-    }
+    
     .side-bar-contact {
       display: none;
     }
@@ -116,6 +108,13 @@
     .toc-bar-left-hide:hover {
       position: relative;
       left: 0px;
+    }
+
+    .chat-content::-webkit-scrollbar {
+      display: none;
+    }
+    .chat-footer {
+      width: calc(100% - 24px);
     }
     
 }
