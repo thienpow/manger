@@ -20,12 +20,19 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
         app_state.selected_bible_book.set(BibleBookItem {book_id, book_name, chapters});
         app_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
         bible::util::reload_chapter_data(ctx);
-        bible::util::scroll_to_selected(ctx);
+
+        bible::util::scroll_to_selected_chapter(ctx, 60);
+        bible::util::scroll_to_selected_book(ctx);
     };
 
     view! { ctx,
         span(
-            class=if app_state.selected_bible_book.get().book_id == id {"toc-menu-selected"} else {""},
+            id=(format!("book-item-{}", id)),
+            class=(if app_state.selected_bible_book.get().book_id == id {
+                "toc-menu-selected"
+            } else {
+                ""
+            }),
             on:click=move |_| handle_toc_click(id, book_name.clone(), chapters)
         ) {
             (book_name_span)
@@ -48,7 +55,7 @@ async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
     });
 
     view! { ctx,
-        div(style="height: 53px")
+        div(style="height: 53px;")
         Keyed {
             iterable: filtered_books,
             view: |ctx, book | 
@@ -59,7 +66,7 @@ async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
 
             key: |book| book.get().book_id,
         }
-        div(style="height: 53px")
+        div(id="book-item-67", style="height: 53px;")
         
     }
 }
@@ -72,11 +79,12 @@ fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G
     let handle_chapter_click = |id: i32| {
         app_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
         bible::util::reload_chapter_data(ctx);
-        bible::util::scroll_to_selected(ctx);
+        bible::util::scroll_to_selected_chapter(ctx, 60);
     };
 
     view! { ctx,
         span(
+            id=(format!("chapter-item-{}", id)),
             class=if app_state.selected_bible_chapter.get().id == id {"chapter-menu-selected"} else {""},
             on:click=move |_| handle_chapter_click(id)
         ) {
@@ -101,7 +109,7 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
     });
 
     view! { ctx,
-        div(style="height: 53px")
+        div(style="height: 53px;white-space: nowrap;")
         Keyed {
             iterable: filtered_chapters,
             view: |ctx, chapter| view! { ctx,
@@ -109,7 +117,8 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
             },
             key: |chapter| chapter.get().id,
         }
-        div(style="height: 53px")
+        div(id=format!("chapter-item-{}", app_state.selected_bible_book.get().chapters+1),
+            style="height: 53px;white-space: nowrap;")
     }
 }
 
@@ -122,6 +131,7 @@ pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
     let book_list_ref: &NodeRef<G> = ctx.create_node_ref();
     let chapter_list_ref = ctx.create_node_ref();
 
+    
 
     if app_state.chapters.get().len() == 0 {
         app_state.init_chapters(150);

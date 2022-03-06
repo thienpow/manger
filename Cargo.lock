@@ -204,79 +204,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
-name = "lexical"
-version = "6.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c34e981f88d060a67815388470172638f1af16b3a12e581cb75142f190161bf9"
-dependencies = [
- "lexical-core",
-]
-
-[[package]]
-name = "lexical-core"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a3926d8f156019890be4abe5fd3785e0cff1001e06f59c597641fd513a5a284"
-dependencies = [
- "lexical-parse-float",
- "lexical-parse-integer",
- "lexical-util",
- "lexical-write-float",
- "lexical-write-integer",
-]
-
-[[package]]
-name = "lexical-parse-float"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4d066d004fa762d9da995ed21aa8845bb9f6e4265f540d716fb4b315197bf0e"
-dependencies = [
- "lexical-parse-integer",
- "lexical-util",
- "static_assertions",
-]
-
-[[package]]
-name = "lexical-parse-integer"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f2c92badda8cc0fc4f3d3cc1c30aaefafb830510c8781ce4e8669881f3ed53ac"
-dependencies = [
- "lexical-util",
- "static_assertions",
-]
-
-[[package]]
-name = "lexical-util"
-version = "0.8.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ff669ccaae16ee33af90dc51125755efed17f1309626ba5c12052512b11e291"
-dependencies = [
- "static_assertions",
-]
-
-[[package]]
-name = "lexical-write-float"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b5186948c7b297abaaa51560f2581dae625e5ce7dfc2d8fdc56345adb6dc576"
-dependencies = [
- "lexical-util",
- "lexical-write-integer",
- "static_assertions",
-]
-
-[[package]]
-name = "lexical-write-integer"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ece956492e0e40fd95ef8658a34d53a3b8c2015762fdcaaff2167b28de1f56ef"
-dependencies = [
- "lexical-util",
- "static_assertions",
-]
-
-[[package]]
 name = "libc"
 version = "0.2.117"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -491,22 +418,20 @@ dependencies = [
 ]
 
 [[package]]
-name = "static_assertions"
-version = "1.1.0"
+name = "smallvec"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+checksum = "f2dd574626839106c320a323308629dcb1acfc96e32a8cba364ddc61ac23ee83"
 
 [[package]]
 name = "sycamore"
 version = "0.8.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28f7e5a3bd2bf5736c995f2c33d27ea1a6cddbf605fab5c59b565b1096072ec2"
+source = "git+https://github.com/sycamore-rs/sycamore#8b2beb5f8cec73ca67aae25fc113326831bdfed5"
 dependencies = [
  "ahash",
  "futures",
  "indexmap",
  "js-sys",
- "lexical",
  "paste",
  "sycamore-futures",
  "sycamore-macro",
@@ -519,8 +444,7 @@ dependencies = [
 [[package]]
 name = "sycamore-futures"
 version = "0.8.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc8c624d64b94f21f65053dc5245b258b5273507d875d167821f693af84604c4"
+source = "git+https://github.com/sycamore-rs/sycamore#8b2beb5f8cec73ca67aae25fc113326831bdfed5"
 dependencies = [
  "futures",
  "sycamore-reactive",
@@ -531,8 +455,7 @@ dependencies = [
 [[package]]
 name = "sycamore-macro"
 version = "0.8.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d65dafa78415be274ac17200354dfd3c47b71c8394bf48d8787caeb5174b359"
+source = "git+https://github.com/sycamore-rs/sycamore#8b2beb5f8cec73ca67aae25fc113326831bdfed5"
 dependencies = [
  "once_cell",
  "proc-macro2",
@@ -543,19 +466,18 @@ dependencies = [
 [[package]]
 name = "sycamore-reactive"
 version = "0.8.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5aff7fdc3947863383803d340b9402df291d30687735f798f52f25cf32db1fdb"
+source = "git+https://github.com/sycamore-rs/sycamore#8b2beb5f8cec73ca67aae25fc113326831bdfed5"
 dependencies = [
  "indexmap",
  "serde",
  "slotmap",
+ "smallvec",
 ]
 
 [[package]]
 name = "sycamore-router"
 version = "0.8.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6bc0a97f76a7dea193cb43b6a6d94614bbf1f9f80cfcf03f146408f124be792d"
+source = "git+https://github.com/sycamore-rs/sycamore#8b2beb5f8cec73ca67aae25fc113326831bdfed5"
 dependencies = [
  "sycamore",
  "sycamore-router-macro",
@@ -566,8 +488,7 @@ dependencies = [
 [[package]]
 name = "sycamore-router-macro"
 version = "0.8.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e52c5fbf9f32ecc187bcdf00e5f6e512116f133c204e4567944608b0c7303b9"
+source = "git+https://github.com/sycamore-rs/sycamore#8b2beb5f8cec73ca67aae25fc113326831bdfed5"
 dependencies = [
  "nom",
  "proc-macro2",

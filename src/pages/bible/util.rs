@@ -1,5 +1,6 @@
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
+use web_sys::console;
 
 use crate::context::{AppState};
 
@@ -11,34 +12,40 @@ pub fn reload_chapter_data(ctx: ScopeRef) {
     });
 
 }
-pub fn scroll_to_selected(ctx: ScopeRef) {
+
+pub fn scroll_to_selected_book(ctx: ScopeRef) {
 
     ctx.spawn_future(async move {
         TimeoutFuture::new(60).await;
 
         let app_state = ctx.use_context::<AppState>();
     
-        let window = web_sys::window().unwrap();
-        let document = window.document().unwrap();
+        match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("book-item-{}", app_state.selected_bible_book.get().book_id+1).as_str()) {
+            Some(item_below) => {
+                item_below.scroll_into_view_with_bool(false);
+            },
+            _ => {}
+        }
+
+    });
     
-        match document.get_element_by_id("book_list") {
-            Some(list) => {
-                list.set_scroll_top(((app_state.selected_bible_book.get().book_id-1) * 53)+15);
+}
+
+pub fn scroll_to_selected_chapter(ctx: ScopeRef, wait: u32) {
+
+    ctx.spawn_future(async move {
+        TimeoutFuture::new(wait).await;
+
+        let app_state = ctx.use_context::<AppState>();
+    
+        match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("chapter-item-{}", app_state.selected_bible_chapter.get().id+1).as_str()) {
+            Some(item_below) => {
+                item_below.scroll_into_view_with_bool(false);
             },
             _ => {}
         }
         
-        match document.get_element_by_id("chapter_list") {
-            Some(list) => {
-                let id = app_state.selected_bible_chapter.get().id;
-                if id > 0 {
-                    list.set_scroll_top(((id-1) * 53)+15);
-                } else {
-                    list.set_scroll_top(53+15);
-                }
-            },
-            _ => {}
-        }
+
     });
     
 }

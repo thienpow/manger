@@ -55,8 +55,6 @@ pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
                     }
                     
                 }
-
-
             }
 
             ContactBar()
