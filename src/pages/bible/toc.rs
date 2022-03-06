@@ -21,7 +21,7 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
         app_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
         bible::util::reload_chapter_data(ctx);
 
-        bible::util::scroll_to_selected_chapter(ctx, 60);
+        bible::util::scroll_to_selected_chapter(ctx, 0);
         bible::util::scroll_to_selected_book(ctx);
     };
 

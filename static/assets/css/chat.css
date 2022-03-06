@@ -6,20 +6,19 @@
     width: 100%;
     border: 0px solid;
     color: var(--theme-color);
-    height: 100vh;
+    height: 100%;
 }
 .chat-content {
     position: relative;
     top: 0px;
     justify-content: flex-start; 
     width: calc(100vw-480);
-    padding-bottom: 15px;
     padding-left: 20px;
     padding-right: 20px;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    height: 100vh;
+    height: 100%;
     z-index: 1;
 }
 
@@ -32,7 +31,7 @@
     padding: 0px 20px;
     align-items: center;
     background-color: var(--theme-bg-color);
-    bottom: 12px;
+    bottom: 24px;
     left: 0px;
     width: calc(100% - 264px);
     margin-left: 12px;

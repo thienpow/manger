@@ -16,7 +16,7 @@ pub fn reload_chapter_data(ctx: ScopeRef) {
 pub fn scroll_to_selected_book(ctx: ScopeRef) {
 
     ctx.spawn_future(async move {
-        TimeoutFuture::new(60).await;
+        TimeoutFuture::new(120).await;
 
         let app_state = ctx.use_context::<AppState>();
     

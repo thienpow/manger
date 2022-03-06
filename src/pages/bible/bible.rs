@@ -42,11 +42,11 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                     div(class="bible-content") {
 
                         div(class="content-section-title", 
-                            style="display:flex; padding-left: 25px; justify-self: center; align-items: center; width: 100%;transition: 0.1s;height: 24px;",
+                            style="display:flex; padding-left: 25px; justify-self: center; align-items: center; width: 100%;transition: 0.3s;height: 24px;",
                             
                         ){
                             i(class=(if *app_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
-                                style="margin-right:25px;",
+                                style="margin-right:25px;cursor: pointer;",
                                 on:click=move |_| {
                                     app_state.pin_bible_toc.set(!*app_state.pin_bible_toc.get())
                                 })
