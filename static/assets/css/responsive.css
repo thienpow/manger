@@ -37,7 +37,7 @@
     
 }
   
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 738px) {
     .menu-gap-shrink {
       width: 100%;
     }
@@ -49,13 +49,6 @@
     }
     .status {
       display: none;
-    }
-    .card {
-      width: 100%;
-      margin-top: 20px;
-    }
-    .card + .card {
-      margin-left: 0;
     }
     .status-button {
       padding: 6px 14px;
@@ -114,6 +107,15 @@
     .chat-footer {
       width: calc(100% - 24px);
     }
+}
+@media screen and (max-width: 540px) {
+  .card {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .card + .card {
+    margin-left: 0;
+  }
 }
   
 @media screen and (max-width: 420px) {

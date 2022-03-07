@@ -20,9 +20,47 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<context::VerseItem>) -> Vie
 }
 
 #[component]
+pub fn BackButton<G: Html>(ctx: ScopeRef) -> View<G> {
+    let show_button = ctx.create_signal(false);
+
+    view! { ctx,
+        div(class="verse-content-nav-panel", style="border-top-left-radius: 12px;",
+            on:mouseenter=move |_| show_button.set(true),
+            on:mouseleave=move |_| show_button.set(false)
+        ) {
+            button(
+                class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_first_page() {"nav-button-show"} else {""}),
+                on:click=move |_| bible::util::scroll_to_previous_page(&ctx, 60)
+            ) {
+                i(class="gg-chevron-left")
+            }
+        }
+    }
+}
+
+#[component]
+pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
+    let show_button = ctx.create_signal(false);
+
+    view! { ctx,
+        div(class="verse-content-nav-panel", style="Wborder-top-right-radius: 12px;",
+            on:mouseenter=move |_| show_button.set(true),
+            on:mouseleave=move |_| show_button.set(false)
+        ) {
+            button(
+                class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_last_page() {"nav-button-show"} else {""}),
+                on:click=move |_| bible::util::scroll_to_next_page(&ctx)
+            ) {
+                i(class="gg-chevron-right")
+            }
+        }
+    }
+}
+
+#[component]
 pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
-
+    
     let get_filtered_verses = ctx.create_memo(|| {
         app_state
             .verses
@@ -63,8 +101,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                     div(class="bible-verse-content-wrapper") {
 
                         //scroll_to_previous_page
-                        div(style="White-space: nowrap;height: 100%; width: 48px; border-top-left-radius: 12px;background-color: var(--content-text-bg);",
-                            on:click=move |_| bible::util::scroll_to_previous_page(&ctx, 60))
+                        BackButton()
 
                         div(id="bible-verse-content", 
                             class="bible-verse-content",
@@ -82,8 +119,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                         }
 
                         //scroll_to_next_page
-                        div(style="height: 100%; width: 48px; border-top-right-radius: 12px;background-color: var(--content-text-bg);",
-                            on:click=move |_| bible::util::scroll_to_next_page(&ctx))
+                        NextButton()
                     }
                 }
                 
