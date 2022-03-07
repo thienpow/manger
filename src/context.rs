@@ -18,6 +18,7 @@ pub struct AppState {
     pub selected_bible_chapter: RcSignal<ChapterItem>,
     pub show_bible_toc: RcSignal<bool>,
     pub pin_bible_toc: RcSignal<bool>,
+    pub current_verse_page: RcSignal<i32>,
 }
 
 impl AppState {
@@ -39,7 +40,8 @@ impl AppState {
 
 
     pub async fn load_chapter_data(&self) {
-        //console::log_1(&format!("book_id: {}", self.selected_bible_book.get().book_id).into());
+        
+
         let book_id = self.selected_bible_book.get().book_id;
         if *self.loaded_book.get() != book_id {
             //console::log_1(&"11loaded".into());

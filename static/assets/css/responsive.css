@@ -34,6 +34,7 @@
     .notification + svg {
       display: none;
     }
+    
 }
   
 @media screen and (max-width: 540px) {
@@ -113,7 +114,6 @@
     .chat-footer {
       width: calc(100% - 24px);
     }
-    
 }
   
 @media screen and (max-width: 420px) {

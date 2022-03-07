@@ -1,6 +1,5 @@
 
 .toc-bar-left {
-    padding: 26px 12px;
     width: 188px;
     height: 100vh;
     overflow: none;
@@ -14,46 +13,65 @@
     position: absolute;
     left: -185px;
 }
-
+.bible-content-header {
+    color: var(--content-title-color);
+    margin-left: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display:flex; 
+    padding-left: 12px; 
+    justify-self: center; 
+    align-items: center; 
+    width: 100%;
+    transition: 0.3s;
+    height: 24px;
+  }
 .bible-content {
-    padding: 12px 0px 68px 0px;
+    padding: 0px 0px 115px 0px;
     display: flex;
     flex-direction: column;
     justify-content: left;
-    width: 100vw;
-    height: 100vh;
+    width: calc(100%-240px);
+    height: 100%;
     background-color: transparent;
     transition: 0.1s;
 }
 .bible-verse-content-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: transparent;
     position: relative;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
+    justify-content: flex-start;
+    align-items: left;
+    overflow: hidden;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin-right: 12px;
     transition: 0.1s;
 }
 .bible-verse-content {
     position: relative;
     overflow: auto;
-    width: 100%;
     height: 100%;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y mandatory;
+    width: 100%;
+    scroll-snap-type: x mandatory;
     scroll-snap-align: center;
     scroll-behavior: smooth;
-    touch-action: pan-y;
+    overflow-x: scroll;
     background-color: var(--content-text-bg);
     color: var(--theme-text-color);
-    padding: 25px 25px 25px 25px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    padding: 24px 0px;
     transition: 0.1s;
+    column-count:2;
+    column-width: 380px;
+    column-fill: auto;
+    column-gap: 48px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.bible-verse-content::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 }
 
 .toc-wrapper {

@@ -107,6 +107,7 @@ fn main() {
         let selected_bible_chapter: RcSignal<ChapterItem> = create_rc_signal(ChapterItem {id: 0, name: "".to_string() });
         let show_bible_toc: RcSignal<bool> = create_rc_signal(false);
         let pin_bible_toc: RcSignal<bool> = create_rc_signal(true);
+        let current_verse_page: RcSignal<i32> = create_rc_signal(0);
 
         let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
         ctx.provide_context(current_route);
@@ -121,7 +122,8 @@ fn main() {
             selected_bible_book,
             selected_bible_chapter,
             show_bible_toc,
-            pin_bible_toc
+            pin_bible_toc,
+            current_verse_page
         };
         ctx.provide_context(app_state);
 
