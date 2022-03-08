@@ -1,7 +1,6 @@
 
 use serde::{Deserialize, Serialize};
 use reqwasm::http::Request;
-use web_sys::console;
 
 use crate::context::{BibleBookItem, MetadataItem, VerseItem};
 

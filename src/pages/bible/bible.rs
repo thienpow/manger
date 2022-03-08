@@ -1,6 +1,5 @@
-use gloo_timers::future::TimeoutFuture;
-use sycamore::{prelude::*, futures::ScopeSpawnFuture};
-use web_sys::{Element, console};
+
+use sycamore::{prelude::*};
 use crate::{pages::{bible::{toc::TOC, self}}, context::AppState};
 use crate::context;
 
@@ -62,7 +61,6 @@ pub fn TextSizeButton<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
 
     view! { ctx,
-        div(class="menu-gap nowrap", style="width: 48px;")
         button(class="text-size-button", style="font-size:12pt;", on:click=move |_| app_state.verse_text_size.set(*app_state.verse_text_size.get()-1)) {"A"}
         div(class="icon-gap")
         button(class="text-size-button", style="font-size:18pt;", on:click=move |_| app_state.verse_text_size.set(*app_state.verse_text_size.get()+1)) {"A"}
@@ -111,7 +109,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                         } else {"".to_string()})
 
                     }
-                    
+                    div(class="menu-gap nowrap")
                     div(class="navbar-menu-right") {
                         TextSizeButton()
                     }
@@ -123,6 +121,8 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                         //scroll_to_previous_page
                         BackButton()
 
+                        //TODO: key up/down = change chapter
+                        // key left/right = change page
                         div(id="bible-verse-content", 
                             class="bible-verse-content",
                             style=format!("font-size:{}pt;", *app_state.verse_text_size.get()),

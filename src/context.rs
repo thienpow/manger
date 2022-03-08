@@ -1,9 +1,7 @@
 
 use serde::{Serialize, Deserialize};
 use sycamore::prelude::{RcSignal, create_rc_signal};
-use web_sys::console;
 use crate::{AppRoutes};
-
 use crate::api;
 
 #[derive(Debug, Default, Clone)]
@@ -32,7 +30,6 @@ impl AppState {
 
         let local_storage = web_sys::window().unwrap().local_storage().unwrap();
         if let Some(local_storage) = &local_storage {
-            //console::log_1(&format!("create_effect").as_str().into());
             local_storage
                 .set_item("dark_mode", &*self.dark_mode.get().to_string())
                 .unwrap();
@@ -41,17 +38,15 @@ impl AppState {
 
 
     pub async fn load_chapter_data(&self) {
-        
 
         let book_id = self.selected_bible_book.get().book_id;
         if *self.loaded_book.get() != book_id {
-            //console::log_1(&"11loaded".into());
+
+            //TODO: check if indexedDB got downloaded the verses or not. if got then dont need to call api to download again.
             let loaded_verses = api::bible::get_book_data("en/kjv".to_string(), book_id).await.unwrap().verses;
             self.loaded_book.set(book_id);
             self.loaded_verses.set(loaded_verses);
-            //console::log_1(&"loaded".into());
         }
-        //console::log_1(&"21loaded".into());
 
         let chapter_id = self.selected_bible_chapter.get().id;
         let loaded_verses = self.loaded_verses.get().iter().cloned().filter(|v| v.chapter == chapter_id).collect::<Vec<VerseItem>>();

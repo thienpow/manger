@@ -1,8 +1,6 @@
 
 use sycamore::prelude::*;
 use sycamore_router::{Route};
-use wasm_bindgen::JsCast;
-use wasm_bindgen::prelude::Closure;
 
 mod api;
 mod pages;
@@ -11,7 +9,7 @@ mod svg;
 mod components;
 mod global;
 use crate::components::{background::Background};
-use crate::context::{CurrentRoute, LeftMenuOpened, BibleBookItem, AppState, ChapterItem, VerseItem};
+use crate::context::{CurrentRoute, BibleBookItem, AppState, ChapterItem, VerseItem};
 use crate::pages::app::App;
 
 #[derive(Debug, Clone, Route)]
@@ -68,9 +66,7 @@ fn main() {
             document.body().unwrap().class_list().toggle("light-mode").expect("");
         }
 
-        let left_menu_opened = LeftMenuOpened(create_rc_signal(false));
-        ctx.provide_context(left_menu_opened);
-
+        
         /* 
         let window_resize_closure = Closure::wrap(Box::new(move |_: web_sys::UiEvent| {
 

@@ -1,6 +1,5 @@
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
-use web_sys::console;
 
 use crate::context::{AppState};
 
