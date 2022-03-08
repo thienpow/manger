@@ -14,19 +14,6 @@
     position: absolute;
     left: -185px;
 }
-.bible-content-header {
-    color: var(--content-title-color);
-    margin-left: 12px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    display:flex; 
-    padding-left: 12px; 
-    justify-self: center; 
-    align-items: center; 
-    width: 100%;
-    transition: 0.3s;
-    height: 24px;
-  }
 .bible-content {
     padding: 0px 0px 115px 0px;
     display: flex;
@@ -186,4 +173,17 @@
     width: 48px;
     background-color: var(--content-text-bg);
     z-index: 1;
+}
+.text-size-button {
+    cursor: pointer; 
+    color: var(--button-inactive);
+    border: 0px solid var(--button-inactive); 
+    border-radius: 2px;
+    width: 36px;
+    background-color:var(--hover-menu-bg);
+    padding: 2px;
+}
+.text-size-button:hover {
+    color: var(--highlight-color);
+    background-color: var(--hover-menu-bg);
 }

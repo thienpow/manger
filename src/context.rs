@@ -19,6 +19,7 @@ pub struct AppState {
     pub show_bible_toc: RcSignal<bool>,
     pub pin_bible_toc: RcSignal<bool>,
     pub current_verse_page: RcSignal<i32>,
+    pub verse_text_size: RcSignal<i32>,
 }
 
 impl AppState {

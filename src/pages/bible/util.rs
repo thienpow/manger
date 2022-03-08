@@ -62,18 +62,14 @@ pub fn scroll_to_previous_page(ctx: ScopeRef, wait: u32) {
 
         let app_state = ctx.use_context::<AppState>();
         let current_verse_page = *app_state.current_verse_page.get();
-                    
-        //web_sys::window().unwrap().match_media("(max-width: 420px)").unwrap().unwrap().matches()
+
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
             Some(e) => {
                 
                 if e.scroll_left() > 0 {
-                    //let pages: f64 = (e.scroll_width() as f64 / e.client_width() as f64).ceil();
                     let previous_page = current_verse_page - 1;
                     app_state.current_verse_page.set(previous_page);
                     e.scroll_with_x_and_y(((previous_page * e.client_width()) as f64 + (47.5f64 * previous_page as f64)) as f64, 0f64);
-                    //console::log_1(&format!("current_page = {}", current_page).into());
-                    //console::log_1(&format!("pages = {}", pages).into());
                 }
                 
             },
@@ -95,14 +91,10 @@ pub fn scroll_to_next_page(ctx: ScopeRef) {
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
             Some(e) => {
                 if e.scroll_width() - e.scroll_left() > e.client_width() + 10  {
-                    //let pages: f32 = (e.scroll_width() as f32 / e.client_width() as f32).ceil();
                     let next_page = current_verse_page + 1;
                     app_state.current_verse_page.set(next_page);
                     e.scroll_with_x_and_y(((next_page * e.client_width()) as f64 + (47.5f64 * next_page as f64)) as f64, 0f64);
-                    //console::log_1(&format!("pages = {}", pages).into());
-                    //console::log_1(&format!("current_page = {}", current_page).into());
                 }
-                //console::log_1(&format!("next_page = {}", next_page).into());
             },
             _ => {}
         }

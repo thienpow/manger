@@ -10,8 +10,8 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<context::VerseItem>) -> Vie
     let prefix = format!("[{}:{}]  ", verse.chapter, verse.verse);
 
     view! { ctx,
-        span() {(prefix)}
-        span(style=""
+        span(style="font-size:inherit;") {(prefix)}
+        span(style="font-size:inherit;"
         ) {
             (verse.text)
             br()br()
@@ -58,6 +58,19 @@ pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
 }
 
 #[component]
+pub fn TextSizeButton<G: Html>(ctx: ScopeRef) -> View<G> {
+    let app_state = ctx.use_context::<AppState>();
+
+    view! { ctx,
+        div(class="menu-gap nowrap", style="width: 48px;")
+        button(class="text-size-button", style="font-size:12pt;", on:click=move |_| app_state.verse_text_size.set(*app_state.verse_text_size.get()-1)) {"A"}
+        div(class="icon-gap")
+        button(class="text-size-button", style="font-size:18pt;", on:click=move |_| app_state.verse_text_size.set(*app_state.verse_text_size.get()+1)) {"A"}
+        div(class="icon-gap")
+    }
+}
+
+#[component]
 pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
     
@@ -78,23 +91,30 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
 
             TOC()
             div(class="main-container") {
-                div(class="bible-content-header"){
+                div(class="navbar"){
                     
-                    i(class=(if *app_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
+                    div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);") {
+                        i(class=(if *app_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
                         style="margin-right:12px;cursor: pointer;",
                         on:click=move |_| {
                             app_state.pin_bible_toc.set(!*app_state.pin_bible_toc.get())
                         })
 
-                    (if app_state.selected_bible_book.get().book_id > 0 {
-                        format!("{}",app_state.selected_bible_book.get().book_name)
-                    } else {"".to_string()})
+                        (if app_state.selected_bible_book.get().book_id > 0 {
+                            format!("{}",app_state.selected_bible_book.get().book_name)
+                        } else {"".to_string()})
 
-                    i(class=("gg-chevron-double-right"), style="margin-left:4px;margin-right:4px;")
+                        i(class=("gg-chevron-double-right"), style="margin-left:4px;margin-right:4px;")
 
-                    (if app_state.selected_bible_book.get().book_id > 0 {
-                        format!("{}",app_state.selected_bible_chapter.get().id.to_string())
-                    } else {"".to_string()})
+                        (if app_state.selected_bible_book.get().book_id > 0 {
+                            format!("{}",app_state.selected_bible_chapter.get().id.to_string())
+                        } else {"".to_string()})
+
+                    }
+                    
+                    div(class="navbar-menu-right") {
+                        TextSizeButton()
+                    }
                 }
 
                 div(class="bible-content") {
@@ -105,6 +125,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
 
                         div(id="bible-verse-content", 
                             class="bible-verse-content",
+                            style=format!("font-size:{}pt;", *app_state.verse_text_size.get()),
                             on:click=move |_| if web_sys::window().unwrap().match_media("(max-width: 420px)").unwrap().unwrap().matches() {
                                 app_state.show_bible_toc.set(false);
                                 app_state.pin_bible_toc.set(false);

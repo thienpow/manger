@@ -35,10 +35,6 @@
     flex-shrink: 0;
 }
 
-.menu-gap {
-    width: 100%;
-}
-
 .menu-gap-shrink {
     width: 0%;
 }
