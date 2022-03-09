@@ -42,7 +42,7 @@
   --border-color: rgba(255, 255, 255, 0.35);
   --popup-bg: rgb(255 255 255);
   --hover-menu-bg: rgba(255 255 255 / 35%);
-  --scrollbar-bg: rgba(235, 219, 219, 0.57);
+  --scrollbar-bg: rgba(221, 171, 171, 0.4);
   --content-title-color: --theme-color;
   --content-text-bg: #ffffff;
 }

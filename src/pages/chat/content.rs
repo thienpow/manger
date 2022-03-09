@@ -6,10 +6,9 @@ use crate::store::AppState;
 
 #[component]
 pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
-
-    fn get_chat_content_style(ctx: ScopeRef) -> String {
-        let app_state = ctx.use_context::<AppState>();
-
+    let app_state = ctx.use_context::<AppState>();
+    
+    let chat_content_style = ctx.create_memo(|| {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
         let mut height =  inner_height-188.0;
@@ -17,11 +16,6 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
             height =  inner_height-130.0;
         } 
         format!("height: {}px;", height)
-    }
-
-    let chat_content_style = ctx.create_signal("".to_string());
-    ctx.create_effect(move || {
-        chat_content_style.set(get_chat_content_style(ctx));
     });
 
     view! { ctx,

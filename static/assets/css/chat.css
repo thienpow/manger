@@ -16,8 +16,6 @@
     padding-left: 20px;
     padding-right: 20px;
     overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
     height: 100%;
     z-index: 1;
 }
