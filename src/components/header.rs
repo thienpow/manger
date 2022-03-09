@@ -2,8 +2,8 @@
 
 use sycamore::prelude::*;
 
-use crate::AppRoutes;
-use crate::context::{CurrentRoute};
+use crate::route::AppRoutes;
+use crate::store::{CurrentRoute};
 use crate::svg::{LOGO_SVG, NOTIF_SVG};
 
 #[component]
@@ -39,7 +39,7 @@ pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
 
     view! { ctx,
 
-        div(ref=header_ref, id="header", class="header") {
+        header(ref=header_ref, id="header", class="header") {
             div(ref=left_menu_ref, class="header-menu-left") {
                 a(class="logo", aria-label="Manger Home Page", href="/", dangerously_set_inner_html=LOGO_SVG) 
             }

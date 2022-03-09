@@ -42,7 +42,7 @@
   --border-color: rgba(255, 255, 255, 0.35);
   --popup-bg: rgb(255 255 255);
   --hover-menu-bg: rgba(255 255 255 / 35%);
-  --scrollbar-bg: rgb(255 253 253 / 57%);
+  --scrollbar-bg: rgba(235, 219, 219, 0.57);
   --content-title-color: --theme-color;
   --content-text-bg: #ffffff;
 }
@@ -342,12 +342,6 @@ body.light-mode .video-bg:before {
   flex-shrink: 0;
 }
 
-.products {
-  display: flex;
-  align-items: center;
-  width: 150px;
-}
-
 .status {
   margin-left: auto;
   width: 140px;
@@ -529,11 +523,12 @@ body.light-mode .video-bg:before {
 
 ::-webkit-scrollbar {
   width: 6px;
-  border-radius: 10px;
+  height: 12px;
+  border-radius: 12px;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-bg);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .animate-right{

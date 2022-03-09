@@ -1,9 +1,9 @@
 
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
-use crate::context::AppState;
-use crate::context::BibleBookItem;
-use crate::context::ChapterItem;
+use crate::store::AppState;
+use crate::store::BibleBookItem;
+use crate::store::ChapterItem;
 use crate::pages::bible;
 
 #[component]

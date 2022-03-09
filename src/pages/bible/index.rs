@@ -1,10 +1,10 @@
 
 use sycamore::{prelude::*};
-use crate::{pages::{bible::{toc::TOC, self}}, context::AppState};
-use crate::context;
+use crate::{pages::{bible::{toc::TOC, self}}, store::AppState};
+use crate::store;
 
 #[component]
-fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<context::VerseItem>) -> View<G> {
+fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<G> {
     let verse =  verse.get();
     let prefix = format!("[{}:{}]  ", verse.chapter, verse.verse);
 
@@ -89,7 +89,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
 
             TOC()
             div(class="main-container") {
-                div(class="navbar"){
+                nav(class="navbar"){
                     
                     div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);") {
                         i(class=(if *app_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
@@ -115,7 +115,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                     }
                 }
 
-                div(class="bible-content") {
+                article(class="bible-content") {
                     div(class="bible-verse-content-wrapper") {
 
                         //scroll_to_previous_page

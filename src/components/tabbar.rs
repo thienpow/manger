@@ -2,8 +2,8 @@
 use sycamore::prelude::*;
 
 
-use crate::AppRoutes;
-use crate::context::{CurrentRoute};
+use crate::route::AppRoutes;
+use crate::store::{CurrentRoute};
 
 #[component]
 pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
@@ -19,7 +19,7 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
 
     view! { ctx,
 
-        div(class="tab-bar", style=get_tabbar_style(&*current_route.get())) {
+        footer(class="tab-bar", style=get_tabbar_style(&*current_route.get())) {
             div(class="tab-bar-wrapper") {
                 div(class="tab-bar-item") {
                     a(aria-label="Manger Home Page", href="/"

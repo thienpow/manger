@@ -1,3 +1,3 @@
-pub mod bible;
+pub mod index;
 mod toc;
 pub mod util;

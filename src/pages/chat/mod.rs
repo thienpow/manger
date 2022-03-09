@@ -1,2 +1,4 @@
-pub mod chat;
-pub mod navbar;
+pub mod index;
+mod navbar;
+mod content;
+mod footer;

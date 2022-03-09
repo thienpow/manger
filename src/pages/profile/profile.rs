@@ -1,7 +1,7 @@
 use sycamore::prelude::*;
 use web_sys::{Event};
 
-use crate::{components::footer, context::{AppState}};
+use crate::{components::footer, store::{AppState}};
 
 
 #[component]

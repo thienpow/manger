@@ -29,9 +29,9 @@ pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
 
             div(class="main-container") {
 
-                div(class="content-wrapper") {
+                article(class="content-wrapper") {
                     div(class="content-section") {
-                        div(class="content-section-title") {
+                        header(class="content-section-title") {
                             "Welcome to use Manger"
                         }
                         div(class="card-wrapper") {

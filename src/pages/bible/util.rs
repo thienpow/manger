@@ -1,7 +1,7 @@
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
 
-use crate::context::{AppState};
+use crate::store::AppState;
 
 pub fn reload_chapter_data(ctx: ScopeRef) {
 

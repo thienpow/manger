@@ -44,10 +44,7 @@
     overflow: auto;
     height: 100%;
     width: 100%;
-    scroll-snap-type: x mandatory;
-    scroll-snap-align: center;
     scroll-behavior: smooth;
-    overflow-x: scroll;
     background-color: var(--content-text-bg);
     color: var(--theme-text-color);
     padding: 24px 0px;

@@ -1,6 +1,6 @@
 use sycamore::prelude::*;
 
-use crate::{context::CurrentRoute, AppRoutes};
+use crate::{store::CurrentRoute, route::AppRoutes};
 
 #[component]
 pub fn ContactBar<G: Html>(ctx: ScopeRef) -> View<G> {

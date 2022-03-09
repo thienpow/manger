@@ -1,27 +1,27 @@
 use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
-use crate::{components::{header::Header, tabbar::TabBar}, AppRoutes, context::CurrentRoute};
-use crate::pages::{home::home::Home, bible::bible::Bible, chat::chat::Chat, profile::Profile};
-
-use crate::pages::{bible};
+use crate::components::{header::Header, tabbar::TabBar};
+use crate::pages::{home, bible, chat, profile};
+use crate::route::AppRoutes; 
+use crate::store::CurrentRoute;
 
 #[component]
-pub fn App<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Index<G: Html>(ctx: ScopeRef) -> View<G> {
     
 
     let home_page = view! { ctx, 
-        Home()
+        home::index::Home()
     };
     let bible_page = view! { ctx, 
-        Bible()
+        bible::index::Bible()
     };
     let chat_page = view! { ctx, 
-        Chat()
+        chat::index::Chat()
     };
 
     let profile_page = view! { ctx, 
-        Profile()
+        profile::profile::Profile()
     };
 
     view! { ctx,
