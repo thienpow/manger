@@ -19,7 +19,7 @@ gloo-timers = { version = "0.2.3", features = ["futures"] }
 
 [dependencies.web-sys]
 features = [
-    "InputEvent", "KeyboardEvent", "Location", "MediaQueryList", "Storage",  "ScrollIntoViewOptions", "ScrollBehavior", "Element", "ScrollToOptions",
+    "Selection", "InputEvent", "KeyboardEvent", "Location", "MediaQueryList", "Storage",  "ScrollIntoViewOptions", "ScrollBehavior", "Element", "ScrollToOptions",
     "Window"
 ]
 version = "0.3.56"

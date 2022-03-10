@@ -36,12 +36,10 @@ pub fn initialize(ctx: ScopeRef) {
             let pin_bible_toc: RcSignal<bool> = create_rc_signal(true);
             let current_verse_page: RcSignal<i32> = create_rc_signal(0);
             let verse_text_size: RcSignal<i32> = create_rc_signal(12);
+            let verse_text_selection_rowone: RcSignal<i32> = create_rc_signal(0);
 
             let inner_width: RcSignal<f64> = create_rc_signal(window.inner_width().unwrap().unchecked_into_f64());
             let inner_height: RcSignal<f64> = create_rc_signal(window.inner_height().unwrap().unchecked_into_f64());
-
-            let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
-            ctx.provide_context(current_route);
 
             let app_state = AppState {
                 bible_books,
@@ -56,10 +54,14 @@ pub fn initialize(ctx: ScopeRef) {
                 pin_bible_toc,
                 current_verse_page,
                 verse_text_size,
-                inner_width, inner_height
+                verse_text_selection_rowone,
+                inner_width, inner_height,
             };
             ctx.provide_context(app_state);
         
+            let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
+            ctx.provide_context(current_route);
+
             
         },
         _ => {}
@@ -81,6 +83,7 @@ pub struct AppState {
     pub pin_bible_toc: RcSignal<bool>,
     pub current_verse_page: RcSignal<i32>,
     pub verse_text_size: RcSignal<i32>,
+    pub verse_text_selection_rowone: RcSignal<i32>,
     pub inner_width: RcSignal<f64>,
     pub inner_height: RcSignal<f64>,
 }

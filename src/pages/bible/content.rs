@@ -1,7 +1,7 @@
 
 
 
-use std::rc::Rc;
+use std::{rc::Rc, slice::SliceIndex};
 use sycamore::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::{Event, console, Element};
@@ -53,7 +53,7 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<
     view! { ctx,
         p(
         ) {
-            span(class="") {(prefix)}
+            span(class="", style="-webkit-user-select:none; user-select:none;") {(prefix)}
             (if is_marked {
                 view! {ctx,
                     span(){(verse_text_before_mark)}
@@ -72,7 +72,8 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<
 #[component]
 pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
-    
+    let content_ref = ctx.create_node_ref();
+
     //let key_code = ctx.create_signal(0);
     let on_scroll = move |e: Event| {
         let elem = e.current_target().unwrap().unchecked_into::<Element>();
@@ -91,16 +92,57 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
             .collect::<Vec<_>>()
     });
 
+    let on_click = move |_e: Event| {
+        if *app_state.inner_width.get() <= 420.0 {
+            app_state.show_bible_toc.set(false);
+            app_state.pin_bible_toc.set(false);
+        }
+    };
+
+    //let result = ctx.create_signal("".to_string());
+
+    let on_mouseup = move |e: Event| {
+                
+        let window = web_sys::window().unwrap();
+
+        let selected_text = window.get_selection().unwrap().unwrap().to_string().as_string().unwrap();
+        let splited = selected_text.split("\n").into_iter().clone();
+
+        let mut found_index = 0;
+        for (i, sel_text) in splited.into_iter().enumerate() {
+
+            if i == 2 {
+                match sel_text.chars().position(|c| c == ']') {
+                    Some(num) => {
+                        found_index = num as i32;
+                    },
+                    _ => {
+                        found_index = -1
+                    }
+                }
+                
+            }
+            console::log_1(&sel_text.into());
+
+        }
+        app_state.verse_text_selection_rowone.set(found_index);
+
+    };
+
+
     view! { ctx,
-        div(id="bible-verse-content", 
+       
+        div(ref=content_ref,
+            id="bible-verse-content", 
             class="bible-verse-content",
             style=format!("font-size:{}pt;", *app_state.verse_text_size.get()),
-            on:click=move |_| if web_sys::window().unwrap().match_media("(max-width: 420px)").unwrap().unwrap().matches() {
-                app_state.show_bible_toc.set(false);
-                app_state.pin_bible_toc.set(false);
-            },
-            on:scroll=on_scroll
+            on:click=on_click,
+            on:scroll=on_scroll,
+            on:mouseup=on_mouseup
         ) {
+            p(style="font-size: 8pt; color: green;") {
+                "first ] at="(*app_state.verse_text_selection_rowone.get())
+            }
         Keyed {
             iterable: get_filtered_verses,
             view: |ctx, verse| view! { ctx,
