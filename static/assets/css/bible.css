@@ -1,6 +1,6 @@
 
 .toc-bar-left {
-    margin-top: 25px;
+    padding-top: 25px;
     width: 188px;
     height: 100vh;
     overflow: none;
@@ -8,7 +8,6 @@
     -webkit-user-select : none;
     White-space: nowrap;
     left: 0px;
-    z-index: 1;
 }
 .toc-bar-left-hide {
     position: absolute;
@@ -21,13 +20,12 @@
     justify-content: left;
     width: calc(100%-240px);
     height: 100%;
-    background-color: transparent;
+    background-color: var(--content-text-bg);
     transition: 0.1s;
 }
 .bible-verse-content-wrapper {
     display: flex;
     flex-direction: row;
-    background-color: transparent;
     position: relative;
     justify-content: flex-start;
     align-items: left;
@@ -38,14 +36,13 @@
     transition: 0.1s;
 }
 .bible-verse-content {
+    position: relative;
     justify-content: center;
     align-items: center;
-    position: relative;
     overflow: auto;
     height: 100%;
     width: 100%;
     scroll-behavior: smooth;
-    background-color: var(--content-text-bg);
     color: var(--theme-text-color);
     padding: 24px 0px;
     transition: 0s;
@@ -53,7 +50,6 @@
     column-width: 300px;
     column-fill: auto;
     column-gap: 48px;
-    z-index: 100;
     /* font-family: "Graphik"; */
 }
 
@@ -170,7 +166,6 @@
     height: 100%; 
     width: 48px;
     background-color: var(--content-text-bg);
-    z-index: 1;
 }
 .text-size-button {
     cursor: pointer; 

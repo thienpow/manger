@@ -1,12 +1,10 @@
 .tab-bar {
     display: none;
-    position: absolute;
+    position: fixed;
     justify-content: center;
     align-items: center;
     margin-left: 0px;
     margin-right: 0px;
-    border-top-style: solid;
-    border-top-width: 1px;
     height: 46px;
     bottom: 22px;
     width: calc(100% - 0px);
@@ -15,9 +13,10 @@
     border: 1px solid var(--theme-bg-color);
     transition: 0.1s ease;
     text-align: center;
-    z-index: 100;
+    z-index: 999;
     -webkit-user-select : none;
     user-select: none;
+    filter: drop-shadow(0px 16px 10px rgba(0, 0, 0, 0.253))
 }
 .tab-bar-wrapper {
     display: flex;

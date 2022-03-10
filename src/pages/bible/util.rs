@@ -127,3 +127,4 @@ pub fn check_if_not_last_page() -> bool {
         _ => {true}
     }
 }
+

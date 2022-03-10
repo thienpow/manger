@@ -2,7 +2,6 @@
 
 
 use std::rc::Rc;
-
 use sycamore::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::{Event, console, Element};
