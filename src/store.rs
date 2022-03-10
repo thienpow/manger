@@ -183,6 +183,7 @@ impl AppState {
                     .clone()
                     .into_iter()
                     .chain(Some(create_rc_signal(VerseItem {
+                        book_id: v.book_id,
                         chapter: v.chapter,
                         verse: v.verse,
                         text: v.text.clone()
@@ -233,6 +234,7 @@ pub struct MetadataItem {
 
 #[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
 pub struct VerseItem {
+    pub book_id: i32,
     pub chapter: i32,
     pub verse: i32,
     pub text: String

@@ -2,12 +2,21 @@
 
 use sycamore::prelude::*;
 
-use crate::{svg::{BACK_SVG, VIDEO_SVG, PHONE_SVG}, store::AppState};
+use crate::svg::{BACK_SVG, VIDEO_SVG, PHONE_SVG};
 
 #[component]
 pub fn NavBar<G: Html>(ctx: ScopeRef) -> View<G> {
 
-    let _app_state = ctx.use_context::<AppState>();
+/*
+    let app_state = ctx.use_context::<AppState>();
+
+    let mut  fragement: Vec<View<G>> = Vec::new();
+    let cool_button: G = node! { ctx, button { "The coolest 😎" } };
+    
+    fragement.push(View::new_node(cool_button));
+
+    let nav_item =  View::new_fragment(fragement);
+ */
 
     view! { ctx,
 

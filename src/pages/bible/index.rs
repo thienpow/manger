@@ -1,22 +1,9 @@
 
 use sycamore::{prelude::*};
-use crate::{pages::{bible::{toc::TOC, self}}, store::AppState};
-use crate::store;
+use wasm_bindgen::JsCast;
+use web_sys::{KeyboardEvent, Event, console};
+use crate::{pages::bible::{self, toc::TOC, navbar::NavBar, content::Content}, store::AppState};
 
-#[component]
-fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<G> {
-    let verse =  verse.get();
-    let prefix = format!("[{}:{}]  ", verse.chapter, verse.verse);
-
-    view! { ctx,
-        span(style="font-size:inherit;") {(prefix)}
-        span(style="font-size:inherit;"
-        ) {
-            (verse.text)
-            br()br()
-        }
-    }
-}
 
 #[component]
 pub fn BackButton<G: Html>(ctx: ScopeRef) -> View<G> {
@@ -42,7 +29,7 @@ pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
     let show_button = ctx.create_signal(false);
 
     view! { ctx,
-        div(class="verse-content-nav-panel", style="Wborder-top-right-radius: 12px;",
+        div(class="verse-content-nav-panel", style="border-top-right-radius: 12px;",
             on:mouseenter=move |_| show_button.set(true),
             on:mouseleave=move |_| show_button.set(false)
         ) {
@@ -57,92 +44,70 @@ pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
 }
 
 #[component]
-pub fn TextSizeButton<G: Html>(ctx: ScopeRef) -> View<G> {
-    let app_state = ctx.use_context::<AppState>();
-
-    view! { ctx,
-        button(class="text-size-button", style="font-size:12pt;", on:click=move |_| app_state.verse_text_size.set(*app_state.verse_text_size.get()-1)) {"A"}
-        div(class="icon-gap")
-        button(class="text-size-button", style="font-size:18pt;", on:click=move |_| app_state.verse_text_size.set(*app_state.verse_text_size.get()+1)) {"A"}
-        div(class="icon-gap")
-    }
-}
-
-#[component]
 pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
     
-    let get_filtered_verses = ctx.create_memo(|| {
-        app_state
-            .verses
-            .get()
-            .iter()
-            //.filter(|v| app_state.selected_bible_chapter.get().id == v.get().chapter)
-            .cloned()
-            .collect::<Vec<_>>()
-    });
+    //TODO: key up/down = change chapter
+        // key left/right = change page
 
+    /*
+    37 = left arrow
+    38 = top arrow
+    39 = right arrow
+    40 = bottom arrow
+    32 = spacebar
+    8 = backspace
+    13 = enter
+     */
+    let key_code = ctx.create_signal(0);
+    let on_keydown = move |e: Event| {
+        //e.current_target().unwrap().
+        let key = e.unchecked_into::<KeyboardEvent>();
+
+        console::log_1(&format!("{}", key.key()).as_str().into());
+        key_code.set(key.key_code());
+    };
 
     view! { ctx,
 
-        div(class="wrapper") {
+        div(class="wrapper",
+            on:keydown=on_keydown,
+        ) {
 
             TOC()
-            div(class="main-container") {
-                nav(class="navbar"){
-                    
-                    div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);") {
-                        i(class=(if *app_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
-                        style="margin-right:12px;cursor: pointer;",
-                        on:click=move |_| {
-                            app_state.pin_bible_toc.set(!*app_state.pin_bible_toc.get())
-                        })
 
-                        (if app_state.selected_bible_book.get().book_id > 0 {
-                            format!("{}",app_state.selected_bible_book.get().book_name)
-                        } else {"".to_string()})
-
-                        i(class=("gg-chevron-double-right"), style="margin-left:4px;margin-right:4px;")
-
-                        (if app_state.selected_bible_book.get().book_id > 0 {
-                            format!("{}",app_state.selected_bible_chapter.get().id.to_string())
-                        } else {"".to_string()})
-
-                    }
-                    div(class="menu-gap nowrap")
-                    div(class="navbar-menu-right") {
-                        TextSizeButton()
-                    }
-                }
+            // bible verse content area
+            div(class="main-container", tabindex="0", style=format!("{}", if app_state.verses.get().iter().len() > 0 {""} else {"display: none;"})) {
+                NavBar()
 
                 article(class="bible-content") {
                     div(class="bible-verse-content-wrapper") {
 
                         //scroll_to_previous_page
                         BackButton()
-
-                        //TODO: key up/down = change chapter
-                        // key left/right = change page
-                        div(id="bible-verse-content", 
-                            class="bible-verse-content",
-                            style=format!("font-size:{}pt;", *app_state.verse_text_size.get()),
-                            on:click=move |_| if web_sys::window().unwrap().match_media("(max-width: 420px)").unwrap().unwrap().matches() {
-                                app_state.show_bible_toc.set(false);
-                                app_state.pin_bible_toc.set(false);
-                            }) {
-                            Keyed {
-                                iterable: get_filtered_verses,
-                                view: |ctx, verse| view! { ctx,
-                                    VerseItem(verse)
-                                },
-                                key: |verse| verse.get().verse,
-                            }
-                        }
+                        //(*key_code.get())
+                        Content()
 
                         //scroll_to_next_page
                         NextButton()
                     }
                 }
+            }
+            div(class="main-container", tabindex="0", style=format!("{}", if app_state.verses.get().iter().len() > 0 {"display: none"} else {""})) {
+
+                p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
+                blockquote {
+                    p {"Intro/Shortcuts here:"}
+                    ul {
+                        li {"intro keyboard shortcuts usage"}
+                        li {"click to last read verse, show a few short verses in between the last read position"}
+                        li {"bookmarks, most recent 5 book marks, click more to view full page bookmark list"}
+                        li {"last edited note/comment"}
+                        li {"friend's note/comment sharing"}
+                    }
+                }
+                
+
                 
             }
 

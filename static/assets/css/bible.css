@@ -54,6 +54,7 @@
     column-fill: auto;
     column-gap: 48px;
     z-index: 100;
+    /* font-family: "Graphik"; */
 }
 
 .toc-wrapper {

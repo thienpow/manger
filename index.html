@@ -7,10 +7,13 @@
     <link data-trunk rel="copy-file" href="/static/robots.txt"/>
     <link data-trunk rel="copy-file" href="/static/CNAME"/>
     <link data-trunk rel="copy-file" href="/static/404.html"/>
+    <link data-trunk rel="copy-file" href="/static/offline.html"/>
+    <link data-trunk rel="copy-file" href="/static/favicon.ico"/>
+    <link data-trunk rel="copy-file" href="/static/service-worker.js"/>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Manger | Live together in Jesus name">
-    <meta name="viewport" content="width-device-width, initial-scale=1.0, minimum-scale=1.0, minimal-ui" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#10121b">
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
     <link rel="manifest" crossorigin="use-credentials" href="/manifest.json"/>
@@ -39,6 +42,13 @@
             );
           }
         }(window.location))
+
+
+        /* Only register a service worker if it's supported */
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
+
     </script>
 </head>
 </html>
