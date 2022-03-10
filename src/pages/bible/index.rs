@@ -70,7 +70,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
     };
 
 
-    let bible_content_style_height = ctx.create_memo(|| {
+    let _bible_content_style_height = ctx.create_memo(|| {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
         let mut height =  inner_height-58.0;
@@ -91,7 +91,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
             // bible verse content area
             div(class="main-container", 
                 tabindex="0", 
-                style=format!("{}{}", if app_state.verses.get().iter().len() > 0 {""} else {"display: none;"}, *bible_content_style_height.get())) {
+                style=format!("{}", if app_state.verses.get().iter().len() > 0 {""} else {"display: none;"})) {
                 NavBar()
 
                 article(class="bible-content") {

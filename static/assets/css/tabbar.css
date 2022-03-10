@@ -5,8 +5,8 @@
     align-items: center;
     margin-left: 0px;
     margin-right: 0px;
-    height: 46px;
-    bottom: 22px;
+    height: 58px;
+    bottom: 12px;
     width: calc(100% - 0px);
     background-color: var(--tabbar-bg-color);
     border-radius: 0px;
@@ -16,7 +16,7 @@
     z-index: 999;
     -webkit-user-select : none;
     user-select: none;
-    filter: drop-shadow(0px 16px 10px rgba(0, 0, 0, 0.253))
+    box-shadow: 10px 10px 20px rgb(94, 88, 88),
 }
 .tab-bar-wrapper {
     display: flex;
