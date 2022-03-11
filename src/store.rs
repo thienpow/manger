@@ -23,11 +23,19 @@ pub fn initialize(ctx: ScopeRef) {
             }
             let dark_mode: RcSignal<bool> = create_rc_signal(is_dark_mode);
 
+            let background_ls = match local_storage.get_item("background").unwrap() {
+                Some(bg) => bg,
+                None => "/assets/img/bg-cross.webp".to_string(),
+            };
+
+            let background: RcSignal<String> = create_rc_signal(background_ls);
+
             let inner_width: RcSignal<f64> = create_rc_signal(window.inner_width().unwrap().unchecked_into_f64());
             let inner_height: RcSignal<f64> = create_rc_signal(window.inner_height().unwrap().unchecked_into_f64());
 
             let app_state = AppState {
                 dark_mode,
+                background,
                 inner_width, inner_height,
             };
             ctx.provide_context(app_state);
@@ -45,6 +53,7 @@ pub fn initialize(ctx: ScopeRef) {
 #[derive(Debug, Default, Clone)]
 pub struct AppState {
     pub dark_mode: RcSignal<bool>,
+    pub background: RcSignal<String>,
     pub inner_width: RcSignal<f64>,
     pub inner_height: RcSignal<f64>,
 }
@@ -58,6 +67,12 @@ impl AppState {
         document.body().unwrap().class_list().toggle("light-mode").expect("");
 
         util::set_local_storage("dark_mode", self.dark_mode.get().to_string().as_str());
+    }
+
+    pub fn switch_background(&self, bg: &str) {
+        self.background.set(bg.to_string());
+
+        util::set_local_storage("background", bg);
     }
 
 }

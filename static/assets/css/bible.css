@@ -67,7 +67,6 @@
     -webkit-user-select : none;
     user-select: none;
     touch-action: pan-y;
-    transition: 0.1s;
 }
 .toc-wrapper::-webkit-scrollbar {
     display: none;
@@ -98,7 +97,7 @@
     margin-right: 16px;
     font-size: 14px;
     border-radius: 8px;
-    transition: 0.1s;
+    transition: 0.06s;
     
 }
 
@@ -106,24 +105,14 @@
     transform: scale(1.02);
     background-color: var(--hover-menu-bg);
     color: var(--theme-color);
-    transition: 0.1s;
+    transition: 0.06s;
 }
 
 .toc-menu-selected {
     border-left: 1px solid red;
     border-right: 1px solid red;
     font-weight: 700;
-    transition: 0.1s;
-    user-select: none;
-    -webkit-user-select : none;
-    cursor: pointer;
-}
-
-.chapter-menu-selected {
-    border-left: 1px solid red;
-    border-right: 1px solid red;
-    font-weight: 700;
-    transition: 0.1s;
+    transition: 0.06s;
     user-select: none;
     -webkit-user-select : none;
     cursor: pointer;

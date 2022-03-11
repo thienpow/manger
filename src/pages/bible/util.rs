@@ -4,7 +4,6 @@ use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
 use crate::pages::bible::{store::BibleState};
 
 pub fn reload_chapter_data(ctx: ScopeRef) {
-
     ctx.spawn_future(async move {
         let app_state = ctx.use_context::<BibleState>();
         app_state.load_chapter_data().await;
@@ -13,7 +12,6 @@ pub fn reload_chapter_data(ctx: ScopeRef) {
         app_state.current_verse_page.set(0);
         scroll_to_previous_page(&ctx, 1000);
     });
-
 }
 
 pub fn scroll_to_selected_book(ctx: ScopeRef, wait: u32) {
@@ -28,7 +26,6 @@ pub fn scroll_to_selected_book(ctx: ScopeRef, wait: u32) {
             _ => {}
         }
     });
-    
 }
 
 pub fn scroll_to_selected_chapter(ctx: ScopeRef, wait: u32) {
@@ -46,7 +43,6 @@ pub fn scroll_to_selected_chapter(ctx: ScopeRef, wait: u32) {
 
 
 pub fn scroll_to_previous_page(ctx: ScopeRef, wait: u32) {
-            
     ctx.spawn_future(async move {
         TimeoutFuture::new(wait).await;
 
@@ -65,13 +61,10 @@ pub fn scroll_to_previous_page(ctx: ScopeRef, wait: u32) {
             },
             _ => {}
         }
-
-        
     });
 }
 
 pub fn scroll_to_next_page(ctx: ScopeRef) {
-        
     ctx.spawn_future(async move {
         TimeoutFuture::new(60).await;
 

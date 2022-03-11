@@ -3,11 +3,11 @@
 
 use std::{rc::Rc};
 use sycamore::prelude::*;
-use wasm_bindgen::JsCast;
+use wasm_bindgen::{JsCast};
 use web_sys::{Event, console, Element};
 
 use crate::{pages::bible::{store::{BibleState, VerseItem}}, store::AppState};
-
+use crate::util;
 
 #[derive(Clone)]
 struct SelectionFirst(pub RcSignal<VerseItem>);
@@ -58,7 +58,6 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<VerseItem>) -> View<G> {
     }
 
     let on_mousedown = move |_: Event| {
-        console::log_1(&"here".into());
         bible_state.selection_first_verse.set(VerseItem{
             book_id: verse.book_id,
             chapter: verse.chapter,
@@ -132,12 +131,11 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
             
             for (i, sel_text) in splited.into_iter().enumerate() {
     
-                /*
+                /* do not use... just keep for reference for debugging
                 if i == 2 {
                     match sel_text.chars().position(|c| c == ']') {
                         Some(num) => {
                             found_index = num as i32;
-                            
                         },
                         _ => {
                             found_index = -1
@@ -146,11 +144,26 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
                     
                 }
                  */
-                console::log_1(&format!("index: {}, text: {}", i, sel_text).into());
-                
-    
+
+                if !sel_text.is_empty() {
+                    console::log_1(&format!("index: {}, text: {}", i, sel_text).into());
+                }
             }
-            console::log_1(&format!("First row of verse selected: {}", bible_state.selection_first_verse.get().verse).into());
+
+            match bible_state.selection_first_verse.get() {
+                verse_item => {
+                    
+                    let js1 = util::js_array(&[
+                        format!("'book_id':{}", verse_item.book_id).as_str(), 
+                        format!("'chapter':{}", verse_item.chapter).as_str(), 
+                        format!("'First verse selected':{}", verse_item.verse).as_str()
+                    ]);
+                     
+                    console::table_1(&js1);
+
+                }
+            };
+            
 
         }
     };

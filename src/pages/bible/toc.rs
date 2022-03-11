@@ -32,9 +32,7 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
             id=(format!("book-item-{}", id)),
             class=(if bible_state.selected_bible_book.get().book_id == id {
                 "toc-menu-selected"
-            } else {
-                ""
-            }),
+            } else {""}),
             on:click=move |_| handle_toc_click(id, book_name.clone(), chapters)
         ) {
             (book_name_span)
@@ -87,7 +85,9 @@ fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G
     view! { ctx,
         span(
             id=(format!("chapter-item-{}", id)),
-            class=if bible_state.selected_bible_chapter.get().id == id {"chapter-menu-selected"} else {""},
+            class=(if bible_state.selected_bible_chapter.get().id == id {
+                "toc-menu-selected"
+            } else {""}),
             on:click=move |_| handle_chapter_click(id)
         ) {
             (id)
