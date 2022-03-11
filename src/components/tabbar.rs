@@ -33,7 +33,7 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
                 }
                 a(aria-label="Love in Action", href="/love") {
                     div(class="tab-bar-mid-item") {
-                        i(class="gg-add-r") 
+                        i(class="btn-cross") 
                     }
                 }
                 a(aria-label="Community Page", href="/community")  { 

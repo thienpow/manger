@@ -97,7 +97,7 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     let on_scroll = move |e: Event| {
         let elem = e.current_target().unwrap().unchecked_into::<Element>();
         
-        console::log_1(&format!("{}", elem.scroll_left()).into());
+        //console::log_1(&format!("{}", elem.scroll_left()).into());
         //key_code.set(key.key_code());
     };
 

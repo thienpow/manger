@@ -108,43 +108,6 @@
     color: var(--highlight-color);
 }
 
-.gg-add-r {
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    top: 5px;
-    width: 22px;
-    height: 22px;
-    border: 2px solid;
-    transform: scale(var(--ggs,1.6));
-    border-radius: 4px;
-    color: var(--theme-color);
- }
- 
- .gg-add-r::after,
- .gg-add-r::before {
-    content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 10px;
-    height: 2px;
-    background: currentColor;
-    border-radius: 5px;
-    top: 8px;
-    left: 4px;
-}
- 
-.gg-add-r::after {
-    width: 2px;
-    height: 14px;
-    top: 4px;
-    left: 8px;
-}
-
-.gg-add-r:hover {
-    color: var(--highlight-color);
-}
 
 .gg-smile {
     box-sizing: border-box;
@@ -553,3 +516,43 @@
    .gg-sun::after {
     transform: rotate(45deg)
    } 
+
+
+
+   .btn-cross {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    top: 5px;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs,1.6));
+    border-radius: 4px;
+    color: var(--theme-color);
+ }
+ 
+ .btn-cross::after,
+ .btn-cross::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px;
+}
+ 
+.btn-cross::after {
+    width: 2px;
+    height: 14px;
+    top: 4px;
+    left: 8px;
+}
+
+.btn-cross:hover {
+    color: var(--highlight-color);
+}

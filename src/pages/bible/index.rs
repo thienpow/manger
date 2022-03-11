@@ -121,7 +121,10 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
             }
             div(class="main-container", tabindex="0", style=format!("{}", if bible_state.verses.get().iter().len() > 0 {"display: none"} else {""})) {
 
-                p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
+                blockquote {
+                    p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
+                }
+                
                 blockquote {
                     p {"Intro/Shortcuts here:"}
                     ul {
