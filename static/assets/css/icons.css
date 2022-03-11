@@ -112,10 +112,11 @@
     box-sizing: border-box;
     position: relative;
     display: block;
+    top: 5px;
     width: 22px;
     height: 22px;
     border: 2px solid;
-    transform: scale(var(--ggs,1.2));
+    transform: scale(var(--ggs,1.6));
     border-radius: 4px;
     color: var(--theme-color);
  }
@@ -136,7 +137,7 @@
  
 .gg-add-r::after {
     width: 2px;
-    height: 10px;
+    height: 14px;
     top: 4px;
     left: 8px;
 }

@@ -21,25 +21,30 @@ pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
 
         footer(class="tab-bar", style=get_tabbar_style(&*current_route.get())) {
             div(class="tab-bar-wrapper") {
-                div(class="tab-bar-item") {
-                    a(aria-label="Manger Home Page", href="/"
-                    ) { i(class="gg-home") }
+                a(aria-label="Manger Home Page", href="/") { 
+                    div(class="tab-bar-item") {
+                        i(class="gg-home") 
+                    }
                 }
-                div(class="tab-bar-item")  {
-                    a(aria-label="Bible Study Page", href="/bible"
-                    )  { i(class="gg-readme") }
+                a(aria-label="Bible Study Page", href="/bible") {
+                    div(class="tab-bar-item")  {
+                        i(class="gg-readme") 
+                    }
                 }
-                div(class="tab-bar-item") {
-                    a(aria-label="Love in Action", href="/love"
-                    ) { i(class="gg-add-r") }
+                a(aria-label="Love in Action", href="/love") {
+                    div(class="tab-bar-mid-item") {
+                        i(class="gg-add-r") 
+                    }
                 }
-                div(class="tab-bar-item") {
-                    a(aria-label="Community Page", href="/community"
-                    )  { i(class="gg-smile") }
+                a(aria-label="Community Page", href="/community")  { 
+                    div(class="tab-bar-item") {
+                        i(class="gg-smile") 
+                    }
                 }
-                div(class="tab-bar-item") {
-                    a(aria-label="Profile Page", href="/profile"
-                    )  { i(class="gg-profile") }
+                a(aria-label="Profile Page", href="/profile")  { 
+                    div(class="tab-bar-item") {
+                        i(class="gg-profile") 
+                    }
                 }
             }
             

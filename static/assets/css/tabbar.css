@@ -22,10 +22,17 @@
     display: flex;
     margin: 0 auto;
 }
-.tab-bar-item {
-    margin: 0 24px;
+.tab-bar-item,
+.tab-bar-mid-item {
+    margin: 0;
+    padding: 12px 24px;
     width: 100%;
+    height: 58px;
     -webkit-user-select : none;
     user-select: none;
     cursor: pointer;
+    border: 0px solid red;
+}
+.tab-bar-mid-item {
+    padding: 4px 24px;
 }
