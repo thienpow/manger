@@ -2,7 +2,7 @@
 use serde::{Deserialize, Serialize};
 use reqwasm::http::Request;
 
-use crate::store::{BibleBookItem, MetadataItem, VerseItem};
+use crate::pages::bible::store::{BibleBookItem, MetadataItem, VerseItem};
 
 #[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
 pub struct TableOfContents {

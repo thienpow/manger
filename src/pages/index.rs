@@ -44,7 +44,7 @@ pub fn Index<G: Html>(ctx: ScopeRef) -> View<G> {
                             },
                             AppRoutes::Bible => {
                                 current_route.set(AppRoutes::Bible);
-                                bible::util::scroll_to_selected_book(&ctx);
+                                bible::util::scroll_to_selected_book(&ctx, 60);
                                 bible::util::scroll_to_selected_chapter(&ctx, 1000);
                                 bible_page.clone()
                             },

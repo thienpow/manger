@@ -1,12 +1,12 @@
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
 
-use crate::store::AppState;
+use crate::pages::bible::{store::BibleState};
 
 pub fn reload_chapter_data(ctx: ScopeRef) {
 
     ctx.spawn_future(async move {
-        let app_state = ctx.use_context::<AppState>();
+        let app_state = ctx.use_context::<BibleState>();
         app_state.load_chapter_data().await;
 
         //evertime loading new chapter data, reset the verse page to 0
@@ -16,41 +16,32 @@ pub fn reload_chapter_data(ctx: ScopeRef) {
 
 }
 
-pub fn scroll_to_selected_book(ctx: ScopeRef) {
-
+pub fn scroll_to_selected_book(ctx: ScopeRef, wait: u32) {
     ctx.spawn_future(async move {
-        TimeoutFuture::new(60).await;
-
-        let app_state = ctx.use_context::<AppState>();
-    
+        TimeoutFuture::new(wait).await;
+        let app_state = ctx.use_context::<BibleState>();
+        
         match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("book-item-{}", app_state.selected_bible_book.get().book_id+1).as_str()) {
             Some(item_below) => {
                 item_below.scroll_into_view_with_bool(false);
             },
             _ => {}
         }
-
     });
     
 }
 
 pub fn scroll_to_selected_chapter(ctx: ScopeRef, wait: u32) {
-
     ctx.spawn_future(async move {
         TimeoutFuture::new(wait).await;
-
-        let app_state = ctx.use_context::<AppState>();
-    
+        let app_state = ctx.use_context::<BibleState>();
         match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("chapter-item-{}", app_state.selected_bible_chapter.get().id+1).as_str()) {
             Some(item_below) => {
                 item_below.scroll_into_view_with_bool(false);
             },
             _ => {}
         }
-        
-
     });
-    
 }
 
 
@@ -59,7 +50,7 @@ pub fn scroll_to_previous_page(ctx: ScopeRef, wait: u32) {
     ctx.spawn_future(async move {
         TimeoutFuture::new(wait).await;
 
-        let app_state = ctx.use_context::<AppState>();
+        let app_state = ctx.use_context::<BibleState>();
         let current_verse_page = *app_state.current_verse_page.get();
 
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
@@ -84,7 +75,7 @@ pub fn scroll_to_next_page(ctx: ScopeRef) {
     ctx.spawn_future(async move {
         TimeoutFuture::new(60).await;
 
-        let app_state = ctx.use_context::<AppState>();
+        let app_state = ctx.use_context::<BibleState>();
         let current_verse_page = *app_state.current_verse_page.get();
                     
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {

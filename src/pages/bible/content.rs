@@ -1,14 +1,19 @@
 
 
 
-use std::{rc::Rc, slice::SliceIndex};
+use std::{rc::Rc};
 use sycamore::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::{Event, console, Element};
 
-use crate::store::{self, AppState};
+use crate::{pages::bible::{store::{BibleState, VerseItem}}, store::AppState};
 
-fn get_marked_index(verse: &Rc<store::VerseItem>) -> (usize, usize) {
+
+#[derive(Clone)]
+struct SelectionFirst(pub RcSignal<VerseItem>);
+
+
+fn get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
 
     if verse.book_id == 1 && verse.verse == 1 && verse.chapter == 1 {
 
@@ -22,7 +27,9 @@ fn get_marked_index(verse: &Rc<store::VerseItem>) -> (usize, usize) {
 }
 
 #[component]
-fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<G> {
+fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<VerseItem>) -> View<G> {
+
+    let bible_state = ctx.use_context::<BibleState>();
     let verse =  verse.get();
     let prefix = format!("[{}:{}]  ", verse.chapter, verse.verse);
 
@@ -49,9 +56,19 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<
             None => "".to_string()
         };
     }
+
+    let on_mousedown = move |_: Event| {
+        console::log_1(&"here".into());
+        bible_state.selection_first_verse.set(VerseItem{
+            book_id: verse.book_id,
+            chapter: verse.chapter,
+            verse: verse.verse,
+            text: verse.text.clone()
+        });
+    };
     
     view! { ctx,
-        p(
+        p(on:mousedown=on_mousedown
         ) {
             span(class="", style="-webkit-user-select:none; user-select:none;") {(prefix)}
             (if is_marked {
@@ -69,9 +86,12 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<store::VerseItem>) -> View<
     }
 }
 
+
 #[component]
 pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
+
     let app_state = ctx.use_context::<AppState>();
+    let bible_state = ctx.use_context::<BibleState>();
     let content_ref = ctx.create_node_ref();
 
     //let key_code = ctx.create_signal(0);
@@ -83,50 +103,56 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     };
 
     let get_filtered_verses = ctx.create_memo(|| {
-        app_state
+        bible_state
             .verses
             .get()
             .iter()
-            //.filter(|v| app_state.selected_bible_chapter.get().id == v.get().chapter)
+            //.filter(|v| bible_state.selected_bible_chapter.get().id == v.get().chapter)
             .cloned()
             .collect::<Vec<_>>()
     });
 
     let on_click = move |_e: Event| {
         if *app_state.inner_width.get() <= 420.0 {
-            app_state.show_bible_toc.set(false);
-            app_state.pin_bible_toc.set(false);
+            bible_state.show_bible_toc.set(false);
+            bible_state.pin_bible_toc.set(false);
         }
     };
 
     //let result = ctx.create_signal("".to_string());
 
-    let on_mouseup = move |e: Event| {
-                
+    let on_mouseup = move |_: Event| {
+        
         let window = web_sys::window().unwrap();
-
         let selected_text = window.get_selection().unwrap().unwrap().to_string().as_string().unwrap();
-        let splited = selected_text.split("\n").into_iter().clone();
-
-        let mut found_index = 0;
-        for (i, sel_text) in splited.into_iter().enumerate() {
-
-            if i == 2 {
-                match sel_text.chars().position(|c| c == ']') {
-                    Some(num) => {
-                        found_index = num as i32;
-                    },
-                    _ => {
-                        found_index = -1
+        
+        if !selected_text.is_empty() {
+            //let mut found_index = 0;
+            let splited = selected_text.split("\n").into_iter().clone();
+            
+            for (i, sel_text) in splited.into_iter().enumerate() {
+    
+                /*
+                if i == 2 {
+                    match sel_text.chars().position(|c| c == ']') {
+                        Some(num) => {
+                            found_index = num as i32;
+                            
+                        },
+                        _ => {
+                            found_index = -1
+                        }
                     }
+                    
                 }
+                 */
+                console::log_1(&format!("index: {}, text: {}", i, sel_text).into());
                 
+    
             }
-            console::log_1(&sel_text.into());
+            console::log_1(&format!("First row of verse selected: {}", bible_state.selection_first_verse.get().verse).into());
 
         }
-        app_state.verse_text_selection_rowone.set(found_index);
-
     };
 
 
@@ -135,14 +161,11 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
         div(ref=content_ref,
             id="bible-verse-content", 
             class="bible-verse-content",
-            style=format!("font-size:{}pt;", *app_state.verse_text_size.get()),
+            style=format!("font-size:{}pt;", *bible_state.verse_text_size.get()),
             on:click=on_click,
             on:scroll=on_scroll,
             on:mouseup=on_mouseup
         ) {
-            p(style="font-size: 8pt; color: green;") {
-                "first ] at="(*app_state.verse_text_selection_rowone.get())
-            }
         Keyed {
             iterable: get_filtered_verses,
             view: |ctx, verse| view! { ctx,

@@ -2,7 +2,15 @@
 use sycamore::{prelude::*};
 use wasm_bindgen::JsCast;
 use web_sys::{KeyboardEvent, Event, console};
-use crate::{pages::bible::{self, toc::TOC, navbar::NavBar, content::Content}, store::AppState};
+use crate::{
+    store::AppState,
+    pages::bible::{
+        self, toc::TOC, navbar::NavBar, content::Content, 
+        store::{
+            BibleState
+        }
+    }
+};
 
 
 #[component]
@@ -48,6 +56,10 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
 
     let app_state = ctx.use_context::<AppState>();
     
+    bible::store::initialize(ctx);
+
+    let bible_state = ctx.use_context::<BibleState>();
+    
     //TODO: key up/down = change chapter
         // key left/right = change page
 
@@ -91,7 +103,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
             // bible verse content area
             div(class="main-container", 
                 tabindex="0", 
-                style=format!("{}", if app_state.verses.get().iter().len() > 0 {""} else {"display: none;"})) {
+                style=format!("{}", if bible_state.verses.get().iter().len() > 0 {""} else {"display: none;"})) {
                 NavBar()
 
                 article(class="bible-content") {
@@ -107,7 +119,7 @@ pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
                     }
                 }
             }
-            div(class="main-container", tabindex="0", style=format!("{}", if app_state.verses.get().iter().len() > 0 {"display: none"} else {""})) {
+            div(class="main-container", tabindex="0", style=format!("{}", if bible_state.verses.get().iter().len() > 0 {"display: none"} else {""})) {
 
                 p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
                 blockquote {

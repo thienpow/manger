@@ -1,14 +1,16 @@
 
 use sycamore::prelude::*;
 use sycamore::suspense::Suspense;
-use crate::store::AppState;
-use crate::store::BibleBookItem;
-use crate::store::ChapterItem;
-use crate::pages::bible;
+use crate::pages::bible::{ 
+    self, 
+    store::{
+        ChapterItem, BibleState, BibleBookItem, 
+    }
+};
 
 #[component]
 pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G> {
-    let app_state = ctx.use_context::<AppState>();
+    let bible_state = ctx.use_context::<BibleState>();
 
     let book = book.get();
     let id = book.book_id;
@@ -17,18 +19,18 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
     let book_name_span = book.book_name.clone();
 
     let handle_toc_click = |book_id: i32, book_name:  String, chapters: i32| {
-        app_state.selected_bible_book.set(BibleBookItem {book_id, book_name, chapters});
-        app_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
+        bible_state.selected_bible_book.set(BibleBookItem {book_id, book_name, chapters});
+        bible_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
         bible::util::reload_chapter_data(ctx);
 
-        bible::util::scroll_to_selected_chapter(ctx, 0);
-        bible::util::scroll_to_selected_book(ctx);
+        bible::util::scroll_to_selected_chapter(ctx, 560);
+        bible::util::scroll_to_selected_book(ctx, 60);
     };
 
     view! { ctx,
         span(
             id=(format!("book-item-{}", id)),
-            class=(if app_state.selected_bible_book.get().book_id == id {
+            class=(if bible_state.selected_bible_book.get().book_id == id {
                 "toc-menu-selected"
             } else {
                 ""
@@ -42,11 +44,11 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
 
 #[component]
 async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
-    let app_state = ctx.use_context::<AppState>();
-    app_state.init_bible_books().await;
+    let bible_state = ctx.use_context::<BibleState>();
+    bible_state.init_bible_books().await;
 
     let filtered_books = ctx.create_memo(|| {
-        app_state
+        bible_state
             .bible_books
             .get()
             .iter()
@@ -74,18 +76,18 @@ async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
 #[component]
 fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G> {
     let id = chapter.get().id;
-    let app_state = ctx.use_context::<AppState>();
+    let bible_state = ctx.use_context::<BibleState>();
     
     let handle_chapter_click = |id: i32| {
-        app_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
+        bible_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
         bible::util::reload_chapter_data(ctx);
-        bible::util::scroll_to_selected_chapter(ctx, 60);
+        bible::util::scroll_to_selected_chapter(ctx, 0);
     };
 
     view! { ctx,
         span(
             id=(format!("chapter-item-{}", id)),
-            class=if app_state.selected_bible_chapter.get().id == id {"chapter-menu-selected"} else {""},
+            class=if bible_state.selected_bible_chapter.get().id == id {"chapter-menu-selected"} else {""},
             on:click=move |_| handle_chapter_click(id)
         ) {
             (id)
@@ -96,14 +98,14 @@ fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G
 
 #[component]
 fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
-    let app_state = ctx.use_context::<AppState>();
+    let bible_state = ctx.use_context::<BibleState>();
 
     let filtered_chapters = ctx.create_memo(|| {
-        app_state
+        bible_state
             .chapters
             .get()
             .iter()
-            .filter(|chapter| app_state.selected_bible_book.get().chapters >= chapter.get().id)
+            .filter(|chapter| bible_state.selected_bible_book.get().chapters >= chapter.get().id)
             .cloned()
             .collect::<Vec<_>>()
     });
@@ -117,7 +119,7 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
             },
             key: |chapter| chapter.get().id,
         }
-        div(id=format!("chapter-item-{}", app_state.selected_bible_book.get().chapters+1),
+        div(id=format!("chapter-item-{}", bible_state.selected_bible_book.get().chapters+1),
             style="height: 53px;white-space: nowrap;")
     }
 }
@@ -126,32 +128,32 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
 #[component]
 pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
 
-    let app_state = ctx.use_context::<AppState>();
+    let bible_state = ctx.use_context::<BibleState>();
 
     let book_list_ref: &NodeRef<G> = ctx.create_node_ref();
     let chapter_list_ref = ctx.create_node_ref();
 
     
 
-    if app_state.chapters.get().len() == 0 {
-        app_state.init_chapters(150);
+    if bible_state.chapters.get().len() == 0 {
+        bible_state.init_chapters(150);
     }
     
     view! { ctx,
         
         div(id="toc-bar-left", class=(
-            if app_state.selected_bible_book.get().book_id == 0 || app_state.selected_bible_chapter.get().id == 0 {
+            if bible_state.selected_bible_book.get().book_id == 0 || bible_state.selected_bible_chapter.get().id == 0 {
                 "toc-bar-left"
             } else {
-                if *app_state.show_bible_toc.get() || *app_state.pin_bible_toc.get() {
+                if *bible_state.show_bible_toc.get() || *bible_state.pin_bible_toc.get() {
                     "toc-bar-left"
                 } else {
                     "toc-bar-left toc-bar-left-hide"
                 }
             }
         ), 
-            on:mouseenter=move |_| app_state.show_bible_toc.set(true),
-            on:mouseleave=move |_| app_state.show_bible_toc.set(false)
+            on:mouseenter=move |_| bible_state.show_bible_toc.set(true),
+            on:mouseleave=move |_| bible_state.show_bible_toc.set(false)
         ) {
 
             div(class="toc-title-left") {

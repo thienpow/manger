@@ -11,6 +11,7 @@ mod store;
 mod route;
 mod svg;
 mod components;
+mod util;
 use crate::components::{background::Background};
 use crate::pages::index::Index;
 use crate::store::AppState;
