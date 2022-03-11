@@ -23,12 +23,13 @@ pub fn NavBar<G: Html>(ctx: ScopeRef) -> View<G> {
     view! { ctx,
         nav(class="navbar"){
                     
-            div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);") {
-                i(class=(if *bible_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
-                style="margin-right:12px;cursor: pointer;",
+            div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);",
                 on:click=move |_| {
                     bible_state.pin_bible_toc.set(!*bible_state.pin_bible_toc.get())
-                })
+                }
+            ) {
+                i(class=(if *bible_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
+                style="margin-right:12px;cursor: pointer;")
 
                 (if bible_state.selected_bible_book.get().book_id > 0 {
                     format!("{}",bible_state.selected_bible_book.get().book_name)
