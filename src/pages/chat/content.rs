@@ -19,7 +19,7 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     });
 
     view! { ctx,
-        div(
+        article(
             id="chat-content", 
             class="chat-content", 
             style=*chat_content_style.get()

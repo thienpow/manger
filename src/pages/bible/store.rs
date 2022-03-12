@@ -22,6 +22,7 @@ pub fn initialize(ctx: ScopeRef) {
             let show_bible_toc: RcSignal<bool> = create_rc_signal(false);
             let pin_bible_toc: RcSignal<bool> = create_rc_signal(true);
             let current_verse_page: RcSignal<i32> = create_rc_signal(0);
+            let current_verse_scroll_x: RcSignal<f64> = create_rc_signal(0.0);
             let verse_text_size: RcSignal<i32> = create_rc_signal(12);
                     
             let selection_first_verse: RcSignal<VerseItem> = create_rc_signal(VerseItem{
@@ -42,6 +43,7 @@ pub fn initialize(ctx: ScopeRef) {
                 show_bible_toc,
                 pin_bible_toc,
                 current_verse_page,
+                current_verse_scroll_x,
                 verse_text_size,
                 selection_first_verse
             };
@@ -63,6 +65,7 @@ pub struct BibleState {
     pub show_bible_toc: RcSignal<bool>,
     pub pin_bible_toc: RcSignal<bool>,
     pub current_verse_page: RcSignal<i32>,
+    pub current_verse_scroll_x: RcSignal<f64>,
     pub verse_text_size: RcSignal<i32>,
     pub selection_first_verse: RcSignal<VerseItem>,
 }

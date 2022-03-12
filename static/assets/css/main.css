@@ -28,7 +28,7 @@
   --popup-bg: rgb(22 25 37);
   --search-bg: #14162b;
   --overlay-bg: rgba(36, 39, 59, 0.3);
-  --scrollbar-bg: rgb(1 2 3 / 40%);
+  --scrollbar-bg: rgba(1, 2, 3, 0.24);
 }
 
 .light-mode {
@@ -46,7 +46,7 @@
   --border-color: rgba(255, 255, 255, 0.35);
   --popup-bg: rgb(255 255 255);
   --hover-menu-bg: rgba(255 255 255 / 35%);
-  --scrollbar-bg: rgba(247, 242, 242, 0.247);
+  --scrollbar-bg: rgba(156, 159, 173, 0.24);
   --content-title-color: --theme-color;
   --content-text-bg: #ffffff;
 }
@@ -614,4 +614,7 @@ body.light-mode .video-bg:before {
 .bg-button,
 .bg-button-selected:hover {
   background-color: var(--hover-menu-bg);
+}
+.btn-wrapper {
+  height: 100%;
 }

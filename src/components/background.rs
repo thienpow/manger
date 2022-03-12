@@ -20,9 +20,3 @@ pub fn Background<G: Html>(ctx: ScopeRef) -> View<G> {
 
     }
 }
-
-pub fn _set_background(url: &str) {
-    let document = web_sys::window().unwrap().document().unwrap();
-    let body = document.body().unwrap();
-    body.set_attribute("background-image", url).unwrap();
-}

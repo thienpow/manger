@@ -3,10 +3,9 @@
 
 use std::{rc::Rc};
 use sycamore::prelude::*;
-use wasm_bindgen::{JsCast};
-use web_sys::{Event, console, Element};
+use web_sys::{Event, console};
 
-use crate::{pages::bible::{store::{BibleState, VerseItem}}, store::AppState};
+use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
 use crate::util;
 
 #[derive(Clone)]
@@ -24,6 +23,45 @@ fn get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
         (0 ,0)
     }
 
+}
+
+
+#[component]
+pub fn BackButton<G: Html>(ctx: ScopeRef) -> View<G> {
+    let show_button = ctx.create_signal(false);
+
+    view! { ctx,
+        div(class="verse-content-nav-panel", style="border-top-left-radius: 12px;",
+            on:mouseenter=move |_| show_button.set(true),
+            on:mouseleave=move |_| show_button.set(false)
+        ) {
+            button(
+                class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_first_page() {"nav-button-show"} else {""}),
+                on:click=move |_| bible::util::scroll_to_previous_page(&ctx, 60)
+            ) {
+                i(class="gg-chevron-left")
+            }
+        }
+    }
+}
+
+#[component]
+pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
+    let show_button = ctx.create_signal(false);
+
+    view! { ctx,
+        div(class="verse-content-nav-panel", style="border-top-right-radius: 12px;",
+            on:mouseenter=move |_| show_button.set(true),
+            on:mouseleave=move |_| show_button.set(false)
+        ) {
+            button(
+                class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_last_page() {"nav-button-show"} else {""}),
+                on:click=move |_| bible::util::scroll_to_next_page(&ctx)
+            ) {
+                i(class="gg-chevron-right")
+            }
+        }
+    }
 }
 
 #[component]
@@ -94,8 +132,9 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     let content_ref = ctx.create_node_ref();
 
     //let key_code = ctx.create_signal(0);
-    let on_scroll = move |e: Event| {
-        let elem = e.current_target().unwrap().unchecked_into::<Element>();
+    let on_scroll = move |_: Event| {
+        
+        //let elem = e.current_target().unwrap().unchecked_into::<Element>();
         
         //console::log_1(&format!("{}", elem.scroll_left()).into());
         //key_code.set(key.key_code());
@@ -121,7 +160,6 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     //let result = ctx.create_signal("".to_string());
 
     let on_mouseup = move |_: Event| {
-        
         let window = web_sys::window().unwrap();
         let selected_text = window.get_selection().unwrap().unwrap().to_string().as_string().unwrap();
         
@@ -153,40 +191,67 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
             match bible_state.selection_first_verse.get() {
                 verse_item => {
                     
-                    let js1 = util::js_array(&[
-                        format!("'book_id':{}", verse_item.book_id).as_str(), 
-                        format!("'chapter':{}", verse_item.chapter).as_str(), 
-                        format!("'First verse selected':{}", verse_item.verse).as_str()
-                    ]);
+                    let arr = js_sys::Array::new();
+                    arr.push(&util::js_array(&["book_id", format!("{}", verse_item.book_id).as_str()]));
+                    arr.push(&util::js_array(&["chapter", format!("{}", verse_item.chapter).as_str()]));
+                    arr.push(&util::js_array(&["First verse selected", format!("{}", verse_item.verse).as_str()]));
                      
-                    console::table_1(&js1);
+                    console::table_1(&arr);
 
                 }
             };
             
-
         }
+
+
     };
 
+    let on_touchend = move |_: Event| {
+        bible::util::scroll_to_near_page(ctx, 60);
+    };
+
+    let bible_content_style = ctx.create_memo(|| {
+        let inner_width: f64 = *app_state.inner_width.get();
+        let inner_height: f64 = *app_state.inner_height.get();
+        let mut height =  inner_height-116.0;
+        if inner_width <= 738.0 {
+            height =  inner_height-128.0;
+        } 
+        
+        format!("font-size:{}pt;height:{}px;", *bible_state.verse_text_size.get(), height)
+    });
 
     view! { ctx,
-       
-        div(ref=content_ref,
-            id="bible-verse-content", 
-            class="bible-verse-content",
-            style=format!("font-size:{}pt;", *bible_state.verse_text_size.get()),
-            on:click=on_click,
-            on:scroll=on_scroll,
-            on:mouseup=on_mouseup
-        ) {
-        Keyed {
-            iterable: get_filtered_verses,
-            view: |ctx, verse| view! { ctx,
-                VerseItem(verse)
-            },
-            key: |verse| verse.get().verse,
+
+        article(class="bible-content", style=*bible_content_style.get()) {
+            //scroll_to_previous_page
+            BackButton()
+            //(*key_code.get())
+            
+            div(class="bible-verse-wrapper"
+            ) {
+                div(ref=content_ref,
+                    id="bible-verse-content", 
+                    class="bible-verse-content",
+                    on:click=on_click,
+                    on:scroll=on_scroll,
+                    on:mouseup=on_mouseup,
+                    on:touchend=on_touchend
+                ) {
+                    Keyed {
+                        iterable: get_filtered_verses,
+                        view: |ctx, verse| view! { ctx,
+                            VerseItem(verse)
+                        },
+                        key: |verse| verse.get().verse,
+                    }
+                }
+            }
+
+            //scroll_to_next_page
+            NextButton()
+        
         }
-    }
 
     }
 }

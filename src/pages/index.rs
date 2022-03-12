@@ -1,7 +1,6 @@
 use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
-use crate::components::background::Background;
 use crate::components::{header::Header, tabbar::TabBar};
 use crate::pages::{home, bible, chat, profile};
 use crate::route::AppRoutes; 

@@ -12,8 +12,7 @@ pub fn Footer<G: Html>(ctx: ScopeRef) -> View<G> {
         div(class="chat-footer") {
             span(class="optinal-button", dangerously_set_inner_html=IMAGE_SVG)
             // can use gg-image
-            //span(dangerously_set_inner_html=PLUG_CIRCLE_SVG)
-
+            
             span(dangerously_set_inner_html=PAPER_CLIP_SVG)
             // can use gg-attachment
 
