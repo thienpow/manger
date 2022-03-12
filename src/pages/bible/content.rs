@@ -3,7 +3,7 @@
 
 use std::{rc::Rc};
 use sycamore::prelude::*;
-use web_sys::{Event, console};
+use web_sys::{Event, console, DomException, Element};
 
 use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
 use crate::util;
@@ -129,7 +129,7 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
 
     let app_state = ctx.use_context::<AppState>();
     let bible_state = ctx.use_context::<BibleState>();
-    let content_ref = ctx.create_node_ref();
+    let verse_content = ctx.create_node_ref();
 
     //let key_code = ctx.create_signal(0);
     let on_scroll = move |_: Event| {
@@ -207,8 +207,26 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     };
 
     let on_touchend = move |_: Event| {
-        bible::util::scroll_to_near_page(ctx, 60);
+        let e = verse_content.get::<DomNode>().unchecked_into::<Element>();
+        let bible_state = ctx.use_context::<BibleState>();
+
+        let previous_scroll_page = (*bible_state.current_verse_scroll_x.get() / (e.client_width() as f64 + 48.0)).floor();
+        let current_scroll_page_actual = e.scroll_left() as f64 / (e.client_width() as f64 + 48.0);
+        
+        let mut page_to_scroll = *bible_state.current_verse_page.get() as f64;
+        let current_scroll_page_diff = current_scroll_page_actual - previous_scroll_page;
+        if current_scroll_page_diff > 1.2/10.0 {
+            page_to_scroll = previous_scroll_page + current_scroll_page_diff.ceil();
+        } else if current_scroll_page_diff < -1.2/10.0 {
+            page_to_scroll = previous_scroll_page + current_scroll_page_diff.floor();
+        }
+        
+        bible_state.current_verse_page.set(page_to_scroll as i32);
+        let x = (page_to_scroll * e.client_width() as f64) as f64 + (48.0 * page_to_scroll as f64);
+        bible_state.current_verse_scroll_x.set(x);
+        e.scroll_with_x_and_y(x, 0.0);
     };
+
 
     let bible_content_style = ctx.create_memo(|| {
         let inner_width: f64 = *app_state.inner_width.get();
@@ -230,7 +248,7 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
             
             div(class="bible-verse-wrapper"
             ) {
-                div(ref=content_ref,
+                div(ref=verse_content,
                     id="bible-verse-content", 
                     class="bible-verse-content",
                     on:click=on_click,

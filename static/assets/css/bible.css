@@ -61,6 +61,9 @@
     padding-top: 12px;
     padding-bottom: 12px;
 }
+.bible-verse-content::-webkit-scrollbar {
+    display: none;
+}
 
 .toc-wrapper {
     position: relative;
@@ -73,6 +76,7 @@
     scroll-snap-type: y mandatory;
     scroll-snap-align: center;
     scroll-behavior: smooth;
+    overscroll-behavior: auto;
     -webkit-user-select : none;
     user-select: none;
     touch-action: pan-y;

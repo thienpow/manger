@@ -1,5 +1,5 @@
 use gloo_timers::future::TimeoutFuture;
-use sycamore::{prelude::ScopeRef, futures::ScopeSpawnFuture};
+use sycamore::{prelude::{ScopeRef, NodeRef}, futures::ScopeSpawnFuture, generic_node::GenericNode};
 use web_sys::{console};
 
 use crate::pages::bible::{store::BibleState};
@@ -42,37 +42,6 @@ pub fn scroll_to_selected_chapter(ctx: ScopeRef, wait: u32) {
     });
 }
 
-// scroll to the near page, by calc 1/3 of width to decide next or previous
-pub fn scroll_to_near_page(ctx: ScopeRef, wait: u32) {
-    ctx.spawn_future(async move {
-        TimeoutFuture::new(wait).await;
-
-        match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
-            Some(e) => {
-                let bible_state = ctx.use_context::<BibleState>();
-
-                let previous_scroll_page = (*bible_state.current_verse_scroll_x.get() / (e.client_width() as f64 + 48.0)).floor();
-                let current_scroll_page_actual = e.scroll_left() as f64 / (e.client_width() as f64 + 48.0);
-                
-                let mut page_to_scroll = *bible_state.current_verse_page.get() as f64;
-                let current_scroll_page_diff = current_scroll_page_actual - previous_scroll_page;
-                if current_scroll_page_diff > 1.2/10.0 {
-                    page_to_scroll = previous_scroll_page + current_scroll_page_diff.ceil();
-                } else if current_scroll_page_diff < -1.2/10.0 {
-                    page_to_scroll = previous_scroll_page + current_scroll_page_diff.floor();
-                }
-                
-                bible_state.current_verse_page.set(page_to_scroll as i32);
-                let x = (page_to_scroll * e.client_width() as f64) as f64 + (48.0 * page_to_scroll as f64);
-                bible_state.current_verse_scroll_x.set(x);
-                e.scroll_with_x_and_y(x, 0.0);
-                
-            },
-            _ => {}
-        }
-        
-    });
-}
 
 pub fn scroll_to_previous_page(ctx: ScopeRef, wait: u32) {
     ctx.spawn_future(async move {
