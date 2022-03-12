@@ -62,11 +62,10 @@ pub fn scroll_to_near_page(ctx: ScopeRef, wait: u32) {
                     page_to_scroll = previous_scroll_page + current_scroll_page_diff.floor();
                 }
                 
-                
                 bible_state.current_verse_page.set(page_to_scroll as i32);
-                let x = (page_to_scroll * e.client_width() as f64) as f64 + (48.0f64 * page_to_scroll as f64);
+                let x = (page_to_scroll * e.client_width() as f64) as f64 + (48.0 * page_to_scroll as f64);
                 bible_state.current_verse_scroll_x.set(x);
-                e.scroll_with_x_and_y(x, 0f64);
+                e.scroll_with_x_and_y(x, 0.0);
                 
             },
             _ => {}
@@ -88,9 +87,9 @@ pub fn scroll_to_previous_page(ctx: ScopeRef, wait: u32) {
                 if e.scroll_left() > 0 {
                     let previous_page = current_verse_page - 1;
                     bible_state.current_verse_page.set(previous_page);
-                    let x = (previous_page * e.client_width()) as f64 + (48.0f64 * previous_page as f64);
+                    let x = (previous_page * e.client_width()) as f64 + (48.0 * previous_page as f64);
                     bible_state.current_verse_scroll_x.set(x);
-                    e.scroll_with_x_and_y(x, 0f64);
+                    e.scroll_with_x_and_y(x, 0.0);
                 }
                 
             },
@@ -111,9 +110,9 @@ pub fn scroll_to_next_page(ctx: ScopeRef) {
                 if e.scroll_width() - e.scroll_left() > e.client_width() + 10  {
                     let next_page = current_verse_page + 1;
                     bible_state.current_verse_page.set(next_page);
-                    let x = (next_page * e.client_width()) as f64 + (48.0f64 * next_page as f64);
+                    let x = (next_page * e.client_width()) as f64 + (48.0 * next_page as f64);
                     bible_state.current_verse_scroll_x.set(x);
-                    e.scroll_with_x_and_y(x, 0f64);
+                    e.scroll_with_x_and_y(x, 0.0);
                 }
             },
             _ => {}
