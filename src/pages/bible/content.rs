@@ -3,7 +3,7 @@
 
 use std::{rc::Rc};
 use sycamore::prelude::*;
-use web_sys::{Event, console, DomException, Element};
+use web_sys::{Event, console, Element};
 
 use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
 use crate::util;
