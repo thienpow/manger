@@ -1,7 +1,7 @@
 use sycamore::prelude::*;
 
 #[component]
-pub fn ContentFooter<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn ContentFooter<G: Html>(ctx: Scope) -> View<G> {
 
     view! { ctx,
         footer(class="info") {

@@ -1,8 +1,8 @@
 use serde::{Serialize, Deserialize};
-use sycamore::prelude::{RcSignal, create_rc_signal, ScopeRef};
+use sycamore::prelude::{RcSignal, create_rc_signal, Scope};
 use crate::pages::bible::api;
 
-pub fn initialize(ctx: ScopeRef) {
+pub fn initialize(ctx: Scope) {
 
     let window = web_sys::window().unwrap();
     let _document = window.document().unwrap();

@@ -5,7 +5,7 @@ use sycamore::prelude::*;
 use crate::svg::{BACK_SVG, VIDEO_SVG, PHONE_SVG};
 
 #[component]
-pub fn NavBar<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn NavBar<G: Html>(ctx: Scope) -> View<G> {
 
 /*
     let app_state = ctx.use_context::<AppState>();

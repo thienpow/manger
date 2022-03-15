@@ -6,7 +6,7 @@ use crate::route::AppRoutes;
 use crate::store::{CurrentRoute};
 
 #[component]
-pub fn TabBar<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn TabBar<G: Html>(ctx: Scope) -> View<G> {
 
     let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
 

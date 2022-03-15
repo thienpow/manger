@@ -2,7 +2,7 @@ use sycamore::prelude::*;
 use crate::store::AppState;
 
 #[component]
-pub fn Preference<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Preference<G: Html>(ctx: Scope) -> View<G> {
 
     let app_state = ctx.use_context::<AppState>();
     

@@ -3,7 +3,7 @@ use crate::{components::footer, store::{AppState}, pages::profile::{preference::
 
 
 #[component]
-pub fn Profile<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Profile<G: Html>(ctx: Scope) -> View<G> {
 
     let _app_state = ctx.use_context::<AppState>();
     

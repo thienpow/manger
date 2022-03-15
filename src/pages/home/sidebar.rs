@@ -3,7 +3,7 @@ use sycamore::prelude::*;
 use crate::svg::{BIBLE_SVG, MUSIC_SVG, GROWTH_SVG, DAILY_SVG, DONATE_SVG, PRAY_SVG, PHOTOS_SVG, FORUM_SVG};
 
 #[component]
-pub fn SidebarLeft<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn SidebarLeft<G: Html>(ctx: Scope) -> View<G> {
 
     view! { ctx,
         

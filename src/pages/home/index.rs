@@ -5,7 +5,7 @@ use crate::{components::{contactbar::ContactBar}, pages::home::sidebar::SidebarL
 
 
 #[component]
-pub fn Home<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Home<G: Html>(ctx: Scope) -> View<G> {
 
     let handle_click_bible = move |_e: Event| {
         console::log_1(&format!("clicked").as_str().into());

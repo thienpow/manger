@@ -27,7 +27,7 @@ fn get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
 
 
 #[component]
-pub fn BackButton<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn BackButton<G: Html>(ctx: Scope) -> View<G> {
     let show_button = ctx.create_signal(false);
 
     view! { ctx,
@@ -37,7 +37,7 @@ pub fn BackButton<G: Html>(ctx: ScopeRef) -> View<G> {
         ) {
             button(
                 class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_first_page() {"nav-button-show"} else {""}),
-                on:click=move |_| bible::util::scroll_to_previous_page(&ctx, 60)
+                on:click=move |_| bible::util::scroll_to_previous_page(ctx, 60)
             ) {
                 i(class="gg-chevron-left")
             }
@@ -46,7 +46,7 @@ pub fn BackButton<G: Html>(ctx: ScopeRef) -> View<G> {
 }
 
 #[component]
-pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn NextButton<G: Html>(ctx: Scope) -> View<G> {
     let show_button = ctx.create_signal(false);
 
     view! { ctx,
@@ -56,7 +56,7 @@ pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
         ) {
             button(
                 class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_last_page() {"nav-button-show"} else {""}),
-                on:click=move |_| bible::util::scroll_to_next_page(&ctx)
+                on:click=move |_| bible::util::scroll_to_next_page(ctx)
             ) {
                 i(class="gg-chevron-right")
             }
@@ -65,7 +65,7 @@ pub fn NextButton<G: Html>(ctx: ScopeRef) -> View<G> {
 }
 
 #[component]
-fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<VerseItem>) -> View<G> {
+fn VerseItem<G: Html>(ctx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
 
     let bible_state = ctx.use_context::<BibleState>();
     let verse =  verse.get();
@@ -125,7 +125,7 @@ fn VerseItem<G: Html>(ctx: ScopeRef, verse: RcSignal<VerseItem>) -> View<G> {
 
 
 #[component]
-pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Content<G: Html>(ctx: Scope) -> View<G> {
 
     let app_state = ctx.use_context::<AppState>();
     let bible_state = ctx.use_context::<BibleState>();

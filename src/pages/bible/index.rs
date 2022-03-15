@@ -13,7 +13,7 @@ use crate::{
 
 
 #[component]
-pub fn Bible<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Bible<G: Html>(ctx: Scope) -> View<G> {
 
     bible::store::initialize(ctx);
 

@@ -9,7 +9,7 @@ use crate::pages::bible::{
 };
 
 #[component]
-pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G> {
+pub fn BookItem<G: Html>(ctx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
     let bible_state = ctx.use_context::<BibleState>();
 
     let book = book.get();
@@ -18,7 +18,7 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
     let chapters = book.chapters;
     let book_name_span = book.book_name.clone();
 
-    let handle_toc_click = |book_id: i32, book_name:  String, chapters: i32| {
+    let handle_toc_click = |ctx: Scope, book_id: i32, book_name:  String, chapters: i32| {
         bible_state.selected_bible_book.set(BibleBookItem {book_id, book_name, chapters});
         bible_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
         bible::util::reload_chapter_data(ctx);
@@ -33,7 +33,7 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
             class=(if bible_state.selected_bible_book.get().book_id == id {
                 "toc-menu-selected"
             } else {""}),
-            on:click=move |_| handle_toc_click(id, book_name.clone(), chapters)
+            on:click=move |_| handle_toc_click(ctx, id, book_name.clone(), chapters)
         ) {
             (book_name_span)
         }
@@ -41,7 +41,7 @@ pub fn BookItem<G: Html>(ctx: ScopeRef, book: RcSignal<BibleBookItem>) -> View<G
 }
 
 #[component]
-async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
+async fn BookList<G: Html>(ctx: Scope<'_>) -> View<G> {
     let bible_state = ctx.use_context::<BibleState>();
     bible_state.init_bible_books().await;
 
@@ -72,11 +72,11 @@ async fn BookList<G: Html>(ctx: ScopeRef<'_>) -> View<G> {
 }
 
 #[component]
-fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G> {
+fn ChapterItem<G: Html>(ctx: Scope, chapter: RcSignal<ChapterItem>) -> View<G> {
     let id = chapter.get().id;
     let bible_state = ctx.use_context::<BibleState>();
     
-    let handle_chapter_click = |id: i32| {
+    let handle_chapter_click = |ctx: Scope, id: i32| {
         bible_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
         bible::util::reload_chapter_data(ctx);
         bible::util::scroll_to_selected_chapter(ctx, 0);
@@ -88,7 +88,7 @@ fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G
             class=(if bible_state.selected_bible_chapter.get().id == id {
                 "toc-menu-selected"
             } else {""}),
-            on:click=move |_| handle_chapter_click(id)
+            on:click=move |_| handle_chapter_click(ctx, id)
         ) {
             (id)
         }
@@ -97,7 +97,7 @@ fn ChapterItem<G: Html>(ctx: ScopeRef, chapter: RcSignal<ChapterItem>) -> View<G
 
 
 #[component]
-fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
+fn ChapterList<G: Html>(ctx: Scope) -> View<G> {
     let bible_state = ctx.use_context::<BibleState>();
 
     let filtered_chapters = ctx.create_memo(|| {
@@ -126,7 +126,7 @@ fn ChapterList<G: Html>(ctx: ScopeRef) -> View<G> {
 
 
 #[component]
-pub fn TOC<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn TOC<G: Html>(ctx: Scope) -> View<G> {
 
     let bible_state = ctx.use_context::<BibleState>();
 

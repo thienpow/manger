@@ -1,9 +1,9 @@
 
-use sycamore::prelude::{RcSignal, create_rc_signal, ScopeRef};
+use sycamore::prelude::{RcSignal, create_rc_signal, Scope};
 use crate::route::{AppRoutes};
 use crate::util;
 
-pub fn initialize(ctx: ScopeRef) {
+pub fn initialize(ctx: Scope) {
 
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();

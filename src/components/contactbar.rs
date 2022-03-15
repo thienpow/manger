@@ -3,7 +3,7 @@ use sycamore::prelude::*;
 use crate::{store::CurrentRoute, route::AppRoutes};
 
 #[component]
-pub fn ContactBar<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
 
     let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
 

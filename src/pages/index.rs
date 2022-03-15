@@ -1,3 +1,4 @@
+
 use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
@@ -7,9 +8,8 @@ use crate::route::AppRoutes;
 use crate::store::CurrentRoute;
 
 #[component]
-pub fn Index<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Index<G: Html>(ctx: Scope) -> View<G> {
     
-
     let home_page = view! { ctx, 
         home::index::Home()
     };
@@ -44,8 +44,8 @@ pub fn Index<G: Html>(ctx: ScopeRef) -> View<G> {
                             },
                             AppRoutes::Bible => {
                                 current_route.set(AppRoutes::Bible);
-                                bible::util::scroll_to_selected_book(&ctx, 60);
-                                bible::util::scroll_to_selected_chapter(&ctx, 1000);
+                                bible::util::scroll_to_selected_book(ctx, 60);
+                                bible::util::scroll_to_selected_chapter(ctx, 1000);
                                 bible_page.clone()
                             },
                             AppRoutes::Love => {

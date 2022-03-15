@@ -7,7 +7,7 @@ use crate::store::{CurrentRoute};
 use crate::svg::{LOGO_SVG, NOTIF_SVG};
 
 #[component]
-pub fn Header<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Header<G: Html>(ctx: Scope) -> View<G> {
 
     let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
 

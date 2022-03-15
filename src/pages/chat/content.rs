@@ -5,7 +5,7 @@ use sycamore::prelude::*;
 use crate::store::AppState;
 
 #[component]
-pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     let app_state = ctx.use_context::<AppState>();
     
     let chat_content_style = ctx.create_memo(|| {

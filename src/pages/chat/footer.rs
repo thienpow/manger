@@ -5,7 +5,7 @@ use sycamore::prelude::*;
 use crate::svg::{IMAGE_SVG, PAPER_CLIP_SVG, SMILE_SVG, THUMBS_UP_SVG};
 
 #[component]
-pub fn Footer<G: Html>(ctx: ScopeRef) -> View<G> {
+pub fn Footer<G: Html>(ctx: Scope) -> View<G> {
     
     view! { ctx,
 

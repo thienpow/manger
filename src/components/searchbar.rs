@@ -7,7 +7,7 @@ pub struct SearchBar {
 }
 
 #[component]
-pub fn SearchBar<G: Html>(ctx: ScopeRef, props: SearchBar) -> View<G> {
+pub fn SearchBar<G: Html>(ctx: Scope, props: SearchBar) -> View<G> {
 
     view! { ctx,
         div(class="search-bar") {
