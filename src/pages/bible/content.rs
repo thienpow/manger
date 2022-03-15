@@ -207,6 +207,7 @@ pub fn Content<G: Html>(ctx: ScopeRef) -> View<G> {
     };
 
     let on_touchend = move |_: Event| {
+
         let e = verse_content.get::<DomNode>().unchecked_into::<Element>();
         let bible_state = ctx.use_context::<BibleState>();
 
