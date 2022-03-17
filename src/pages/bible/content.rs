@@ -3,7 +3,7 @@
 
 use std::{rc::Rc};
 use sycamore::prelude::*;
-use web_sys::{Event, console, Element};
+use web_sys::{Event, Element};
 
 use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
 use crate::util;
@@ -168,7 +168,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             //let mut found_index = 0;
             let splited = selected_text.split("\n").into_iter().clone();
             
-            for (i, sel_text) in splited.into_iter().enumerate() {
+            for (_i, sel_text) in splited.into_iter().enumerate() {
     
                 /* do not use... just keep for reference for debugging
                 if i == 2 {
@@ -185,7 +185,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
                  */
 
                 if !sel_text.is_empty() {
-                    console::log_1(&format!("index: {}, text: {}", i, sel_text).into());
+                    //console::log_1(&format!("index: {}, text: {}", i, sel_text).into());
                 }
             }
 
@@ -197,7 +197,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
                     arr.push(&util::js_array(&["chapter", format!("{}", verse_item.chapter).as_str()]));
                     arr.push(&util::js_array(&["First verse selected", format!("{}", verse_item.verse).as_str()]));
                      
-                    console::table_1(&arr);
+                    //console::table_1(&arr);
 
                 }
             };
