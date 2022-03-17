@@ -1,0 +1,79 @@
+.toast-container {
+    display: flex;
+    flex-direction: column;
+    gap:  .5rem;
+    position: fixed;
+    margin: 12px;
+    max-width: 300px;
+    min-width: 250px;
+    z-index: 10000;
+}
+.toast-container[data-position^="top-"]  {
+    top: 0;
+}
+.toast-container[data-position^="bottom-"]  {
+    bottom: 0;
+}
+.toast-container[data-position$="-right"]  {
+    right: 0;
+}
+.toast-container[data-position$="-left"]  {
+    left: 0;
+}
+.toast-container[data-position$="-center"]  {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toast {
+    box-sizing: border-box;
+    padding: 0.75rem;
+    background-color: white;
+    border: 1px solid #333;
+    border-radius: .25em;
+    position: relative;
+    transition: transform 300ms ease-in-out;
+}
+.toast-container[data-position$="-right"] .toast {
+    transform: translateX(110%);
+}
+.toast-container[data-position$="-left"] .toast  {
+    transform: translateX(-110%);
+}
+.toast-container[data-position="top-center"] .toast  {
+    transform: translateY(-100vh);
+}
+.toast-container[data-position="bottom-center"] .toast  {
+    transform: translateY(100vh);
+}
+.toast::after {
+    content: "\00D7";
+    position: absolute;
+    top: 2px;
+    right: 5px;
+}
+.toast-container .toast.show  {
+    transform: translate(0, 0);
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+  
+@-webkit-keyframes fadeout {
+    from {opacity: 1;}
+    to { opacity: 0;}
+}
+  
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}

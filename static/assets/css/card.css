@@ -4,6 +4,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
+    gap: .5rem;
 }
 
 .card {

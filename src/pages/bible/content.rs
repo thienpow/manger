@@ -5,7 +5,7 @@ use std::{rc::Rc};
 use sycamore::prelude::*;
 use web_sys::{Event, console, Element};
 
-use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
+use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState, components::toast::{self, ToastProps}};
 use crate::util;
 
 #[derive(Clone)]
@@ -151,6 +151,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     });
 
     let on_click = move |_e: Event| {
+        
         if *app_state.inner_width.get() <= 420.0 {
             bible_state.show_bible_toc.set(false);
             bible_state.pin_bible_toc.set(false);

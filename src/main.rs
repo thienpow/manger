@@ -12,6 +12,7 @@ mod route;
 mod svg;
 mod components;
 mod util;
+use crate::components::toast::{Positions, ToastContainerProps, Toast};
 use crate::components::{background::Background};
 use crate::pages::index::Index;
 use crate::store::AppState;
@@ -48,6 +49,7 @@ fn main() {
         view! { ctx, 
             Background()
             Index()
+            Toast(ToastContainerProps{position: Positions::TopRight})
         }
     });
 }
