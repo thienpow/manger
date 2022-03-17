@@ -5,7 +5,7 @@ use std::{rc::Rc};
 use sycamore::prelude::*;
 use web_sys::{Event, console, Element};
 
-use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState, components::toast::{self, ToastProps}};
+use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
 use crate::util;
 
 #[derive(Clone)]

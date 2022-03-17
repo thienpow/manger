@@ -2,7 +2,7 @@ use core::fmt;
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::*, futures::ScopeSpawnLocal};
 
-//#[allow(dead_code)]
+#[allow(dead_code)]
 #[derive(Debug, Clone, Copy)]
 pub enum Positions {
     TopLeft,
@@ -53,7 +53,7 @@ pub struct ToastState {
     pub new_toast: RcSignal<ToastProps>,
 }
 
-pub fn Show(ctx: Scope, props: ToastProps) {
+pub fn show(ctx: Scope, props: ToastProps) {
     let toast_state = ctx.use_context::<ToastState>();
     toast_state.new_toast.set(ToastProps{title: props.title, text: props.text, icon_url: props.icon_url});
     toast_state.show_new_toast.set(true);

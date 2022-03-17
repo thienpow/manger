@@ -27,7 +27,7 @@ pub fn BookItem<G: Html>(ctx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
         bible::util::scroll_to_selected_chapter(ctx, 560);
         bible::util::scroll_to_selected_book(ctx, 60);
 
-        toast::Show(ctx, ToastProps{title: "title here".to_string(), text: book_name_clone, icon_url: "".to_string()});
+        toast::show(ctx, ToastProps{title: "title here".to_string(), text: book_name_clone, icon_url: "".to_string()});
     };
 
     view! { ctx,
