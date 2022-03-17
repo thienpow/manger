@@ -131,15 +131,6 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     let bible_state = ctx.use_context::<BibleState>();
     let verse_content = ctx.create_node_ref();
 
-    //let key_code = ctx.create_signal(0);
-    let on_scroll = move |_: Event| {
-        
-        //let elem = e.current_target().unwrap().unchecked_into::<Element>();
-        
-        //console::log_1(&format!("{}", elem.scroll_left()).into());
-        //key_code.set(key.key_code());
-    };
-
     let get_filtered_verses = ctx.create_memo(|| {
         bible_state
             .verses
@@ -151,16 +142,13 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     });
 
     let on_click = move |_e: Event| {
-        
         if *app_state.inner_width.get() <= 420.0 {
             bible_state.show_bible_toc.set(false);
             bible_state.pin_bible_toc.set(false);
         }
     };
 
-    //let result = ctx.create_signal("".to_string());
-
-    let on_mouseup = move |_: Event| {
+    let _on_mouseup = move |_: Event| {
         let window = web_sys::window().unwrap();
         let selected_text = window.get_selection().unwrap().unwrap().to_string().as_string().unwrap();
         
@@ -254,8 +242,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
                     id="bible-verse-content", 
                     class="bible-verse-content",
                     on:click=on_click,
-                    on:scroll=on_scroll,
-                    on:mouseup=on_mouseup,
+                    //on:mouseup=on_mouseup,
                     on:touchend=on_touchend
                 ) {
                     Keyed {

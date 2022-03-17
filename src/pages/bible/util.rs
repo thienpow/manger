@@ -75,7 +75,7 @@ pub fn scroll_to_next_page(ctx: Scope) {
                     
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
             Some(e) => {
-                if e.scroll_width() - e.scroll_left() > e.client_width() + 10  {
+                if e.scroll_width() - e.scroll_left() > e.client_width()  {
                     let next_page = current_verse_page + 1;
                     bible_state.current_verse_page.set(next_page);
                     let x = (next_page * e.client_width()) as f64 + (48.0 * next_page as f64);

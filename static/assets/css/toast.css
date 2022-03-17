@@ -7,6 +7,7 @@
     max-width: 300px;
     min-width: 250px;
     z-index: 10000;
+    background-color: transparent;
 }
 .toast-container[data-position^="top-"]  {
     top: 0;
