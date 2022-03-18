@@ -1,12 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-/*
-@import url(//db.onlinewebfonts.com/c/0fac23294cabd9471f8ca7816bf12eae?family=FuturaPTW02-Book);
-@import url(//db.onlinewebfonts.com/c/e81d1bf7827206c7d1273046adace7f2?family=Graphik);
-*/
-*:not(html) {
-  -webkit-transform: translate3d(0, 0, 0);
-}
+
 * {
+  -webkit-transform: translate3d(0, 0, 0);
   outline: none;
   box-sizing: border-box;
 }
