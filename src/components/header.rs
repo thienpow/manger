@@ -4,7 +4,7 @@ use sycamore::prelude::*;
 
 use crate::route::AppRoutes;
 use crate::store::{CurrentRoute};
-use crate::svg::{LOGO_SVG, NOTIF_SVG};
+use crate::svg::{NOTIF_SVG};
 
 #[component]
 pub fn Header<G: Html>(ctx: Scope) -> View<G> {
@@ -25,12 +25,14 @@ pub fn Header<G: Html>(ctx: Scope) -> View<G> {
 
         header(ref=header_ref, id="header", class="header") {
             div(ref=left_menu_ref, class="header-menu-left") {
-                a(class="logo", aria-label="Manger Home Page", href="/", dangerously_set_inner_html=LOGO_SVG) 
+                a(class="logo", aria-label="Manger Home Page", href="/") {
+                    img(loading="lazy", alt="Manger Logo", src="/assets/img/logo-192.png", width="100%")
+                } 
             }
             div(class="menu-gap")
             div(class="header-menu") {
                 a(class=(match *current_route.get() {AppRoutes::Home => "navbar-menu-home is-active", _ => "navbar-menu-home"}), href="/") {"Home"}
-                a(class=(match *current_route.get() {AppRoutes::Bible => "is-active", _ => ""}), href="/bible") {"Bible Study"}
+                a(class=(match *current_route.get() {AppRoutes::Bible => "is-active", _ => ""}), href="/bible") {"Bible"}
                 a(class=(match *current_route.get() {AppRoutes::Community => "is-active", _ => ""}), href="/community") {"Community"}
             }
             
@@ -40,8 +42,8 @@ pub fn Header<G: Html>(ctx: Scope) -> View<G> {
             div(class="menu-gap")
             div(class="header-profile") {
                 div(class="notification") {
-                    span(class="notification-number") {(10)}
                     span(dangerously_set_inner_html=NOTIF_SVG) 
+                    span(class="notification-number") {(10)}
                 }
                 div(class="icon-gap")
                 div() {

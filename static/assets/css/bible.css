@@ -125,7 +125,6 @@
     border-left: 1px solid red;
     border-right: 1px solid red;
     font-weight: 700;
-    transition: 0.06s;
     user-select: none;
     -webkit-user-select : none;
     cursor: pointer;

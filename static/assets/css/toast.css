@@ -29,8 +29,9 @@
 .toast {
     box-sizing: border-box;
     padding: 0.75rem;
-    background-color: white;
-    border: 1px solid #333;
+    color: var(--theme-color);
+    background-color: var(--popup-bg);
+    border: 1px solid var(--border-color);
     border-radius: .25em;
     position: relative;
     transition: transform 300ms ease-in-out;
@@ -62,7 +63,7 @@
 @-webkit-keyframes fadein {
     from {opacity: 0;}
     to {opacity: 1;}
-  }
+}
   
 @keyframes fadein {
     from {opacity: 0;}

@@ -1,7 +1,10 @@
-use gloo_timers::future::TimeoutFuture;
-use sycamore::{prelude::{Scope}, futures::ScopeSpawnLocal};
+use std::{cell::RefCell, rc::Rc};
 
-use crate::pages::bible::{store::BibleState};
+use gloo_timers::future::TimeoutFuture;
+use sycamore::{prelude::Scope, futures::ScopeSpawnLocal};
+use wasm_bindgen::{prelude::Closure, JsCast};
+
+use crate::pages::bible::store::BibleState;
 
 pub fn reload_chapter_data(ctx: Scope) {
     ctx.spawn_local(async move {
@@ -14,12 +17,41 @@ pub fn reload_chapter_data(ctx: Scope) {
     });
 }
 
+/*
+    TODO: see if can use request_animation_frame method
+
+    fn window() -> web_sys::Window {
+        web_sys::window().expect("no global `window` exists")
+    }
+
+    fn request_animation_frame(f: &Closure<dyn FnMut()>) {
+        window()
+            .request_animation_frame(f.as_ref().unchecked_ref())
+            .expect("should register `requestAnimationFrame` OK");
+    }
+
+    let f = Rc::new(RefCell::new(None));
+    let g = f.clone();
+    *g.borrow_mut() = Some(Closure::wrap(Box::new(move || {
+       
+        let _ = f.borrow_mut().take();
+
+    }) as Box<dyn FnMut()>));
+
+    request_animation_frame(g.borrow().as_ref().unwrap());
+
+ */
+
+
 pub fn scroll_to_selected_book(ctx: Scope, wait: u32) {
+
     ctx.spawn_local(async move {
         TimeoutFuture::new(wait).await;
+
         let app_state = ctx.use_context::<BibleState>();
+        let target_id = app_state.selected_bible_book.get().book_id+1;
         
-        match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("book-item-{}", app_state.selected_bible_book.get().book_id+1).as_str()) {
+        match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("book-item-{}", target_id).as_str()) {
             Some(item_below) => {
                 item_below.scroll_into_view_with_bool(false);
             },
@@ -29,16 +61,21 @@ pub fn scroll_to_selected_book(ctx: Scope, wait: u32) {
 }
 
 pub fn scroll_to_selected_chapter(ctx: Scope, wait: u32) {
+
     ctx.spawn_local(async move {
         TimeoutFuture::new(wait).await;
+
         let app_state = ctx.use_context::<BibleState>();
-        match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("chapter-item-{}", app_state.selected_bible_chapter.get().id+1).as_str()) {
+        let target_id = app_state.selected_bible_chapter.get().id+1;
+    
+        match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("chapter-item-{}", target_id).as_str()) {
             Some(item_below) => {
                 item_below.scroll_into_view_with_bool(false);
             },
             _ => {}
         }
     });
+    
 }
 
 

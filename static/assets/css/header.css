@@ -28,6 +28,7 @@
 }
 
 .logo {
+    padding-top: .5rem;
     background-color: transparent;
     cursor: pointer;
 }

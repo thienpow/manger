@@ -45,7 +45,6 @@ fn main() {
         window.add_event_listener_with_callback("resize", window_resize_closure.as_ref().unchecked_ref()).unwrap();
         window_resize_closure.forget();
         
-
         view! { ctx, 
             Background()
             Index()
