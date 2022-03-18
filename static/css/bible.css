@@ -43,23 +43,22 @@
     height: 100%;
 }
 .bible-verse-content {
-    overflow: auto;
+    overflow: overlay;
     width: 100%;
     height: 100%;
     scroll-behavior: smooth;
     color: var(--theme-text-color);
-    column-count:2;
-    column-width: 350px;
+    column-count: 2;
+    column-width: 380px;
     column-fill: auto;
     column-gap: 48px;
-    padding-top: 12px;
-    padding-bottom: 24px;
     touch-action: pan-x;
     scroll-behavior: smooth;
     overscroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scroll-snap-align: center;
+    padding: 1% 0 15%;
 }
 .bible-verse-content::-webkit-scrollbar {
     display: none;
