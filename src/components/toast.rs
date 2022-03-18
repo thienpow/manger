@@ -48,7 +48,7 @@ pub struct ToastProps {
 
 
 #[derive(Debug, Default, Clone)]
-pub struct ToastState {
+struct ToastState {
     pub show_new_toast: RcSignal<bool>,
     pub new_toast: RcSignal<ToastProps>,
 }
