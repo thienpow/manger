@@ -221,22 +221,38 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     let bible_content_style = ctx.create_memo(|| {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
-        let mut height =  inner_height-166.0;
+        let mut height =  inner_height-116.0;
         if inner_width <= 738.0 {
-            height =  inner_height-178.0;
+            height =  inner_height-128.0;
         } 
         
-        format!("font-size:{}pt;height:{}px;", *bible_state.verse_text_size.get(), height)
+        format!("height:{}px;",height)
+    });
+
+    let verse_content_style = ctx.create_memo(|| {
+        let inner_width: f64 = *app_state.inner_width.get();
+        let inner_height: f64 = *app_state.inner_height.get();
+        let mut height =  inner_height-116.0-50.0;
+        if inner_width <= 738.0 {
+            height =  inner_height-128.0-50.0;
+        } 
+        
+        format!("font-size:{}pt;height:{}px;min-height:{}px;max-height:{}px;", *bible_state.verse_text_size.get(), height, height, height)
     });
 
     view! { ctx,
 
-        article(class="bible-content", style=*bible_content_style.get()) {
+        article(
+            class="bible-content",
+            style=*bible_content_style.get()
+        ) {
             //scroll_to_previous_page
             BackButton()
             //(*key_code.get())
             
-            div(class="bible-verse-wrapper"
+            div(
+                class="bible-verse-wrapper",
+                style=*bible_content_style.get()
             ) {
                 div(ref=verse_content,
                     id="bible-verse-content", 
@@ -244,7 +260,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
                     on:click=on_click,
                     //on:mouseup=on_mouseup,
                     on:touchend=on_touchend,
-                    style=*bible_content_style.get()
+                    style=*verse_content_style.get()
                 ) {
                     Keyed {
                         iterable: get_filtered_verses,

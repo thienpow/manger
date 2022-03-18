@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 * {
-  -webkit-transform: translate3d(0, 0, 0);
   outline: none;
   box-sizing: border-box;
 }
