@@ -1,6 +1,7 @@
 use core::fmt;
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::*, futures::ScopeSpawnLocal};
+use web_sys::Event;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy)]
@@ -94,49 +95,81 @@ pub fn Toast<G: Html>(ctx: Scope, props: ToastContainerProps) -> View<G> {
     }
 }
 
+fn remove(ctx: Scope, toast: DomNode) {
+    ctx.spawn_local(async move {
+        TimeoutFuture::new(60).await;
+        toast.add_class("hide");
+
+        TimeoutFuture::new(300).await;
+        match toast.parent_node() {
+            Some(parent) => {
+                parent.remove_self();
+            },
+            None => {}
+        }
+        
+        toast.remove_self();
+    });
+
+}
+
 
 #[component]
 fn ToastItem<G: GenericNode>(ctx: Scope) -> View<G> {
+    let stay_show = ctx.create_signal(false);
+    
     let toast_state = ctx.use_context::<ToastState>();
     let new_toast = toast_state.new_toast.get();
     let title = new_toast.title.to_string();
     let text = new_toast.text.to_string();
+    let icon_url = new_toast.icon_url.to_string();
 
-    let toast = ctx.create_node_ref();
+    let toast_ref = ctx.create_node_ref();
 
-    let remove = move || {
-        let toast = toast.get::<DomNode>();
-        let parent = toast.parent_node().unwrap();
-        
-        parent.remove_self();
-        toast.remove_self();
-    };
-
-    let on_click = move |_| {
-        remove();
-    };
 
     ctx.spawn_local(async move {
-        TimeoutFuture::new(3000).await;
-        remove();
+        loop {
+            TimeoutFuture::new(7000).await;
+            if *stay_show.get() {
+            } else {
+                match toast_ref.get::<DomNode>() {
+                    toast => {
+                        remove(ctx, toast);
+                    },
+                }
+                break;
+            }
+        }
     });
+    
 
     ctx.spawn_local(async move {
         TimeoutFuture::new(60).await;
-        let toast = toast.get::<DomNode>();
+        let toast = toast_ref.get::<DomNode>();
         toast.add_class("show");
     });
 
+    let on_click = move |_| {
+        stay_show.set(false);
+        remove(ctx, toast_ref.get::<DomNode>());
+    };
+
     view! { ctx,
-        div(
-            ref=toast, 
+        div(ref=toast_ref, 
             class="toast",
-            on:click=on_click
-    ) {
-            //img(class="toast-img", src=(icon_url))
+            on:mouseenter=move |_| stay_show.set(true),
+            on:mouseleave=move |_| stay_show.set(false),
+        ) {
+            div(class="toast_x", 
+                style=(if *stay_show.get() {"display:flex;"} else {""}),
+                on:click=on_click
+            ) {"×"}
             div(class="toast-title") {(title)}
-            div(class="toast-text") {(text)}
-            
+            div(class="toast-content") {
+                img(class="toast-img", src=(icon_url))
+                div(class="toast-text") {(text)}
+            }
+    
         }
     }
 }

@@ -27,6 +27,8 @@
 }
 
 .toast {
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 0.75rem;
     color: var(--theme-color);
@@ -48,18 +50,39 @@
 .toast-container[data-position="bottom-center"] .toast  {
     transform: translateY(100vh);
 }
-.toast::after {
-    content: "\00D7";
+.toast_x {
+    display: none;
     position: absolute;
     top: 2px;
     right: 5px;
+    color: var(--theme-color);
+    background-color: var(--popup-bg);
+    cursor: pointer;
 }
 .toast-container .toast.show  {
     transform: translate(0, 0);
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    -webkit-animation: fadein 0.5s;
+    animation: fadein 0.5s;
 }
-
+.toast-container .toast.hide  {
+    transform: translate(0, 0);
+    -webkit-animation: fadeout 0.5s;
+    animation: fadeout 0.5s;
+}
+.toast-title {
+    color: var(--content-title-color);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8em;
+}
+.toast-content {
+    display: flex;
+    flex-direction: row;
+}
+.toast-text {
+    color: var(--content-title-color);
+    font-size: 12px;
+}
 @-webkit-keyframes fadein {
     from {opacity: 0;}
     to {opacity: 1;}
