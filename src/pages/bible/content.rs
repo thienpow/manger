@@ -221,9 +221,9 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     let bible_content_style = ctx.create_memo(|| {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
-        let mut height =  inner_height-116.0;
+        let mut height =  inner_height-166.0;
         if inner_width <= 738.0 {
-            height =  inner_height-128.0;
+            height =  inner_height-178.0;
         } 
         
         format!("font-size:{}pt;height:{}px;", *bible_state.verse_text_size.get(), height)
@@ -243,7 +243,8 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
                     class="bible-verse-content",
                     on:click=on_click,
                     //on:mouseup=on_mouseup,
-                    on:touchend=on_touchend
+                    on:touchend=on_touchend,
+                    style=*bible_content_style.get()
                 ) {
                     Keyed {
                         iterable: get_filtered_verses,

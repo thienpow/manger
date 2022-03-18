@@ -116,6 +116,9 @@
   .card + .card {
     margin-left: 0;
   }
+  .bible-wrapper {
+    border-radius: 0;
+  }
 }
   
 @media screen and (max-width: 420px) {
