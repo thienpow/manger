@@ -33,7 +33,7 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                         ctx.spawn_local(async move {
                             TimeoutFuture::new(120).await;
                             let content = app_content_ref.get::<DomNode>();
-                            content.set_attribute("style", "transform: translate(0, 0); transition: transform 777ms ease-in-out;");
+                            content.set_attribute("style", "transform: translate(0, 0); transition: transform 488ms ease-in-out;");
                         });
                     }
                     
@@ -43,14 +43,17 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                     if *app_state.inner_width.get() <= 738.0 {
                         let content = app_content_ref.get::<DomNode>();
 
-                        if i == *page_index.get() {
-
-                        } else if i < *page_index.get() {
-                            content.set_attribute("style", "transform: translateX(-88px);-webkit-animation: fadein 0.5s;animation: fadein 0.5s;");
-                        } else if i > *page_index.get() {
-                            content.set_attribute("style", "transform: translateX(88px);-webkit-animation: fadein 0.5s;animation: fadein 0.5s;");
+                        let pi = *page_index.get();
+                        let mut x = "0";
+                        if i == pi {
+                        } else if i < pi {
+                            x = "-88"
+                        } else if i > pi {
+                            x = "88"
                         }
-                        
+
+                        let style = format!("-webkit-animation:fadein 0.0s;animation:fadein 0.0s; transform:translateX({}px);", x);
+                        content.set_attribute("style", &style);
                     }
                     
                 };

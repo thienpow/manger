@@ -3,7 +3,7 @@
 
 use std::{rc::Rc};
 use sycamore::prelude::*;
-use web_sys::{Event, Element};
+use web_sys::{Event, Element, console};
 
 use crate::{pages::bible::{store::{BibleState, VerseItem}, self}, store::AppState};
 use crate::util;
@@ -211,6 +211,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             page_to_scroll = previous_scroll_page + current_scroll_page_diff.floor();
         }
         
+        //console::log_1(&format!("{}", page_to_scroll).into());
         bible_state.current_verse_page.set(page_to_scroll as i32);
         let x = (page_to_scroll * e.client_width() as f64) as f64 + (48.0 * page_to_scroll as f64);
         bible_state.current_verse_scroll_x.set(x);

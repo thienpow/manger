@@ -59,6 +59,7 @@
     scroll-snap-align: center;
     background-color: var(--content-text-bg);
     color: var(--theme-text-color);
+    scrollbar-width: none;
 }
 .bible-verse-content::-webkit-scrollbar {
     display: none;

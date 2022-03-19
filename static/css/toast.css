@@ -42,10 +42,16 @@
     border: 1px solid var(--border-color);
     border-radius: .25em;
     position: relative;
-    transition: transform 300ms ease-in-out;
+    transition: transform 488ms ease-in-out;
     height: 78px;
     max-height: 78px;
+    overflow: auto;
+    scrollbar-width: none;
 }
+.toast::-webkit-scrollbar {
+    display: none;
+}
+
 .toast-container[data-position$="-right"] .toast {
     transform: translateX(110%);
 }
@@ -64,7 +70,6 @@
     top: 2px;
     right: 5px;
     color: var(--theme-color);
-    background-color: var(--popup-bg);
     cursor: pointer;
 }
 .toast-container .toast.show  {
