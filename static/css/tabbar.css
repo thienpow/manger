@@ -1,12 +1,14 @@
 .tab-bar {
+    left: 0;
+    right: 0;
+    height: 58px;
+    bottom: 12px;
     display: none;
     position: fixed;
     justify-content: center;
     align-items: center;
     margin-left: 0px;
     margin-right: 0px;
-    height: 58px;
-    bottom: 12px;
     width: calc(100% - 0px);
     background-color: var(--tabbar-bg-color);
     border-radius: 0px;
@@ -24,15 +26,18 @@
 }
 .tab-bar-item,
 .tab-bar-mid-item {
+    padding-top: 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 72px;
     margin: 0;
-    padding: 12px 24px;
-    width: 100%;
     height: 58px;
     -webkit-user-select : none;
     user-select: none;
     cursor: pointer;
     border: 0px solid red;
 }
-.tab-bar-mid-item {
-    padding: 6px 24px;
+.tab-bar-item:hover {
+    color: var(--highlight-color);
 }

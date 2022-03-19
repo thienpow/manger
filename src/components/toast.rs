@@ -126,7 +126,7 @@ fn ToastItem<G: GenericNode>(ctx: Scope) -> View<G> {
 
     let toast_ref = ctx.create_node_ref();
 
-
+    
     ctx.spawn_local(async move {
         loop {
             TimeoutFuture::new(7000).await;

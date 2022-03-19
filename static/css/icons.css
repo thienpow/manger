@@ -21,6 +21,8 @@
     border-bottom-left-radius: 0;
     margin-top: 7px;
     color: var(--theme-color);
+    -webkit-user-select : none;
+    user-select: none;
 }
 
 .gg-home::after,
@@ -55,10 +57,6 @@
     bottom: 0;
 }
 
-.gg-home:hover {
-    color: var(--highlight-color);
-}
-
 .gg-readme {
     display: block;
     position: relative;
@@ -69,6 +67,8 @@
     border-bottom: 4px solid;
     border-radius: 4px;
     color: var(--theme-color);
+    -webkit-user-select : none;
+    user-select: none;
 }
 
 .gg-readme::after,
@@ -104,10 +104,6 @@
     right: -8px;
 }
 
-.gg-readme:hover {
-    color: var(--highlight-color);
-}
-
 
 .gg-smile {
     box-sizing: border-box;
@@ -119,6 +115,8 @@
     border: 2px solid;
     border-radius: 100px;
     color: var(--theme-color);
+    -webkit-user-select : none;
+    user-select: none;
 }
 
 .gg-smile::after,
@@ -150,10 +148,6 @@
     top: 9px;
 }
 
-.gg-smile:hover {
-    color: var(--highlight-color);
-}
-
 .gg-profile,
 .gg-profile::after,
 .gg-profile::before {
@@ -170,6 +164,8 @@
     height: 22px;
     position: relative;
     color: var(--theme-color);
+    -webkit-user-select : none;
+    user-select: none;
 }
 
 .gg-profile::after,
@@ -188,10 +184,6 @@
     left: 0px;
     width: 18px;
     height: 18px;
-}
-
-.gg-profile:hover {
-    color: var(--highlight-color);
 }
 
 .gg-chevron-double-left-r {
@@ -519,19 +511,19 @@
 
 
 
-   .btn-cross {
+.btn-cross {
+    -webkit-user-select : none;
+    user-select: none;
     box-sizing: border-box;
     position: relative;
     display: block;
-    top: 5px;
     width: 22px;
     height: 22px;
-    border: 2px solid;
-    transform: scale(var(--ggs,1.6));
+    transform: scale(var(--ggs,2.6));
     border-radius: 4px;
     color: var(--theme-color);
+    left: 6px;
  }
- 
  .btn-cross::after,
  .btn-cross::before {
     content: "";
@@ -540,10 +532,10 @@
     position: absolute;
     width: 10px;
     height: 2px;
-    background: currentColor;
     border-radius: 5px;
     top: 8px;
     left: 4px;
+    background: currentColor;
 }
  
 .btn-cross::after {
@@ -551,8 +543,4 @@
     height: 14px;
     top: 4px;
     left: 8px;
-}
-
-.btn-cross:hover {
-    color: var(--highlight-color);
 }

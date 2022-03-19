@@ -1,7 +1,7 @@
 use sycamore_router::Route;
 
 
-#[derive(Debug, Clone, Route)]
+#[derive(Debug, PartialEq, Eq, Clone, Route)]
 pub enum AppRoutes {
     #[to("/")]
     Home,
