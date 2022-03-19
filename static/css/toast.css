@@ -1,13 +1,19 @@
 .toast-container {
     display: flex;
     flex-direction: column;
-    gap:  .5rem;
+    gap:  3px;
     position: fixed;
     margin: 12px;
     max-width: 300px;
     min-width: 250px;
     z-index: 10000;
     background-color: transparent;
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+    overflow: auto;
+}
+.toast-container::-webkit-scrollbar {
+    display: none;
 }
 .toast-container[data-position^="top-"]  {
     top: 0;
@@ -37,6 +43,8 @@
     border-radius: .25em;
     position: relative;
     transition: transform 300ms ease-in-out;
+    height: 78px;
+    max-height: 78px;
 }
 .toast-container[data-position$="-right"] .toast {
     transform: translateX(110%);
@@ -65,7 +73,6 @@
     animation: fadein 0.5s;
 }
 .toast-container .toast.hide  {
-    transform: translate(0, 0);
     -webkit-animation: fadeout 0.5s;
     animation: fadeout 0.5s;
 }
@@ -94,11 +101,27 @@
 }
   
 @-webkit-keyframes fadeout {
-    from {opacity: 1;}
-    to { opacity: 0;}
+    from {
+        opacity: 1;
+        height: 78px;
+        transform: translateY(0px);
+    }
+    to { 
+        opacity: 0;
+        height: 0;
+        transform: translateY(-80px);
+    }
 }
   
 @keyframes fadeout {
-    from {opacity: 1;}
-    to {opacity: 0;}
+    from {
+        opacity: 1;
+        height: 78px;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 0;
+        height: 0;
+        transform: translateY(-80px);
+    }
 }

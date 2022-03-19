@@ -100,7 +100,7 @@ fn remove(ctx: Scope, toast: DomNode) {
         TimeoutFuture::new(60).await;
         toast.add_class("hide");
 
-        TimeoutFuture::new(300).await;
+        TimeoutFuture::new(230).await;
         match toast.parent_node() {
             Some(parent) => {
                 parent.remove_self();

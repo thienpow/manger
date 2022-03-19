@@ -47,7 +47,6 @@
     position: relative;
     overflow: auto;
     width: 100%;
-    scroll-behavior: smooth;
     columns: 2;
     column-width: 380px;
     column-fill: auto;
