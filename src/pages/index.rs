@@ -47,12 +47,12 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                         let mut x = "0";
                         if i == pi {
                         } else if i < pi {
-                            x = "-88"
+                            x = "-38"
                         } else if i > pi {
-                            x = "88"
+                            x = "38"
                         }
 
-                        let style = format!("-webkit-animation:fadein 0.0s;animation:fadein 0.0s; transform:translateX({}px);", x);
+                        let style = format!("-webkit-animation:fadein 0.488s;animation:fadein 0.488s; transform:translateX({}px);", x);
                         content.set_attribute("style", &style);
                     }
                     

@@ -10,11 +10,13 @@
     user-select: none;
     -webkit-user-select : none;
     white-space: nowrap;
-    left: 0px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
 }
 .toc-bar-left-hide {
-    position: absolute;
-    left: -185px;
+    position: fixed;
+    transform: translateX(-185px); transition: transform 488ms ease-in-out;
 }
 .bible-wrapper {
     position: relative;
@@ -34,7 +36,6 @@
     background-color: var(--content-text-bg);
     color: var(--theme-text-color);
     z-index: 1;
-    border: 0px solid yellow;
 }
 .bible-verse-wrapper {
     position: relative;
