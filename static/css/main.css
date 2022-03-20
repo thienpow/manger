@@ -71,7 +71,7 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  background-color: var(--theme-bg-color);
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   overflow: hidden;
