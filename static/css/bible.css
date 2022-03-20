@@ -12,11 +12,11 @@
     white-space: nowrap;
     top: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 3;
 }
 .toc-bar-left-hide {
     position: fixed;
-    transform: translateX(-185px); transition: transform 488ms ease-in-out;
+    transform: translateX(-188px); transition: transform 488ms ease-in-out;
 }
 .bible-wrapper {
     position: relative;
