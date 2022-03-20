@@ -522,7 +522,8 @@
     transform: scale(var(--ggs,2.6));
     border-radius: 4px;
     color: var(--theme-color);
-    left: 6px;
+    left: 7px;
+    top: 7px;
  }
  .btn-cross::after,
  .btn-cross::before {
@@ -534,13 +535,13 @@
     height: 2px;
     border-radius: 5px;
     top: 8px;
-    left: 4px;
+    left: 3px;
     background: currentColor;
 }
  
 .btn-cross::after {
     width: 2px;
-    height: 14px;
+    height: 12px;
     top: 4px;
-    left: 8px;
+    left: 7px;
 }
