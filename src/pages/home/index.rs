@@ -31,11 +31,11 @@ pub fn Home<G: Html>(ctx: Scope) -> View<G> {
                             "Welcome to use Manger"
                         }
                         div(class="card-wrapper") {
-                            div(id="cardPWA", class="card-pwa-install card") {
+                            div(id="cardPWA", class="card") {
                                 span() {"v0.0.1"}
                                 div(class="card__subtext") {"You can install this app to your homescreen now!"}
                                 div(class="card-buttons") {
-                                    button(id="btnPWA", class="cbutton status-button btn-pwa-install") {"Add to Homescreen"}
+                                    button(id="btnPWA", class="cbutton status-button") {"Add to Homescreen"}
                                 }
 
                                 script(type="text/javascript") {
