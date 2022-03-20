@@ -7,10 +7,6 @@ use crate::{components::{contactbar::ContactBar}, pages::home::sidebar::SidebarL
 #[component]
 pub fn Home<G: Html>(ctx: Scope) -> View<G> {
 
-    let handle_click_bible = move |_e: Event| {
-        console::log_1(&format!("clicked").as_str().into());
-    };
-    
     view! { ctx,
 
         /*
@@ -35,18 +31,56 @@ pub fn Home<G: Html>(ctx: Scope) -> View<G> {
                             "Welcome to use Manger"
                         }
                         div(class="card-wrapper") {
-                            div(class="card") {
+                            div(id="cardPWA", class="card-pwa-install card") {
                                 span() {"v0.0.1"}
-                                div(class="card__subtext") {"Just a version indicator here."}
+                                div(class="card__subtext") {"You can install this app to your homescreen now!"}
                                 div(class="card-buttons") {
-                                    button(class="cbutton status-button", on:click=handle_click_bible) {"Nothing"}
+                                    button(id="btnPWA", class="cbutton status-button btn-pwa-install") {"Add to Homescreen"}
+                                }
+
+                                script(type="text/javascript") {
+                                    r#"
+                                    let deferredPrompt;
+                                    const installBtn = document.getElementById('btnPWA');
+                                    
+                                    const pwaCard = document.getElementById('cardPWA');
+                                    installBtn.style.display = 'none';
+                                    pwaCard.style.display = 'none';
+                                    
+                                    window.addEventListener('beforeinstallprompt', (e) => {
+                                        e.preventDefault();
+                                        // Stash the event so it can be triggered later.
+                                        deferredPrompt = e;
+                                        // Update UI to notify the user they can add to home screen
+                                        installBtn.style.display = 'block';
+                                        pwaCard.style.display = 'block';
+                                        console.log(installBtn);
+
+                                        installBtn.addEventListener('click', (e) => {
+                                        // hide our user interface that shows our A2HS button
+                                        installBtn.style.display = 'none';
+                                        // Show the prompt
+                                        deferredPrompt.prompt();
+                                        // Wait for the user to respond to the prompt
+                                        deferredPrompt.userChoice.then((choiceResult) => {
+                                            if (choiceResult.outcome === 'accepted') {
+                                                console.log('User accepted the A2HS prompt');
+                                            } else {
+                                                console.log('User dismissed the A2HS prompt');
+                                            }
+                                            deferredPrompt = null;
+                                            });
+                                        });
+                                    });
+                                    "#
                                 }
                             }
+                            
                             div(class="card") {
                                 span() {"Bible image here"}
                                 div(class="card__subtext") {"Please choose a preferred Bible language."}
                                 div(class="card-buttons") {
-                                    button(class="cbutton status-button", on:click=handle_click_bible) {"中文简体"}
+                                    button(class="cbutton status-button") {"中文简体"}
                                     div(class="menu")
                                 }
                             }

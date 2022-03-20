@@ -613,3 +613,10 @@ body.light-mode .video-bg:before {
 .btn-wrapper {
   height: 100%;
 }
+
+.card-pwa-install {
+  display: none;
+}
+.btn-pwa-install {
+  display: none;
+}
