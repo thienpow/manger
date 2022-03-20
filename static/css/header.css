@@ -20,6 +20,7 @@
     color: var(--inactive-color);
     border-bottom: 2px solid transparent;
     transition: 0.1s;
+    z-index: 2;
 }
 
 .header-menu a.is-active, .header-menu a:hover {
@@ -60,7 +61,7 @@
 .wide .search-bar {
     max-width: 600px;
     margin: auto;
-    transition: 0.1s;
+    transition: 0.488s;
     box-shadow: 0 0 0 1px var(--border-color);
     padding-left: 0;
 }

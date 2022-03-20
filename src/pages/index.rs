@@ -28,6 +28,10 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
     
                 let app_content_ref = ctx.create_node_ref();
                 let slide_in = move |i: i32| {
+                    if *page_index.get() == i {
+                        return;
+                    }
+                    
                     page_index.set(i);
                     if *app_state.inner_width.get() <= 738.0 {
                         ctx.spawn_local(async move {

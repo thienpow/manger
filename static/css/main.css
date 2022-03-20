@@ -40,11 +40,11 @@
   --overlay-bg: rgb(255 255 255 / 30%);
   --dropdown-hover: rgb(236 236 236);
   --border-color: rgba(255, 255, 255, 0.35);
-  --popup-bg: rgb(255, 255, 255);
+  --popup-bg: rgb(253, 254, 255);
   --hover-menu-bg: rgba(255 255 255 / 35%);
   --scrollbar-bg: rgba(156, 159, 173, 0.24);
   --content-title-color: --theme-color;
-  --content-text-bg: #ffffff;
+  --content-text-bg: rgb(249, 251, 255);
 }
 
 .app {
