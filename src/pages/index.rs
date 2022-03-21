@@ -36,7 +36,7 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                         ctx.spawn_local(async move {
                             TimeoutFuture::new(120).await;
                             let content = app_content_ref.get::<DomNode>();
-                            content.set_attribute("style", "transform: translate(0, 0); transition: transform 488ms ease-in-out;");
+                            content.set_attribute("style", "transform: translate(0, 0); transition: transform 288ms ease-in-out;");
                         });
                     }
                     
@@ -55,7 +55,7 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                             x = "38"
                         }
 
-                        let style = format!("-webkit-animation:fadein 0.488s;animation:fadein 0.488s; transform:translateX({}px);", x);
+                        let style = format!("-webkit-animation:fadein 0.288s;animation:fadein 0.288s; transform:translateX({}px);", x);
                         content.set_attribute("style", &style);
                     }
                     
