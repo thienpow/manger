@@ -1,6 +1,6 @@
 [build]
 # The index HTML file to drive the bundling process.
-target = "index.html"
+target = "static/index.html"
 # Build in release mode.
 release = true
 # The output dir for all final assets.

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" style="box-sizing: border-box;-webkit-font-smoothing: antialiased;">
+<head>
+    <link data-trunk rel="rust" href="../Cargo.toml">
+    <link data-trunk rel="css" href="/css/main.css">
+    <link data-trunk rel="css" href="/css/card.css">
+    <link data-trunk rel="css" href="/css/header.css">
+    <link data-trunk rel="css" href="/css/navbar.css">
+    <link data-trunk rel="css" href="/css/sidebar.css">
+    <link data-trunk rel="css" href="/css/contactbar.css">
+    <link data-trunk rel="css" href="/css/tabbar.css">
+    <link data-trunk rel="css" href="/css/chat.css">
+    <link data-trunk rel="css" href="/css/bible.css">
+    <link data-trunk rel="css" href="/css/responsive.css">
+    <link data-trunk rel="css" href="/css/themeswitch.css">
+    <link data-trunk rel="css" href="/css/icons.css">
+    <link data-trunk rel="css" href="/css/toast.css">
+    <link data-trunk rel="copy-dir" href="/assets"/>
+    <link data-trunk rel="copy-dir" href="/bible"/>
+    <link data-trunk rel="copy-file" href="/manifest.json"/>
+    <link data-trunk rel="copy-file" href="/site.webmanifest"/>
+    <link data-trunk rel="copy-file" href="/robots.txt"/>
+    <link data-trunk rel="copy-file" href="/CNAME"/>
+    <link data-trunk rel="copy-file" href="/README.md"/>
+    <link data-trunk rel="copy-file" href="/404.html"/>
+    <link data-trunk rel="copy-file" href="/offline.html"/>
+    <link data-trunk rel="copy-file" href="/favicon.ico"/>
+    <link data-trunk rel="copy-file" href="/favicon-16x16.png"/>
+    <link data-trunk rel="copy-file" href="/favicon-32x32.png"/>
+    <link data-trunk rel="copy-file" href="/service-worker.js"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Manger | Live together in Jesus name">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#10121b">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json"/>
+    
+    <title>Manger | Live together in Jesus name</title>
+    
+    <script type="text/javascript">
+        (function(l) {
+          if (l.search[1] === '/' ) {
+            var decoded = l.search.slice(1).split('&').map(function(s) { 
+              return s.replace(/~and~/g, '&')
+            }).join('?');
+            window.history.replaceState(null, null,
+                l.pathname.slice(0, -1) + decoded + l.hash
+            );
+          }
+        }(window.location))
+
+
+        /* Only register a service worker if it's supported */
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
