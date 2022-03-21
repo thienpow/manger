@@ -1,13 +1,25 @@
-use sycamore::prelude::*;
+use gloo_timers::future::TimeoutFuture;
+use sycamore::{prelude::*, futures::ScopeSpawnLocal};
 
 use crate::svg::{BIBLE_SVG, MUSIC_SVG, GROWTH_SVG, DAILY_SVG, DONATE_SVG, PRAY_SVG, PHOTOS_SVG, FORUM_SVG};
 
 #[component]
 pub fn SidebarLeft<G: Html>(ctx: Scope) -> View<G> {
 
+    let side_bar_left_ref = ctx.create_node_ref();
+
+    /*
+    
+    ctx.spawn_local(async move {
+        TimeoutFuture::new(60).await;
+        let side_bar_left = side_bar_left_ref.get::<DomNode>();
+        side_bar_left.add_class("show");
+    });
+     */
+
     view! { ctx,
         
-        div(class="side-bar-left") {
+        div(ref=side_bar_left_ref, class="side-bar-left") {
 
             /* Spiritual formation */
             div(class="side-wrapper") {
