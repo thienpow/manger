@@ -1,7 +1,7 @@
 use core::fmt;
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::*, futures::ScopeSpawnLocal};
-use web_sys::Event;
+
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy)]

@@ -23,7 +23,6 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
 
                 let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
 
-
                 let app_state = ctx.use_context::<AppState>();
     
                 let app_content_ref = ctx.create_node_ref();
@@ -98,7 +97,6 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                                         bible::util::scroll_to_selected_chapter(ctx, 1000);
                                         slide_in(1);
                                         bible_page.clone()
-                                        
                                     },
                                     AppRoutes::Love => {
                                         reset_slide(2);
