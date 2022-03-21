@@ -1,4 +1,4 @@
-.tab-bar {
+.tabbar {
     left: 0;
     right: 0;
     height: 58px;
@@ -19,13 +19,13 @@
     user-select: none;
     box-shadow: 10px 10px 20px rgb(94, 88, 88),
 }
-.tab-bar-wrapper {
+.tabbar-wrapper {
     display: flex;
     margin: 0 auto;
     position: relative;
 }
-.tab-bar-item,
-.tab-bar-mid-item {
+.tabbar-item,
+.tabbar-mid-item {
     position: relative;
     padding-top: 15px;
     display: flex;
@@ -38,9 +38,9 @@
     user-select: none;
     cursor: pointer;
 }
-.tab-bar-mid-item {
+.tabbar-mid-item {
     padding-top: 12px;
 }
-.tab-bar-item:hover {
+.tabbar-item:hover {
     color: var(--highlight-color);
 }

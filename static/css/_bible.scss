@@ -43,7 +43,7 @@
     padding-top: 15px;
     padding-bottom: 35px;
 }
-.bible-verse-content {
+.bible-verse-content-bookview {
     display: inline-block;
     position: relative;
     overflow: auto;
@@ -62,7 +62,25 @@
     color: var(--theme-text-color);
     scrollbar-width: none;
 }
-.bible-verse-content::-webkit-scrollbar {
+.bible-verse-content-bookview::-webkit-scrollbar {
+    display: none;
+}
+.bible-verse-content-vscrollview {
+    display: inline-block;
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    touch-action: pan-y;
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y mandatory;
+    scroll-snap-align: center;
+    background-color: var(--content-text-bg);
+    color: var(--theme-text-color);
+    scrollbar-width: none;
+}
+.bible-verse-content-vscrollview::-webkit-scrollbar {
     display: none;
 }
 

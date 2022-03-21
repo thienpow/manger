@@ -27,6 +27,15 @@ fn get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
 
 
 #[component]
+pub fn EmptyNavPanel<G: Html>(ctx: Scope) -> View<G> {
+    view! { ctx,
+        div(class="verse-content-nav-panel") {
+
+        }
+    }
+}
+
+#[component]
 pub fn BackButton<G: Html>(ctx: Scope) -> View<G> {
     let show_button = ctx.create_signal(false);
 
@@ -141,6 +150,14 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             .collect::<Vec<_>>()
     });
 
+    let get_content_style = ctx.create_memo(|| {
+        if *bible_state.is_bookview.get() {
+            "bible-verse-content-bookview"
+        } else {
+            "bible-verse-content-vscrollview"
+        }
+    });
+
     let on_click = move |_e: Event| {
         if *app_state.inner_width.get() <= 420.0 {
             bible_state.show_bible_toc.set(false);
@@ -196,10 +213,12 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     };
 
     let on_touchend = move |_: Event| {
+        let bible_state = ctx.use_context::<BibleState>();
+        if !*bible_state.is_bookview.get() {
+            return;
+        }
 
         let e = verse_content.get::<DomNode>().unchecked_into::<Element>();
-        let bible_state = ctx.use_context::<BibleState>();
-
         let previous_scroll_page = (*bible_state.current_verse_scroll_x.get() / (e.client_width() as f64 + 48.0)).floor();
         let current_scroll_page_actual = e.scroll_left() as f64 / (e.client_width() as f64 + 48.0);
         
@@ -248,7 +267,14 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             style=*bible_content_style.get()
         ) {
             //scroll_to_previous_page
-            BackButton()
+            (
+                if *bible_state.is_bookview.get() {
+                    BackButton(ctx, ())
+                } else {
+                    EmptyNavPanel(ctx, ())
+                }
+            )
+            
             //(*key_code.get())
             
             div(
@@ -257,7 +283,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             ) {
                 div(ref=verse_content,
                     id="bible-verse-content", 
-                    class="bible-verse-content",
+                    class=*get_content_style.get(),
                     on:click=on_click,
                     //on:mouseup=on_mouseup,
                     on:touchend=on_touchend,
@@ -274,7 +300,13 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             }
 
             //scroll_to_next_page
-            NextButton()
+            (
+                if *bible_state.is_bookview.get() {
+                    NextButton(ctx, ())
+                } else {
+                    EmptyNavPanel(ctx, ())
+                }
+            )
         
         }
 

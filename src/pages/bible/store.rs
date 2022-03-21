@@ -24,6 +24,7 @@ pub fn initialize(ctx: Scope) {
             let current_verse_page: RcSignal<i32> = create_rc_signal(0);
             let current_verse_scroll_x: RcSignal<f64> = create_rc_signal(0.0);
             let verse_text_size: RcSignal<i32> = create_rc_signal(12);
+            let is_bookview: RcSignal<bool> = create_rc_signal(true);
                     
             let selection_first_verse: RcSignal<VerseItem> = create_rc_signal(VerseItem{
                 book_id: 0,
@@ -45,7 +46,8 @@ pub fn initialize(ctx: Scope) {
                 current_verse_page,
                 current_verse_scroll_x,
                 verse_text_size,
-                selection_first_verse
+                is_bookview,
+                selection_first_verse,
             };
             ctx.provide_context(bible_state);
         
@@ -67,6 +69,7 @@ pub struct BibleState {
     pub current_verse_page: RcSignal<i32>,
     pub current_verse_scroll_x: RcSignal<f64>,
     pub verse_text_size: RcSignal<i32>,
+    pub is_bookview: RcSignal<bool>,
     pub selection_first_verse: RcSignal<VerseItem>,
 }
 
