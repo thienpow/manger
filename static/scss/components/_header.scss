@@ -85,7 +85,6 @@
     border: none;
     background-color: var(--search-bg);
     border-radius: 8px;
-    font-family: var(--body-font);
     font-size: 15px;
     font-weight: 500;
     padding: 0 20px 0 40px;
@@ -95,29 +94,16 @@
     background-repeat: no-repeat;
     background-position: 16px 48%;
     color: var(--theme-color);
+    ::-moz-placeholder {
+        color: var(--inactive-color);
+    }
+    :-ms-input-placeholder {
+        color: var(--inactive-color);
+    }
+    ::placeholder {
+        color: var(--inactive-color);
+    }
 }
-
-.search-bar input::-moz-placeholder {
-    font-family: var(--body-font);
-    color: var(--inactive-color);
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.search-bar input:-ms-input-placeholder {
-    font-family: var(--body-font);
-    color: var(--inactive-color);
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.search-bar input::placeholder {
-    font-family: var(--body-font);
-    color: var(--inactive-color);
-    font-size: 15px;
-    font-weight: 500;
-}
-
 
 .notify {
     position: relative;
