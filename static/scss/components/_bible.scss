@@ -61,9 +61,9 @@
     background-color: var(--content-text-bg);
     color: var(--theme-text-color);
     scrollbar-width: none;
-}
-.bible-verse-content-bookview::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .bible-verse-content-vscrollview {
     display: inline-block;
@@ -79,11 +79,10 @@
     background-color: var(--content-text-bg);
     color: var(--theme-text-color);
     scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
-.bible-verse-content-vscrollview::-webkit-scrollbar {
-    display: none;
-}
-
 .toc-wrapper {
     position: relative;
     overflow: auto;
@@ -96,11 +95,10 @@
     -webkit-user-select : none;
     user-select: none;
     touch-action: pan-y;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
-.toc-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
 .toc-title-left {
     text-align: center;
     color: var(--inactive-color);
@@ -127,14 +125,12 @@
     font-size: 14px;
     border-radius: 8px;
     transition: 0.06s;
-    
-}
-
-.toc-menu span:hover {
-    transform: scale(1.02);
-    background-color: var(--hover-menu-bg);
-    color: var(--theme-color);
-    transition: 0.06s;
+    &:hover {
+        transform: scale(1.02);
+        background-color: var(--hover-menu-bg);
+        color: var(--theme-color);
+        transition: 0.06s;
+    }
 }
 
 .toc-menu-selected {
@@ -167,10 +163,10 @@
 }
 .nav-button-show {
     display: flex;
-}
-.nav-button-show:hover {
-    color: var(--highlight-color);
-    background-color: var(--hover-menu-bg);
+    &:hover {
+        color: var(--highlight-color);
+        background-color: var(--hover-menu-bg);
+    }
 }
 
 .verse-content-nav-panel {
@@ -198,8 +194,8 @@
     min-width: 24px;
     background-color:var(--hover-menu-bg);
     padding: 3px;
-}
-.text-size-button:hover {
-    color: var(--highlight-color);
-    background-color: var(--hover-menu-bg);
+    &:hover {
+        color: var(--highlight-color);
+        background-color: var(--hover-menu-bg);
+    }
 }

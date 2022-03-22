@@ -11,9 +11,9 @@
     scroll-behavior: smooth;
     overscroll-behavior: none;
     overflow: auto;
-}
-.toast-container::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .toast-container[data-position^="top-"]  {
     top: 0;
@@ -47,11 +47,10 @@
     max-height: 78px;
     overflow: auto;
     scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
-.toast::-webkit-scrollbar {
-    display: none;
-}
-
 .toast-container[data-position$="-right"] .toast {
     transform: translateX(110%);
 }

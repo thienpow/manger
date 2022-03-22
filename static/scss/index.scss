@@ -40,7 +40,7 @@ body {
     overflow: no-scroll;
     overscroll-behavior: none;
     touch-action: none;
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         display: none;
     }
 }
