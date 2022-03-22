@@ -1,23 +1,7 @@
 
-@use "themes/dark";
-@use "themes/light";
-
-@use "base/colors";
-@use "base/fonts";
-
-@use "components/main";
-@use "components/bible";
-@use "components/card";
-@use "components/chat";
-@use "components/contactbar";
-@use "components/header";
-@use "components/icons";
-@use "components/navbar";
-@use "components/sidebar";
-@use "components/tabbar";
-@use "components/themeswitch";
-@use "components/toast";
-@use "components/responsive";
+@use "base" as *;
+@use "components" as *;
+@use "themes" as *;
 
 * {
     outline: none;
@@ -29,7 +13,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font: 100% fonts.$stacks;
+    font: 100% $font-stack;
+    color: $primary-color;
     flex-direction: column;
     background-size: cover;
     background-position: center;
