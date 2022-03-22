@@ -48,4 +48,14 @@ body {
 img {
     max-width: 100%;
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 12px;
+    border-radius: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-bg);
+    border-radius: 12px;
+}
   
