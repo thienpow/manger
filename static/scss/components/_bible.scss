@@ -1,201 +1,201 @@
 
 .toc-bar-left {
-    display:inline-block;
-    position: relative;
-    padding-top: 25px;
-    width: 188px;
-    min-width: 188px;
-    height: 100vh;
-    overflow: none;
-    user-select: none;
-    -webkit-user-select : none;
-    white-space: nowrap;
-    top: 0;
-    bottom: 0;
-    z-index: 3;
+  display:inline-block;
+  position: relative;
+  padding-top: 25px;
+  width: 188px;
+  min-width: 188px;
+  height: 100vh;
+  overflow: none;
+  user-select: none;
+  -webkit-user-select : none;
+  white-space: nowrap;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
 }
 .toc-bar-left-hide {
-    position: fixed;
-    transform: translateX(-188px); transition: transform 488ms ease-in-out;
+  position: fixed;
+  transform: translateX(-188px); transition: transform 488ms ease-in-out;
 }
 .bible-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    color: var(--theme-color);
-    background-color: var(--content-text-bg);
-    border-radius: 12px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: var(--theme-color);
+  background-color: var(--content-text-bg);
+  border-radius: 12px;
 }
 .bible-content {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: left;
-    width: 100%;
-    background-color: var(--content-text-bg);
-    color: var(--theme-text-color);
-    z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: left;
+  width: 100%;
+  background-color: var(--content-text-bg);
+  color: var(--theme-text-color);
+  z-index: 1;
 }
 .bible-verse-wrapper {
-    position: relative;
-    width: calc(100%-336px);
-    padding-top: 15px;
-    padding-bottom: 35px;
+  position: relative;
+  width: calc(100%-336px);
+  padding-top: 15px;
+  padding-bottom: 35px;
 }
 .bible-verse-content-bookview {
-    display: inline-block;
-    position: relative;
-    overflow: auto;
-    width: 100%;
-    columns: 2;
-    column-width: 380px;
-    column-fill: auto;
-    column-gap: 48px;
-    touch-action: pan-x;
-    scroll-behavior: smooth;
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scroll-snap-align: center;
-    background-color: var(--content-text-bg);
-    color: var(--theme-text-color);
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  display: inline-block;
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  columns: 2;
+  column-width: 380px;
+  column-fill: auto;
+  column-gap: 48px;
+  touch-action: pan-x;
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-snap-align: center;
+  background-color: var(--content-text-bg);
+  color: var(--theme-text-color);
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 .bible-verse-content-vscrollview {
-    display: inline-block;
-    position: relative;
-    overflow: auto;
-    width: 100%;
-    touch-action: pan-y;
-    scroll-behavior: smooth;
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y mandatory;
-    scroll-snap-align: center;
-    background-color: var(--content-text-bg);
-    color: var(--theme-text-color);
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  display: inline-block;
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  touch-action: pan-y;
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: center;
+  background-color: var(--content-text-bg);
+  color: var(--theme-text-color);
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 .toc-wrapper {
-    position: relative;
-    overflow: auto;
-    height: 128px;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y mandatory;
-    scroll-snap-align: center;
-    scroll-behavior: smooth;
-    overscroll-behavior: auto;
-    -webkit-user-select : none;
-    user-select: none;
-    touch-action: pan-y;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  position: relative;
+  overflow: auto;
+  height: 128px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: center;
+  scroll-behavior: smooth;
+  overscroll-behavior: auto;
+  -webkit-user-select : none;
+  user-select: none;
+  touch-action: pan-y;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 .toc-title-left {
-    text-align: center;
-    color: var(--inactive-color);
-    margin-bottom: 14px;
-    justify-self: center;
-    align-items: center;
-    height: 30px;
+  text-align: center;
+  color: var(--inactive-color);
+  margin-bottom: 14px;
+  justify-self: center;
+  align-items: center;
+  height: 30px;
 }
 
 .toc-menu span {
-    -webkit-user-select : none;
-    user-select: none;
-    cursor: pointer;
-    scroll-snap-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: var(--inactive-color);
-    padding-top: 16px;
-    padding-bottom: 16px;
-    margin-left: 16px;
-    margin-right: 16px;
-    font-size: 14px;
-    border-radius: 8px;
+  -webkit-user-select : none;
+  user-select: none;
+  cursor: pointer;
+  scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--inactive-color);
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: 0.06s;
+  &:hover {
+    transform: scale(1.02);
+    background-color: var(--hover-menu-bg);
+    color: var(--theme-color);
     transition: 0.06s;
-    &:hover {
-        transform: scale(1.02);
-        background-color: var(--hover-menu-bg);
-        color: var(--theme-color);
-        transition: 0.06s;
-    }
+  }
 }
 
 .toc-menu-selected {
-    border-left: 1px solid red;
-    border-right: 1px solid red;
-    font-weight: 700;
-    user-select: none;
-    -webkit-user-select : none;
-    cursor: pointer;
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+  font-weight: 700;
+  user-select: none;
+  -webkit-user-select : none;
+  cursor: pointer;
 }
 
 .toc-menu svg {
-    width: 16px;
-    margin-right: 8px;
+  width: 16px;
+  margin-right: 8px;
 }
 
 .verse-content-nav-button {
-    display: none;
-    width: 32px;
-    height: 78px;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    -webkit-user-select : none;
-    user-select: none;
-    border: 1px solid rgba(255, 0, 0, 0.103);
-    border-radius: 12px;
-    background-color: var(--hover-menu-bg);
+  display: none;
+  width: 32px;
+  height: 78px;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  -webkit-user-select : none;
+  user-select: none;
+  border: 1px solid rgba(255, 0, 0, 0.103);
+  border-radius: 12px;
+  background-color: var(--hover-menu-bg);
 }
 .nav-button-show {
-    display: flex;
-    &:hover {
-        color: var(--highlight-color);
-        background-color: var(--hover-menu-bg);
-    }
+  display: flex;
+  &:hover {
+    color: var(--highlight-color);
+    background-color: var(--hover-menu-bg);
+  }
 }
 
 .verse-content-nav-panel {
-    display:inline-block;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    height: 100%; 
-    width: 36px;
-    min-width: 36px;
-    background-color: var(--content-text-bg);
-    white-space: nowrap;
-    z-index: -1;
+  display:inline-block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  height: 100%; 
+  width: 36px;
+  min-width: 36px;
+  background-color: var(--content-text-bg);
+  white-space: nowrap;
+  z-index: -1;
 }
 
 .text-size-button {
-    cursor: pointer; 
-    color: var(--button-inactive);
-    border: 0px solid var(--button-inactive); 
-    border-radius: 3px;
-    width: 24px;
-    min-width: 24px;
-    background-color:var(--hover-menu-bg);
-    padding: 3px;
-    &:hover {
-        color: var(--highlight-color);
-        background-color: var(--hover-menu-bg);
-    }
+  cursor: pointer; 
+  color: var(--button-inactive);
+  border: 0px solid var(--button-inactive); 
+  border-radius: 3px;
+  width: 24px;
+  min-width: 24px;
+  background-color:var(--hover-menu-bg);
+  padding: 3px;
+  &:hover {
+    color: var(--highlight-color);
+    background-color: var(--hover-menu-bg);
+  }
 }

@@ -3,27 +3,29 @@
   other mode would be using class name and to be toggled.
 */
 :root {
-    --theme-color: #f9fafb;
-    --theme-bg-color: rgba(16 18 27 / 40%);
-    --theme-text-color: #d5d5d5;
+  --theme-color: #f9fafb;
+  --theme-bg-color: rgba(16 18 27 / 40%);
+  --theme-text-color: #d5d5d5;
+  --chat-text-color: #ccc3c3;
 
-    --tabbar-bg-color: rgba(102, 104, 116, 0.15);
-    --border-color: rgba(113 119 144 / 25%);
-    --toast-border-color: rgba(113, 119, 144, 0.888);
-    --highlight-color: #adb3bb;
-    --inactive-color: rgb(113 119 144 / 78%);
+  --tabbar-bg-color: rgba(102, 104, 116, 0.15);
+  --border-color: rgba(113 119 144 / 25%);
+  --toast-border-color: rgba(113, 119, 144, 0.888);
+  --highlight-color: #adb3bb;
+  --inactive-color: rgb(113 119 144 / 78%);
 
-    --hover-menu-bg: rgba(12 15 25 / 30%);
-    --button-inactive: rgb(249 250 251 / 55%);
-    --dropdown-bg: #21242d;
-    --dropdown-hover: rgb(42 46 60);
+  --hover-menu-bg: rgba(12 15 25 / 30%);
+  --button-inactive: rgb(249 250 251 / 55%);
+  --dropdown-bg: #21242d;
+  --dropdown-hover: rgb(42 46 60);
 
-    --content-title-color: #999ba5;
-    --content-bg: rgb(146 151 179 / 13%);
-    --content-text-bg: #48484a;
+  --content-title-color: #999ba5;
+  --content-bg: rgb(146 151 179 / 13%);
+  --content-text-bg: #48484a;
 
-    --search-bg: #14162b;
-    --popup-bg: rgb(22 25 37);
-    --overlay-bg: rgba(36, 39, 59, 0.3);
-    --scrollbar-bg: rgba(1, 2, 3, 0.24);
+  --search-bg: #14162b;
+  --popup-bg: rgb(22 25 37);
+  --overlay-bg: rgba(36, 39, 59, 0.3);
+  --scrollbar-bg: rgba(1, 2, 3, 0.24);
+
 }
