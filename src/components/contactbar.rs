@@ -19,8 +19,8 @@ pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
                 div(class="side-menu") {
 
                     a(class=(match &*current_route.get() {
-                        AppRoutes::Chat(cid)=> {if cid == "Q123" {"person active"} else {"person"}},
-                        _ => "person"
+                        AppRoutes::Chat(cid)=> {if cid == "Q123" {"avatar active"} else {"avatar"}},
+                        _ => "avatar"
                     }), href="/chat/Q123", alt="Sacha Griffin") {
                         div(class="avatar") {
                             img(src="/assets/img/avatar_1.webp", alt="Sacha Griffin", loading="lazy")
@@ -35,8 +35,8 @@ pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
 
 
                     a(class=(match &*current_route.get() {
-                        AppRoutes::Chat(cid)=> {if cid == "Q124" {"person active"} else {"person"}},
-                        _ => "person"
+                        AppRoutes::Chat(cid)=> {if cid == "Q124" {"avatar active"} else {"avatar"}},
+                        _ => "avatar"
                     }), href="/chat/Q124", alt="Sacha Griffin") {
                         span(class="avatar") {
                             img(src="/assets/img/avatar_2.webp", alt="Debby Jones", loading="lazy")
@@ -51,8 +51,8 @@ pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
 
 
                     a(class=(match &*current_route.get() {
-                        AppRoutes::Chat(cid)=> {if cid == "Q125" {"person active"} else {"person"}},
-                        _ => "person"
+                        AppRoutes::Chat(cid)=> {if cid == "Q125" {"avatar active"} else {"avatar"}},
+                        _ => "avatar"
                     }), href="/chat/Q125", alt="Sacha Griffin") {
                         div(class="avatar") {
                             img(src="/assets/img/avatar_3.webp", alt="Sarah White", loading="lazy")
@@ -79,8 +79,8 @@ pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
                     
 
                     a(class=(match &*current_route.get() {
-                        AppRoutes::Chat(cid)=> {if cid == "Q126" {"person active"} else {"person"}},
-                        _ => "person"
+                        AppRoutes::Chat(cid)=> {if cid == "Q126" {"avatar active"} else {"avatar"}},
+                        _ => "avatar"
                     }), href="/chat/Q126", alt="Sacha Griffin") {
                         div(class="avatar") {
                             img(src="/assets/img/avatar_1.webp", alt="Sacha Griffin", loading="lazy")
@@ -95,8 +95,8 @@ pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
 
 
                     a(class=(match &*current_route.get() {
-                        AppRoutes::Chat(cid)=> {if cid == "Q127" {"person active"} else {"person"}},
-                        _ => "person"
+                        AppRoutes::Chat(cid)=> {if cid == "Q127" {"avatar active"} else {"avatar"}},
+                        _ => "avatar"
                     }), href="/chat/Q127", alt="Sacha Griffin") {
                         span(class="avatar") {
                             img(src="/assets/img/avatar_2.webp", alt="Debby Jones", loading="lazy")
@@ -111,8 +111,8 @@ pub fn ContactBar<G: Html>(ctx: Scope) -> View<G> {
 
 
                     a(class=(match &*current_route.get() {
-                        AppRoutes::Chat(cid)=> {if cid == "Q128" {"person active"} else {"person"}},
-                        _ => "person"
+                        AppRoutes::Chat(cid)=> {if cid == "Q128" {"avatar active"} else {"avatar"}},
+                        _ => "avatar"
                     }), href="/chat/Q128", alt="Sacha Griffin") {
                         div(class="avatar") {
                             img(src="/assets/img/avatar_3.webp", alt="Sarah White", loading="lazy")

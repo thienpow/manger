@@ -1,5 +1,5 @@
 
-.person.active:after {
+.avatar.active:after {
   content: '';
   display: block;
   position: absolute;
@@ -7,7 +7,7 @@
   border-left: 2px solid var(--highlight-color);
 }
   
-.person .avatar img {
+.avatar .avatar img {
   position: relative;
   width: 32px;
   height: 32px;
@@ -15,12 +15,12 @@
   border-radius: 50%;
 }
   
-.person .avatar {
+.avatar .avatar {
   position: relative;
   display: inline-block;
 }
   
-.person .avatar .status {
+.avatar .avatar .status {
   position: absolute;
   right: 7px;
   bottom: 0px;
@@ -30,34 +30,34 @@
   border: 2px solid var(--border-color);	
 }
   
-.person .avatar .status.online {
+.avatar .avatar .status.online {
   background: #0bf9c7;
 }
   
-.person .avatar .status.away {
+.avatar .avatar .status.away {
   background: #f4a711;
 }
   
-.person .avatar .status.busy {
+.avatar .avatar .status.busy {
   background: #f42464;
 }
   
-.person .info {
+.avatar .info {
   display: inline-block;
   width: auto;
 }
   
-.person .name, .person .status-msg {
+.avatar .name, .avatar .status-msg {
   display: inline-block;
 }
   
-.person .name {
+.avatar .name {
   color: var(--content-title-color);
   font-size: .9rem;
   font-weight: 500;
 }
   
-.person .status-msg {
+.avatar .status-msg {
   width: 180px;
   font-size: .7rem;
   overflow: hidden;
@@ -65,14 +65,14 @@
   text-overflow: ellipsis;
 }
   
-.person .unread-messages, .person .last-login {
+.avatar .unread-messages, .avatar .last-login {
   font-size: .7rem;
   position: absolute;
   top: 10px;
   right: 10px;
 }
   
-.person .unread-messages {
+.avatar .unread-messages {
   padding: 0 8px;
   text-align: center;
   color: var(--content-title-color);
