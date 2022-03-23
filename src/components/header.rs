@@ -7,12 +7,12 @@ use crate::store::{CurrentRoute};
 use crate::svg::{NOTIF_SVG};
 
 #[component]
-pub fn Header<G: Html>(ctx: Scope) -> View<G> {
+pub fn Header<G: Html>(cx: Scope) -> View<G> {
 
-    let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
+    let CurrentRoute(current_route) = use_context::<CurrentRoute>(cx);
 
-    let header_ref = ctx.create_node_ref();
-    let left_menu_ref = ctx.create_node_ref();
+    let header_ref = create_node_ref(cx);
+    let left_menu_ref = create_node_ref(cx);
 
     let on_search_focus = move |_| {
         header_ref.get::<DomNode>().add_class("wide");
@@ -21,7 +21,7 @@ pub fn Header<G: Html>(ctx: Scope) -> View<G> {
         header_ref.get::<DomNode>().remove_class("wide");
     };
 
-    view! { ctx,
+    view! { cx,
 
         header(ref=header_ref, id="header", class="header") {
             div(ref=left_menu_ref, class="header-menu-left") {

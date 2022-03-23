@@ -1,6 +1,6 @@
 use core::fmt;
 use gloo_timers::future::TimeoutFuture;
-use sycamore::{prelude::*, futures::ScopeSpawnLocal};
+use sycamore::{prelude::*, futures::{spawn_local_scoped}};
 
 
 #[allow(dead_code)]
@@ -54,14 +54,14 @@ struct ToastState {
     pub new_toast: RcSignal<ToastProps>,
 }
 
-pub fn show(ctx: Scope, props: ToastProps) {
-    let toast_state = ctx.use_context::<ToastState>();
+pub fn show(cx: Scope, props: ToastProps) {
+    let toast_state = use_context::<ToastState>(cx);
     toast_state.new_toast.set(ToastProps{title: props.title, text: props.text, icon_url: props.icon_url});
     toast_state.show_new_toast.set(true);
 }
 
 #[component]
-pub fn Toast<G: Html>(ctx: Scope, props: ToastContainerProps) -> View<G> {
+pub fn Toast<G: Html>(cx: Scope, props: ToastContainerProps) -> View<G> {
 
     let show_new_toast: RcSignal<bool> = create_rc_signal(false);
     let new_toast: RcSignal<ToastProps> = create_rc_signal(ToastProps{title: "".to_string(), text: "".to_string(), icon_url: "".to_string()});
@@ -69,17 +69,17 @@ pub fn Toast<G: Html>(ctx: Scope, props: ToastContainerProps) -> View<G> {
         show_new_toast,
         new_toast
     };
-    ctx.provide_context(toast_state);
+    provide_context(cx, toast_state);
 
-    let toast_container = ctx.create_node_ref();
+    let toast_container = create_node_ref(cx);
 
-    let toast_state = ctx.use_context::<ToastState>();
+    let toast_state = use_context::<ToastState>(cx);
 
-    ctx.create_effect(move || {
+    create_effect(cx, move || {
         if *toast_state.show_new_toast.get() == true {
             toast_state.show_new_toast.set(false);
 
-            let t: G = node! {ctx, 
+            let t: G = node! {cx, 
                 div() {
                     ToastItem {}
                 }
@@ -90,13 +90,13 @@ pub fn Toast<G: Html>(ctx: Scope, props: ToastContainerProps) -> View<G> {
     });
 
 
-    view! { ctx,
+    view! { cx,
         div(ref=toast_container, class="toast-container", data-position=props.position.to_string())
     }
 }
 
-fn remove(ctx: Scope, toast: DomNode) {
-    ctx.spawn_local(async move {
+fn remove(cx: Scope, toast: DomNode) {
+    spawn_local_scoped(cx, async move {
         TimeoutFuture::new(60).await;
         toast.add_class("hide");
 
@@ -115,26 +115,26 @@ fn remove(ctx: Scope, toast: DomNode) {
 
 
 #[component]
-fn ToastItem<G: GenericNode>(ctx: Scope) -> View<G> {
-    let stay_show = ctx.create_signal(false);
+fn ToastItem<G: GenericNode>(cx: Scope) -> View<G> {
+    let stay_show = create_signal(cx, false);
     
-    let toast_state = ctx.use_context::<ToastState>();
+    let toast_state = use_context::<ToastState>(cx);
     let new_toast = toast_state.new_toast.get();
     let title = new_toast.title.to_string();
     let text = new_toast.text.to_string();
     let icon_url = new_toast.icon_url.to_string();
 
-    let toast_ref = ctx.create_node_ref();
+    let toast_ref = create_node_ref(cx);
 
     
-    ctx.spawn_local(async move {
+    spawn_local_scoped(cx, async move {
         loop {
             TimeoutFuture::new(7000).await;
             if *stay_show.get() {
             } else {
                 match toast_ref.get::<DomNode>() {
                     toast => {
-                        remove(ctx, toast);
+                        remove(cx, toast);
                     },
                 }
                 break;
@@ -143,7 +143,7 @@ fn ToastItem<G: GenericNode>(ctx: Scope) -> View<G> {
     });
     
 
-    ctx.spawn_local(async move {
+    spawn_local_scoped(cx, async move {
         TimeoutFuture::new(60).await;
         let toast = toast_ref.get::<DomNode>();
         toast.add_class("show");
@@ -151,10 +151,10 @@ fn ToastItem<G: GenericNode>(ctx: Scope) -> View<G> {
 
     let on_click = move |_| {
         stay_show.set(false);
-        remove(ctx, toast_ref.get::<DomNode>());
+        remove(cx, toast_ref.get::<DomNode>());
     };
 
-    view! { ctx,
+    view! { cx,
         div(ref=toast_ref, 
             class="toast",
             on:mouseenter=move |_| stay_show.set(true),

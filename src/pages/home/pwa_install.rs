@@ -1,9 +1,9 @@
 use sycamore::prelude::*;
 
 #[component]
-pub fn PWAInstall<G: Html>(ctx: Scope) -> View<G> {
+pub fn PWAInstall<G: Html>(cx: Scope) -> View<G> {
 
-    view! { ctx,
+    view! { cx,
         div(id="cardPWA", class="card") {
             span() {"v0.0.1"}
             div(class="card__subtext") {"You can install this app to your homescreen now!"}

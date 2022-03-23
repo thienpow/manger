@@ -225,15 +225,15 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.120"
+version = "0.2.121"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad5c14e80759d0939d013e6ca49930e59fc53dd8e5009132f76240c179380c09"
+checksum = "efaa7b300f3b5fe8eb6bf21ce3895e1751d9665086af2d64b42f19701015ff4f"
 
 [[package]]
 name = "log"
-version = "0.4.14"
+version = "0.4.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "51b9bbe6c47d51fc3e1a9b945965946b4c44142ab8792c50835a980d362c2710"
+checksum = "6389c490849ff5bc16be905ae24bc913a9c8892e19b2341dbc175e14c341c2b8"
 dependencies = [
  "cfg-if",
 ]
@@ -342,9 +342,9 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.15"
+version = "1.0.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "864d3e96a899863136fc6e99f3d7cae289dafe43bf2c5ac19b70df7210c0a145"
+checksum = "b4af2ec4714533fcdf07e886f17025ace8b997b9ce51204ee69b6da831c3da57"
 dependencies = [
  "proc-macro2",
 ]
@@ -434,7 +434,7 @@ checksum = "f2dd574626839106c320a323308629dcb1acfc96e32a8cba364ddc61ac23ee83"
 [[package]]
 name = "sycamore"
 version = "0.8.0-beta.3"
-source = "git+https://github.com/sycamore-rs/sycamore#9fdff59b9c0c399cd8793ae73fe7fd1e7d7ec3a3"
+source = "git+https://github.com/sycamore-rs/sycamore#f095d70da958793749c64b6b307a3b6c8cd2efc2"
 dependencies = [
  "ahash",
  "futures",
@@ -452,7 +452,7 @@ dependencies = [
 [[package]]
 name = "sycamore-futures"
 version = "0.8.0-beta.3"
-source = "git+https://github.com/sycamore-rs/sycamore#9fdff59b9c0c399cd8793ae73fe7fd1e7d7ec3a3"
+source = "git+https://github.com/sycamore-rs/sycamore#f095d70da958793749c64b6b307a3b6c8cd2efc2"
 dependencies = [
  "futures",
  "sycamore-reactive",
@@ -463,7 +463,7 @@ dependencies = [
 [[package]]
 name = "sycamore-macro"
 version = "0.8.0-beta.3"
-source = "git+https://github.com/sycamore-rs/sycamore#9fdff59b9c0c399cd8793ae73fe7fd1e7d7ec3a3"
+source = "git+https://github.com/sycamore-rs/sycamore#f095d70da958793749c64b6b307a3b6c8cd2efc2"
 dependencies = [
  "once_cell",
  "proc-macro2",
@@ -474,7 +474,7 @@ dependencies = [
 [[package]]
 name = "sycamore-reactive"
 version = "0.8.0-beta.3"
-source = "git+https://github.com/sycamore-rs/sycamore#9fdff59b9c0c399cd8793ae73fe7fd1e7d7ec3a3"
+source = "git+https://github.com/sycamore-rs/sycamore#f095d70da958793749c64b6b307a3b6c8cd2efc2"
 dependencies = [
  "indexmap",
  "serde",
@@ -485,7 +485,7 @@ dependencies = [
 [[package]]
 name = "sycamore-router"
 version = "0.8.0-beta.3"
-source = "git+https://github.com/sycamore-rs/sycamore#9fdff59b9c0c399cd8793ae73fe7fd1e7d7ec3a3"
+source = "git+https://github.com/sycamore-rs/sycamore#f095d70da958793749c64b6b307a3b6c8cd2efc2"
 dependencies = [
  "sycamore",
  "sycamore-router-macro",
@@ -496,7 +496,7 @@ dependencies = [
 [[package]]
 name = "sycamore-router-macro"
 version = "0.8.0-beta.3"
-source = "git+https://github.com/sycamore-rs/sycamore#9fdff59b9c0c399cd8793ae73fe7fd1e7d7ec3a3"
+source = "git+https://github.com/sycamore-rs/sycamore#f095d70da958793749c64b6b307a3b6c8cd2efc2"
 dependencies = [
  "nom",
  "proc-macro2",
@@ -507,9 +507,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.88"
+version = "1.0.89"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ebd69e719f31e88618baa1eaa6ee2de5c9a1c004f1e9ecdb58e8352a13f20a01"
+checksum = "ea297be220d52398dcc07ce15a209fce436d361735ac1db700cab3b6cdfb9f54"
 dependencies = [
  "proc-macro2",
  "quote",

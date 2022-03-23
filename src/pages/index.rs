@@ -1,6 +1,6 @@
 
 use gloo_timers::future::TimeoutFuture;
-use sycamore::futures::ScopeSpawnLocal;
+use sycamore::futures::spawn_local_scoped;
 use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
@@ -10,22 +10,22 @@ use crate::route::AppRoutes;
 use crate::store::{CurrentRoute, AppState};
 
 #[component]
-pub fn Index<G: Html>(ctx: Scope) -> View<G> {
+pub fn Index<G: Html>(cx: Scope) -> View<G> {
     
 
-    view! { ctx,
+    view! { cx,
         
         Router {
             integration: HistoryIntegration::new(),
-            view: |ctx, route: &ReadSignal<AppRoutes>| {
+            view: |cx, route: &ReadSignal<AppRoutes>| {
 
-                let page_index = ctx.create_signal(0);
+                let page_index = create_signal(cx, 0);
 
-                let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
+                let CurrentRoute(current_route) = use_context::<CurrentRoute>(cx);
 
-                let app_state = ctx.use_context::<AppState>();
+                let app_state = use_context::<AppState>(cx);
     
-                let app_content_ref = ctx.create_node_ref();
+                let app_content_ref = create_node_ref(cx);
                 let slide_in = move |i: i32| {
                     if *page_index.get() == i {
                         return;
@@ -33,7 +33,7 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                     
                     page_index.set(i);
                     if *app_state.inner_width.get() <= 738.0 {
-                        ctx.spawn_local(async move {
+                        spawn_local_scoped(cx, async move {
                             TimeoutFuture::new(120).await;
                             let content = app_content_ref.get::<DomNode>();
                             content.set_attribute("style", "transform: translate(0, 0); transition: transform 288ms ease-in-out;");
@@ -62,20 +62,20 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                 };
 
 
-                let home_page = view! { ctx, 
+                let home_page = view! { cx, 
                     home::index::Home()
                 };
-                let bible_page = view! { ctx, 
+                let bible_page = view! { cx, 
                     bible::index::Bible()
                 };
-                let chat_page = view! { ctx, 
+                let chat_page = view! { cx, 
                     chat::index::Chat()
                 };
-                let profile_page = view! { ctx, 
+                let profile_page = view! { cx, 
                     profile::profile::Profile()
                 };
 
-                view! { ctx,
+                view! { cx,
                     div(class="app") {
                         
                         Header()
@@ -93,8 +93,8 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                                     AppRoutes::Bible => {
                                         reset_slide(1);
                                         current_route.set(AppRoutes::Bible);
-                                        bible::util::scroll_to_selected_book(ctx, 60);
-                                        bible::util::scroll_to_selected_chapter(ctx, 1000);
+                                        bible::util::scroll_to_selected_book(cx, 60);
+                                        bible::util::scroll_to_selected_chapter(cx, 1000);
                                         slide_in(1);
                                         bible_page.clone()
                                     },
@@ -102,14 +102,14 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                                         reset_slide(2);
                                         current_route.set(AppRoutes::Love);
                                         slide_in(2);
-                                        view! { ctx,
+                                        view! { cx,
                                         p {"Love in Action"}
                                     }},
                                     AppRoutes::Community => {
                                         reset_slide(3);
                                         current_route.set(AppRoutes::Community);
                                         slide_in(3);
-                                        view! { ctx,
+                                        view! { cx,
                                         p {"Community features here (chat,meeting,sharing,prayer,help)"}
                                     }},
                                     AppRoutes::Chat(cid) => {
@@ -128,7 +128,7 @@ pub fn Index<G: Html>(ctx: Scope) -> View<G> {
                                         reset_slide(6);
                                         current_route.set(AppRoutes::NotFound);
                                         slide_in(6);
-                                        view! { ctx,
+                                        view! { cx,
                                         p { "404 Not Found" }
                                     }},
                                 }

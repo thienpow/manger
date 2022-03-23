@@ -5,9 +5,9 @@ use crate::{components, pages::home::{sidebar::SidebarLeft, pwa_install::PWAInst
 
 
 #[component]
-pub fn Home<G: Html>(ctx: Scope) -> View<G> {
+pub fn Home<G: Html>(cx: Scope) -> View<G> {
 
-    view! { ctx,
+    view! { cx,
 
         div(class="wrapper") {
 

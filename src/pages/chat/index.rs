@@ -3,9 +3,9 @@ use crate::components::contactbar::ContactBar;
 use crate::pages::chat::{navbar::NavBar, content::Content, footer::Footer};
 
 #[component]
-pub fn Chat<G: Html>(ctx: Scope) -> View<G> {
+pub fn Chat<G: Html>(cx: Scope) -> View<G> {
     
-    view! { ctx,
+    view! { cx,
 
         div(class="wrapper") {
 

@@ -9,8 +9,8 @@ use crate::{pages::bible::{
 }, components::toast::{ToastProps, self}};
 
 #[component]
-pub fn BookItem<G: Html>(ctx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
-    let bible_state = ctx.use_context::<BibleState>();
+pub fn BookItem<G: Html>(cx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
+    let bible_state = use_context::<BibleState>(cx);
 
     let book = book.get();
     let id = book.book_id;
@@ -18,25 +18,25 @@ pub fn BookItem<G: Html>(ctx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
     let chapters = book.chapters;
     let book_name_span = book.book_name.clone();
 
-    let handle_toc_click = |ctx: Scope, book_id: i32, book_name:  String, chapters: i32| {
+    let handle_toc_click = |cx: Scope, book_id: i32, book_name:  String, chapters: i32| {
         let book_name_clone = book_name.clone();
         bible_state.selected_bible_book.set(BibleBookItem {book_id, book_name, chapters});
         bible_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
-        bible::util::reload_chapter_data(ctx);
+        bible::util::reload_chapter_data(cx);
 
-        bible::util::scroll_to_selected_chapter(ctx, 560);
-        bible::util::scroll_to_selected_book(ctx, 60);
+        bible::util::scroll_to_selected_chapter(cx, 560);
+        bible::util::scroll_to_selected_book(cx, 60);
 
-        toast::show(ctx, ToastProps{title: "title here".to_string(), text: book_name_clone, icon_url: "".to_string()});
+        toast::show(cx, ToastProps{title: "title here".to_string(), text: book_name_clone, icon_url: "".to_string()});
     };
 
-    view! { ctx,
+    view! { cx,
         span(
             id=(format!("book-item-{}", id)),
             class=(if bible_state.selected_bible_book.get().book_id == id {
                 "toc-menu-selected"
             } else {""}),
-            on:click=move |_| handle_toc_click(ctx, id, book_name.clone(), chapters)
+            on:click=move |_| handle_toc_click(cx, id, book_name.clone(), chapters)
         ) {
             (book_name_span)
         }
@@ -44,11 +44,11 @@ pub fn BookItem<G: Html>(ctx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
 }
 
 #[component]
-async fn BookList<G: Html>(ctx: Scope<'_>) -> View<G> {
-    let bible_state = ctx.use_context::<BibleState>();
+async fn BookList<G: Html>(cx: Scope<'_>) -> View<G> {
+    let bible_state = use_context::<BibleState>(cx);
     bible_state.init_bible_books().await;
 
-    let filtered_books = ctx.create_memo(|| {
+    let filtered_books = create_memo(cx, || {
         bible_state
             .bible_books
             .get()
@@ -57,13 +57,13 @@ async fn BookList<G: Html>(ctx: Scope<'_>) -> View<G> {
             .collect::<Vec<_>>()
     });
 
-    view! { ctx,
+    view! { cx,
         div(style="height: 53px;")
         Keyed {
             iterable: filtered_books,
-            view: |ctx, book | 
+            view: |cx, book | 
 
-                view! { ctx,
+                view! { cx,
                     BookItem(book)
                 },
 
@@ -75,23 +75,23 @@ async fn BookList<G: Html>(ctx: Scope<'_>) -> View<G> {
 }
 
 #[component]
-fn ChapterItem<G: Html>(ctx: Scope, chapter: RcSignal<ChapterItem>) -> View<G> {
+fn ChapterItem<G: Html>(cx: Scope, chapter: RcSignal<ChapterItem>) -> View<G> {
     let id = chapter.get().id;
-    let bible_state = ctx.use_context::<BibleState>();
+    let bible_state = use_context::<BibleState>(cx);
     
-    let handle_chapter_click = |ctx: Scope, id: i32| {
+    let handle_chapter_click = |cx: Scope, id: i32| {
         bible_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
-        bible::util::reload_chapter_data(ctx);
-        bible::util::scroll_to_selected_chapter(ctx, 0);
+        bible::util::reload_chapter_data(cx);
+        bible::util::scroll_to_selected_chapter(cx, 0);
     };
 
-    view! { ctx,
+    view! { cx,
         span(
             id=(format!("chapter-item-{}", id)),
             class=(if bible_state.selected_bible_chapter.get().id == id {
                 "toc-menu-selected"
             } else {""}),
-            on:click=move |_| handle_chapter_click(ctx, id)
+            on:click=move |_| handle_chapter_click(cx, id)
         ) {
             (id)
         }
@@ -100,10 +100,10 @@ fn ChapterItem<G: Html>(ctx: Scope, chapter: RcSignal<ChapterItem>) -> View<G> {
 
 
 #[component]
-fn ChapterList<G: Html>(ctx: Scope) -> View<G> {
-    let bible_state = ctx.use_context::<BibleState>();
+fn ChapterList<G: Html>(cx: Scope) -> View<G> {
+    let bible_state = use_context::<BibleState>(cx);
 
-    let filtered_chapters = ctx.create_memo(|| {
+    let filtered_chapters = create_memo(cx, || {
         bible_state
             .chapters
             .get()
@@ -113,11 +113,11 @@ fn ChapterList<G: Html>(ctx: Scope) -> View<G> {
             .collect::<Vec<_>>()
     });
 
-    view! { ctx,
+    view! { cx,
         div(style="height: 53px;white-space: nowrap;")
         Keyed {
             iterable: filtered_chapters,
-            view: |ctx, chapter| view! { ctx,
+            view: |cx, chapter| view! { cx,
                 ChapterItem(chapter)
             },
             key: |chapter| chapter.get().id,
@@ -129,12 +129,12 @@ fn ChapterList<G: Html>(ctx: Scope) -> View<G> {
 
 
 #[component]
-pub fn TOC<G: Html>(ctx: Scope) -> View<G> {
+pub fn TOC<G: Html>(cx: Scope) -> View<G> {
 
-    let bible_state = ctx.use_context::<BibleState>();
+    let bible_state = use_context::<BibleState>(cx);
 
-    let book_list_ref: &NodeRef<G> = ctx.create_node_ref();
-    let chapter_list_ref = ctx.create_node_ref();
+    let book_list_ref: &NodeRef<G> = create_node_ref(cx);
+    let chapter_list_ref = create_node_ref(cx);
 
     
 
@@ -142,7 +142,7 @@ pub fn TOC<G: Html>(ctx: Scope) -> View<G> {
         bible_state.init_chapters(150);
     }
     
-    view! { ctx,
+    view! { cx,
         
         div(id="toc-bar-left", class=(
             if bible_state.selected_bible_book.get().book_id == 0 || bible_state.selected_bible_chapter.get().id == 0 {
@@ -167,7 +167,7 @@ pub fn TOC<G: Html>(ctx: Scope) -> View<G> {
 
                 div(class="toc-menu") {
                     Suspense {
-                        fallback: view! { ctx, "Loading..." },
+                        fallback: view! { cx, "Loading..." },
                         BookList {}
                     }
                 }

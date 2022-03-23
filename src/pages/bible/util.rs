@@ -1,19 +1,19 @@
 
 
 use gloo_timers::future::TimeoutFuture;
-use sycamore::{prelude::Scope, futures::ScopeSpawnLocal};
+use sycamore::{prelude::{Scope, use_context}, futures::{spawn_local_scoped}};
 
 
 use crate::pages::bible::store::BibleState;
 
-pub fn reload_chapter_data(ctx: Scope) {
-    ctx.spawn_local(async move {
-        let app_state = ctx.use_context::<BibleState>();
+pub fn reload_chapter_data(cx: Scope) {
+    spawn_local_scoped(cx, async move {
+        let app_state = use_context::<BibleState>(cx);
         app_state.load_chapter_data().await;
 
         //evertime loading new chapter data, reset the verse page to 0
         app_state.current_verse_page.set(0);
-        scroll_to_previous_page(ctx, 1000);
+        scroll_to_previous_page(cx, 1000);
     });
 }
 
@@ -43,12 +43,12 @@ pub fn reload_chapter_data(ctx: Scope) {
  */
 
 
-pub fn scroll_to_selected_book(ctx: Scope, wait: u32) {
+pub fn scroll_to_selected_book(cx: Scope, wait: u32) {
 
-    ctx.spawn_local(async move {
+    spawn_local_scoped(cx, async move {
         TimeoutFuture::new(wait).await;
 
-        let app_state = ctx.use_context::<BibleState>();
+        let app_state = use_context::<BibleState>(cx);
         let target_id = app_state.selected_bible_book.get().book_id+1;
         
         match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("book-item-{}", target_id).as_str()) {
@@ -60,12 +60,12 @@ pub fn scroll_to_selected_book(ctx: Scope, wait: u32) {
     });
 }
 
-pub fn scroll_to_selected_chapter(ctx: Scope, wait: u32) {
+pub fn scroll_to_selected_chapter(cx: Scope, wait: u32) {
 
-    ctx.spawn_local(async move {
+    spawn_local_scoped(cx, async move {
         TimeoutFuture::new(wait).await;
 
-        let app_state = ctx.use_context::<BibleState>();
+        let app_state = use_context::<BibleState>(cx);
         let target_id = app_state.selected_bible_chapter.get().id+1;
     
         match web_sys::window().unwrap().document().unwrap().get_element_by_id(format!("chapter-item-{}", target_id).as_str()) {
@@ -79,11 +79,11 @@ pub fn scroll_to_selected_chapter(ctx: Scope, wait: u32) {
 }
 
 
-pub fn scroll_to_previous_page(ctx: Scope, wait: u32) {
-    ctx.spawn_local(async move {
+pub fn scroll_to_previous_page(cx: Scope, wait: u32) {
+    spawn_local_scoped(cx, async move {
         TimeoutFuture::new(wait).await;
 
-        let bible_state = ctx.use_context::<BibleState>();
+        let bible_state = use_context::<BibleState>(cx);
         let current_verse_page = *bible_state.current_verse_page.get();
 
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
@@ -103,11 +103,11 @@ pub fn scroll_to_previous_page(ctx: Scope, wait: u32) {
     });
 }
 
-pub fn scroll_to_next_page(ctx: Scope) {
-    ctx.spawn_local(async move {
+pub fn scroll_to_next_page(cx: Scope) {
+    spawn_local_scoped(cx, async move {
         TimeoutFuture::new(60).await;
 
-        let bible_state = ctx.use_context::<BibleState>();
+        let bible_state = use_context::<BibleState>(cx);
         let current_verse_page = *bible_state.current_verse_page.get();
                     
         match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {

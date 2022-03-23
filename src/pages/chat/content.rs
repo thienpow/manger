@@ -5,10 +5,10 @@ use sycamore::prelude::*;
 use crate::store::AppState;
 
 #[component]
-pub fn Content<G: Html>(ctx: Scope) -> View<G> {
-    let app_state = ctx.use_context::<AppState>();
+pub fn Content<G: Html>(cx: Scope) -> View<G> {
+    let app_state = use_context::<AppState>(cx);
     
-    let chat_content_style = ctx.create_memo(|| {
+    let chat_content_style = create_memo(cx, || {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
         let mut height =  inner_height-188.0;
@@ -18,7 +18,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
         format!("height: {}px;", height)
     });
 
-    view! { ctx,
+    view! { cx,
         article(
             id="chat-content", 
             class="chat-content", 

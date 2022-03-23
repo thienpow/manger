@@ -1,9 +1,9 @@
 
-use sycamore::prelude::{RcSignal, create_rc_signal, Scope};
+use sycamore::prelude::{RcSignal, create_rc_signal, Scope, provide_context};
 use crate::route::{AppRoutes};
 use crate::util;
 
-pub fn initialize(ctx: Scope) {
+pub fn initialize(cx: Scope) {
 
     let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
@@ -38,10 +38,10 @@ pub fn initialize(ctx: Scope) {
                 background,
                 inner_width, inner_height,
             };
-            ctx.provide_context(app_state);
+            provide_context(cx, app_state);
         
             let current_route = CurrentRoute(create_rc_signal(AppRoutes::Home));
-            ctx.provide_context(current_route);
+            provide_context(cx, current_route);
 
             
         },

@@ -5,10 +5,10 @@ use sycamore::prelude::*;
 use crate::pages::bible::store::BibleState;
 
 #[component]
-pub fn TextSizeButton<G: Html>(ctx: Scope) -> View<G> {
-    let bible_state = ctx.use_context::<BibleState>();
+pub fn TextSizeButton<G: Html>(cx: Scope) -> View<G> {
+    let bible_state = use_context::<BibleState>(cx);
 
-    view! { ctx,
+    view! { cx,
         button(class="text-size-button", style="font-size:12pt;", on:click=move |_| bible_state.verse_text_size.set(*bible_state.verse_text_size.get()-1)) {"A"}
         div(class="icon-gap")
         button(class="text-size-button", style="font-size:18pt;", on:click=move |_| bible_state.verse_text_size.set(*bible_state.verse_text_size.get()+1)) {"A"}
@@ -17,10 +17,10 @@ pub fn TextSizeButton<G: Html>(ctx: Scope) -> View<G> {
 }
 
 #[component]
-pub fn NavBar<G: Html>(ctx: Scope) -> View<G> {
-    let bible_state = ctx.use_context::<BibleState>();
+pub fn NavBar<G: Html>(cx: Scope) -> View<G> {
+    let bible_state = use_context::<BibleState>(cx);
     
-    view! { ctx,
+    view! { cx,
         nav(class="navbar"){
                     
             div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);",

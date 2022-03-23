@@ -6,9 +6,9 @@ use crate::route::AppRoutes;
 use crate::store::CurrentRoute;
 
 #[component]
-pub fn TabBar<G: Html>(ctx: Scope) -> View<G> {
+pub fn TabBar<G: Html>(cx: Scope) -> View<G> {
 
-    let CurrentRoute(current_route) = ctx.use_context::<CurrentRoute>();
+    let CurrentRoute(current_route) = use_context::<CurrentRoute>(cx);
 
     fn get_tabbar_style(current: &AppRoutes) -> String {
         match current {
@@ -25,7 +25,7 @@ pub fn TabBar<G: Html>(ctx: Scope) -> View<G> {
         }
     }
 
-    view! { ctx,
+    view! { cx,
 
         footer(class="tabbar", style=get_tabbar_style(&*current_route.get())) {
             div(class="tabbar-wrapper") {

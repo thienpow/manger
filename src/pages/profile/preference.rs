@@ -2,9 +2,9 @@ use sycamore::prelude::*;
 use crate::store::AppState;
 
 #[component]
-pub fn Preference<G: Html>(ctx: Scope) -> View<G> {
+pub fn Preference<G: Html>(cx: Scope) -> View<G> {
 
-    let app_state = ctx.use_context::<AppState>();
+    let app_state = use_context::<AppState>(cx);
     
     let get_bg_button_style = move |bg: &str| {
         if bg == &*app_state.background.get() {
@@ -13,7 +13,7 @@ pub fn Preference<G: Html>(ctx: Scope) -> View<G> {
             "bg-button"
         }
     };
-    view! { ctx,
+    view! { cx,
         
         div(class="content-section") {
             div(class="content-section-title") { "SYSTEM PREFERENCES" }

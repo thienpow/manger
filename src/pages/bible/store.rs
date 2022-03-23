@@ -1,8 +1,8 @@
 use serde::{Serialize, Deserialize};
-use sycamore::prelude::{RcSignal, create_rc_signal, Scope};
+use sycamore::prelude::{RcSignal, create_rc_signal, Scope, provide_context};
 use crate::pages::bible::api;
 
-pub fn initialize(ctx: Scope) {
+pub fn initialize(cx: Scope) {
 
     let window = web_sys::window().unwrap();
     let _document = window.document().unwrap();
@@ -49,7 +49,7 @@ pub fn initialize(ctx: Scope) {
                 is_bookview,
                 selection_first_verse,
             };
-            ctx.provide_context(bible_state);
+            provide_context(cx, bible_state);
         
         },
         _ => {}

@@ -2,11 +2,11 @@ use sycamore::prelude::*;
 use crate::store::AppState;
 
 #[component]
-pub fn Account<G: Html>(ctx: Scope) -> View<G> {
+pub fn Account<G: Html>(cx: Scope) -> View<G> {
 
-    let _app_state = ctx.use_context::<AppState>();
+    let _app_state = use_context::<AppState>(cx);
     
-    view! { ctx,
+    view! { cx,
         div(class="content-section") {
             div(class="content-section-title") { "PROFILE DATA" }
             div(class="card-wrapper") {

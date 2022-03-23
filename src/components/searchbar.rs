@@ -7,9 +7,9 @@ pub struct SearchBar {
 }
 
 #[component]
-pub fn SearchBar<G: Html>(ctx: Scope, props: SearchBar) -> View<G> {
+pub fn SearchBar<G: Html>(cx: Scope, props: SearchBar) -> View<G> {
 
-    view! { ctx,
+    view! { cx,
         div(class="search-bar") {
             input(type="text", placeholder="Search", on:focus=props.focus, on:blur=props.blur)
         }

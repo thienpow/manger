@@ -13,11 +13,11 @@ use crate::{
 
 
 #[component]
-pub fn Bible<G: Html>(ctx: Scope) -> View<G> {
+pub fn Bible<G: Html>(cx: Scope) -> View<G> {
 
-    bible::store::initialize(ctx);
+    bible::store::initialize(cx);
 
-    let bible_state = ctx.use_context::<BibleState>();
+    let bible_state = use_context::<BibleState>(cx);
     
     //TODO: key up/down = change chapter
         // key left/right = change page
@@ -31,7 +31,7 @@ pub fn Bible<G: Html>(ctx: Scope) -> View<G> {
     8 = backspace
     13 = enter
      */
-    let key_code = ctx.create_signal(0);
+    let key_code = create_signal(cx, 0);
     let on_keydown = move |e: Event| {
         //e.current_target().unwrap().
         let key = e.unchecked_into::<KeyboardEvent>();
@@ -41,7 +41,7 @@ pub fn Bible<G: Html>(ctx: Scope) -> View<G> {
     };
 
 
-    view! { ctx,
+    view! { cx,
 
         div(class="wrapper",
             on:keydown=on_keydown,

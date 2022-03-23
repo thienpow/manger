@@ -5,9 +5,9 @@ use sycamore::prelude::*;
 use crate::svg::{THUMBS_UP_SVG};
 
 #[component]
-pub fn Footer<G: Html>(ctx: Scope) -> View<G> {
+pub fn Footer<G: Html>(cx: Scope) -> View<G> {
     
-    view! { ctx,
+    view! { cx,
 
         div(class="chat-footer") {
             i(class="icon-image optinal-button")

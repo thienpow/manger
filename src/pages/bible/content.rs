@@ -27,8 +27,8 @@ fn get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
 
 
 #[component]
-pub fn EmptyNavPanel<G: Html>(ctx: Scope) -> View<G> {
-    view! { ctx,
+pub fn EmptyNavPanel<G: Html>(cx: Scope) -> View<G> {
+    view! { cx,
         div(class="verse-content-nav-panel") {
 
         }
@@ -36,17 +36,17 @@ pub fn EmptyNavPanel<G: Html>(ctx: Scope) -> View<G> {
 }
 
 #[component]
-pub fn BackButton<G: Html>(ctx: Scope) -> View<G> {
-    let show_button = ctx.create_signal(false);
+pub fn BackButton<G: Html>(cx: Scope) -> View<G> {
+    let show_button = create_signal(cx, false);
 
-    view! { ctx,
+    view! { cx,
         div(class="verse-content-nav-panel", style="border-top-left-radius: 12px;",
             on:mouseenter=move |_| show_button.set(true),
             on:mouseleave=move |_| show_button.set(false)
         ) {
             button(
                 class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_first_page() {"nav-button-show"} else {""}),
-                on:click=move |_| bible::util::scroll_to_previous_page(ctx, 60)
+                on:click=move |_| bible::util::scroll_to_previous_page(cx, 60)
             ) {
                 i(class="icon-chevron-left")
             }
@@ -55,17 +55,17 @@ pub fn BackButton<G: Html>(ctx: Scope) -> View<G> {
 }
 
 #[component]
-pub fn NextButton<G: Html>(ctx: Scope) -> View<G> {
-    let show_button = ctx.create_signal(false);
+pub fn NextButton<G: Html>(cx: Scope) -> View<G> {
+    let show_button = create_signal(cx, false);
 
-    view! { ctx,
+    view! { cx,
         div(class="verse-content-nav-panel", style="border-top-right-radius: 12px;",
             on:mouseenter=move |_| show_button.set(true),
             on:mouseleave=move |_| show_button.set(false)
         ) {
             button(
                 class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_last_page() {"nav-button-show"} else {""}),
-                on:click=move |_| bible::util::scroll_to_next_page(ctx)
+                on:click=move |_| bible::util::scroll_to_next_page(cx)
             ) {
                 i(class="icon-chevron-right")
             }
@@ -74,9 +74,9 @@ pub fn NextButton<G: Html>(ctx: Scope) -> View<G> {
 }
 
 #[component]
-fn VerseItem<G: Html>(ctx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
+fn VerseItem<G: Html>(cx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
 
-    let bible_state = ctx.use_context::<BibleState>();
+    let bible_state = use_context::<BibleState>(cx);
     let verse =  verse.get();
     let prefix = format!("[{}:{}]  ", verse.chapter, verse.verse);
 
@@ -113,12 +113,12 @@ fn VerseItem<G: Html>(ctx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
         });
     };
     
-    view! { ctx,
+    view! { cx,
         p(on:mousedown=on_mousedown
         ) {
             span(class="", style="-webkit-user-select:none; user-select:none;") {(prefix)}
             (if is_marked {
-                view! {ctx,
+                view! {cx,
                     span(){(verse_text_before_mark)}
                     mark() {
                         span(){(verse_text_with_mark)}
@@ -126,7 +126,7 @@ fn VerseItem<G: Html>(ctx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
                     span(){(verse_text_after_mark)}
                 }
             } else {
-                view! {ctx, span(){(verse_text)}}
+                view! {cx, span(){(verse_text)}}
             })
         }
     }
@@ -134,13 +134,13 @@ fn VerseItem<G: Html>(ctx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
 
 
 #[component]
-pub fn Content<G: Html>(ctx: Scope) -> View<G> {
+pub fn Content<G: Html>(cx: Scope) -> View<G> {
 
-    let app_state = ctx.use_context::<AppState>();
-    let bible_state = ctx.use_context::<BibleState>();
-    let verse_content = ctx.create_node_ref();
+    let app_state = use_context::<AppState>(cx);
+    let bible_state = use_context::<BibleState>(cx);
+    let verse_content = create_node_ref(cx);
 
-    let get_filtered_verses = ctx.create_memo(|| {
+    let get_filtered_verses = create_memo(cx, || {
         bible_state
             .verses
             .get()
@@ -150,7 +150,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             .collect::<Vec<_>>()
     });
 
-    let get_content_style = ctx.create_memo(|| {
+    let get_content_style = create_memo(cx, || {
         if *bible_state.is_bookview.get() {
             "bible-verse-content-bookview"
         } else {
@@ -213,7 +213,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     };
 
     let on_touchend = move |_: Event| {
-        let bible_state = ctx.use_context::<BibleState>();
+        let bible_state = use_context::<BibleState>(cx);
         if !*bible_state.is_bookview.get() {
             return;
         }
@@ -238,7 +238,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
     };
 
 
-    let bible_content_style = ctx.create_memo(|| {
+    let bible_content_style = create_memo(cx,|| {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
         let mut height =  inner_height-116.0;
@@ -249,7 +249,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
         format!("height:{}px;",height)
     });
 
-    let verse_content_style = ctx.create_memo(|| {
+    let verse_content_style = create_memo(cx,|| {
         let inner_width: f64 = *app_state.inner_width.get();
         let inner_height: f64 = *app_state.inner_height.get();
         let mut height =  inner_height-116.0-50.0;
@@ -260,7 +260,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
         format!("font-size:{}pt;height:{}px;min-height:{}px;max-height:{}px;", *bible_state.verse_text_size.get(), height, height, height)
     });
 
-    view! { ctx,
+    view! { cx,
 
         article(
             class="bible-content",
@@ -269,9 +269,9 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             //scroll_to_previous_page
             (
                 if *bible_state.is_bookview.get() {
-                    BackButton(ctx, ())
+                    BackButton(cx, ())
                 } else {
-                    EmptyNavPanel(ctx, ())
+                    EmptyNavPanel(cx, ())
                 }
             )
             
@@ -291,7 +291,7 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
                 ) {
                     Keyed {
                         iterable: get_filtered_verses,
-                        view: |ctx, verse| view! { ctx,
+                        view: |cx, verse| view! { cx,
                             VerseItem(verse)
                         },
                         key: |verse| verse.get().verse,
@@ -302,9 +302,9 @@ pub fn Content<G: Html>(ctx: Scope) -> View<G> {
             //scroll_to_next_page
             (
                 if *bible_state.is_bookview.get() {
-                    NextButton(ctx, ())
+                    NextButton(cx, ())
                 } else {
-                    EmptyNavPanel(ctx, ())
+                    EmptyNavPanel(cx, ())
                 }
             )
         

@@ -3,11 +3,11 @@ use crate::{components::footer, store::{AppState}, pages::profile::{preference::
 
 
 #[component]
-pub fn Profile<G: Html>(ctx: Scope) -> View<G> {
+pub fn Profile<G: Html>(cx: Scope) -> View<G> {
 
-    let _app_state = ctx.use_context::<AppState>();
+    let _app_state = use_context::<AppState>(cx);
     
-    view! { ctx,
+    view! { cx,
 
         div(class="wrapper") {
             div(class="main-container") {
