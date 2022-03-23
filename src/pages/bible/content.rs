@@ -48,7 +48,7 @@ pub fn BackButton<G: Html>(ctx: Scope) -> View<G> {
                 class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_first_page() {"nav-button-show"} else {""}),
                 on:click=move |_| bible::util::scroll_to_previous_page(ctx, 60)
             ) {
-                i(class="gg-chevron-left")
+                i(class="icon-chevron-left")
             }
         }
     }
@@ -67,7 +67,7 @@ pub fn NextButton<G: Html>(ctx: Scope) -> View<G> {
                 class=format!("verse-content-nav-button {}", if *show_button.get() && bible::util::check_if_not_last_page() {"nav-button-show"} else {""}),
                 on:click=move |_| bible::util::scroll_to_next_page(ctx)
             ) {
-                i(class="gg-chevron-right")
+                i(class="icon-chevron-right")
             }
         }
     }

@@ -44,3 +44,10 @@
 .tabbar-item:hover {
   color: var(--highlight-color);
 }
+
+
+@media screen and (max-width: 738px) {
+  .tabbar {
+    display: flex;
+  }
+}

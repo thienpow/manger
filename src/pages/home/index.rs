@@ -9,16 +9,6 @@ pub fn Home<G: Html>(ctx: Scope) -> View<G> {
 
     view! { ctx,
 
-        /*
-        div(class="main-header") {
-            div(class="header-menu") {
-                a(class="main-header-link is-active", href="#") { "Desktop" }
-                a(class="main-header-link", href="#") { "Mobile" }
-                a(class="main-header-link", href="#") { "Web" }
-            }
-        }
-        */
-        
         div(class="wrapper") {
 
             SidebarLeft()

@@ -28,14 +28,14 @@ pub fn NavBar<G: Html>(ctx: Scope) -> View<G> {
                     bible_state.pin_bible_toc.set(!*bible_state.pin_bible_toc.get())
                 }
             ) {
-                i(class=(if *bible_state.pin_bible_toc.get() {"gg-chevron-double-right-r"} else {"gg-chevron-double-left-r"}), 
+                i(class=(if *bible_state.pin_bible_toc.get() {"icon-chevron-double-right-r"} else {"icon-chevron-double-left-r"}), 
                 style="margin-right:12px;cursor: pointer;")
 
                 (if bible_state.selected_bible_book.get().book_id > 0 {
                     format!("{}",bible_state.selected_bible_book.get().book_name)
                 } else {"".to_string()})
 
-                i(class=("gg-chevron-double-right"), style="margin-left:4px;margin-right:4px;")
+                i(class=("icon-chevron-double-right"), style="margin-left:4px;margin-right:4px;")
 
                 (if bible_state.selected_bible_book.get().book_id > 0 {
                     format!("{}",bible_state.selected_bible_chapter.get().id.to_string())

@@ -199,3 +199,18 @@
     background-color: var(--hover-menu-bg);
   }
 }
+
+@media screen and (max-width: 738px) {
+  .bible-wrapper {
+    border-radius: 0;
+  }
+
+  .toc-bar-left {
+    padding: 56px 0px;
+    background-color: var(--content-bg);
+  }
+  .toc-bar-left-hide:hover {
+    position: relative;
+    left: 0px;
+  }
+}

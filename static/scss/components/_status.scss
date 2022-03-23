@@ -1,0 +1,48 @@
+
+.status {
+  margin-left: auto;
+  width: 140px;
+  font-size: 15px;
+  position: relative;
+}
+  
+.status-circle {
+  width: 6px;
+  height: 6px;
+  background-color: #396df0;
+  position: absolute;
+  border-radius: 50%;
+  top: 4px;
+  left: -20px;
+}
+  
+.status-circle.green {
+  background-color: #3bf083;
+}
+  
+.status-button {
+  font-size: 15px;
+  margin-top: 0;
+  padding: 6px 24px;
+}
+  
+.status-button.open {
+  background: none;
+  color: var(--button-inactive);
+  border: 1px solid var(--button-inactive);
+}
+  
+.status-button:not(.open):hover {
+  color: #fff;
+  border-color: #fff;
+}
+  
+
+@media screen and (max-width: 738px) {
+  .status {
+    display: none;
+  }
+  .status-button {
+    padding: 6px 14px;
+  }
+}

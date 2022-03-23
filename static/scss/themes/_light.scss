@@ -3,6 +3,8 @@
 
 
 .light-mode {
+  --primary-color: rgb(196, 18, 18);
+  
   --theme-color: #3c3a3a;
   --theme-bg-color: rgb(255 255 255 / 31%);
   --theme-text-color: #272727;
@@ -43,4 +45,17 @@
     -webkit-backdrop-filter: saturate(3);
     backdrop-filter: saturate(3);
   }
+}
+
+.light-mode .profile-img {
+  border: 2px solid var(--theme-bg-color);
+}
+.light-mode .content-section ul {
+  background-color: var(--theme-bg-color);
+}
+.light-mode .pop-up__title {
+  border-color: var(--theme-color);
+}
+.light-mode .dropdown.is-active ul {
+  background-color: rgba(255, 255, 255, 0.94);
 }

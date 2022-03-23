@@ -1,0 +1,36 @@
+
+.icon-cross {
+    -webkit-user-select : none;
+    user-select: none;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    transform: scale(var(--ggs,2.6));
+    border-radius: 4px;
+    color: var(--theme-color);
+    left: 7px;
+    top: 7px;
+  }
+  .icon-cross::after,
+  .icon-cross::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    border-radius: 5px;
+    top: 8px;
+    left: 3px;
+    background: currentColor;
+  }
+   
+  .icon-cross::after {
+    width: 2px;
+    height: 12px;
+    top: 4px;
+    left: 7px;
+  }
+  

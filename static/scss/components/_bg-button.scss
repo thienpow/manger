@@ -1,0 +1,17 @@
+
+.bg-button,
+.bg-button-selected {
+  width: 78px;
+  height: 48px;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.bg-button-selected {
+  border: 3px solid var(--highlight-color);
+}
+.bg-button,
+.bg-button-selected:hover {
+  background-color: var(--hover-menu-bg);
+}

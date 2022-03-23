@@ -53,6 +53,10 @@
 .chat-footer svg + svg {
   margin-left: 12px;
 }
+
+.chat-footer i + i {
+  margin-left: 12px;
+}
   
 .chat-footer input {
   border: none;
@@ -68,6 +72,14 @@
   }
 }
 
-  
-  
-  
+@media screen and (max-width: 738px) {
+  .chat-content::-webkit-scrollbar {
+    display: none;
+  }
+  .chat-footer {
+    width: calc(100% - 24px);
+  }
+  .optinal-button {
+    display: none;
+  }
+}
