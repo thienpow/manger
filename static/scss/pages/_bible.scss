@@ -1,6 +1,6 @@
 
 .toc-bar-left {
-  display:inline-block;
+  display: inline-block;
   position: relative;
   padding-top: 25px;
   width: 188px;
@@ -13,10 +13,14 @@
   top: 0;
   bottom: 0;
   z-index: 3;
+  transition: transform 288ms ease-in-out;
 }
-.toc-bar-left-hide {
-  position: fixed;
-  transform: translateX(-188px); transition: transform 488ms ease-in-out;
+.toc-bar-left.show {
+  transform: translate(0, 0);
+}
+.toc-bar-left.hide {
+  position: absolute;
+  transform: translateX(-188px);
 }
 .bible-wrapper {
   position: relative;

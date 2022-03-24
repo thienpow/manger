@@ -74,6 +74,8 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
                         li {"bookmarks, most recent 5 book marks, click more to view full page bookmark list"}
                         li {"last edited note/comment"}
                         li {"friend's note/comment sharing"}
+                        li {"switch v-scroll/h-scroll mode"}
+                        li {"float toolbar in mobile screen, with tool buttons like change font size, switch scroll mode, search, chapter nav, note taking etc"}
                     }
                 }
                 

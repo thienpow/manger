@@ -1,5 +1,6 @@
 
-use sycamore::prelude::*;
+use gloo_timers::future::TimeoutFuture;
+use sycamore::{prelude::*, futures::spawn_local_scoped};
 use sycamore::suspense::Suspense;
 use crate::{pages::bible::{ 
     self, 
@@ -133,37 +134,30 @@ pub fn TOC<G: Html>(cx: Scope) -> View<G> {
 
     let bible_state = use_context::<BibleState>(cx);
 
-    let book_list_ref: &NodeRef<G> = create_node_ref(cx);
-    let chapter_list_ref = create_node_ref(cx);
-
-    
-
     if bible_state.chapters.get().len() == 0 {
         bible_state.init_chapters(150);
     }
-    
+
+
     view! { cx,
         
         div(id="toc-bar-left", class=(
             if bible_state.selected_bible_book.get().book_id == 0 || bible_state.selected_bible_chapter.get().id == 0 {
-                "toc-bar-left"
+                "toc-bar-left show"
             } else {
                 if *bible_state.show_bible_toc.get() || *bible_state.pin_bible_toc.get() {
                     "toc-bar-left"
                 } else {
-                    "toc-bar-left toc-bar-left-hide"
+                    "toc-bar-left hide"
                 }
             }
-        ), 
-            on:mouseenter=move |_| bible_state.show_bible_toc.set(true),
-            on:mouseleave=move |_| bible_state.show_bible_toc.set(false)
-        ) {
+        )) {
 
             div(class="toc-title-left") {
                 "BOOKS"
             }
             div(class="row")
-            div(ref=book_list_ref, id="book_list", class="toc-wrapper") {
+            div(id="book_list", class="toc-wrapper") {
 
                 div(class="toc-menu") {
                     Suspense {
@@ -180,7 +174,7 @@ pub fn TOC<G: Html>(cx: Scope) -> View<G> {
                 "CHAPTERS"
             }
             div(class="row")
-            div(ref=chapter_list_ref, id="chapter_list", class="toc-wrapper") {
+            div(id="chapter_list", class="toc-wrapper") {
 
                 div(class="toc-menu") {
                                
