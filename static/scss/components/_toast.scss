@@ -38,6 +38,7 @@
   max-height: 84px;
   max-width: 300px;
   min-width: 288px;
+  transition: transform 288ms ease-in-out;
 }
 .toast-box {
   box-sizing: border-box;
@@ -46,7 +47,6 @@
   background-color: var(--popup-bg);
   border: 1px solid var(--toast-border-color);
   border-radius: 1.5em;
-  transition: transform 288ms ease-in-out;
   height: 78px;
   max-height: 78px;
   max-width: 300px;
