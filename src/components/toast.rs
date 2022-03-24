@@ -160,16 +160,17 @@ fn ToastItem<G: GenericNode>(cx: Scope) -> View<G> {
             on:mouseenter=move |_| stay_show.set(true),
             on:mouseleave=move |_| stay_show.set(false),
         ) {
-            div(class="toast_x", 
-                style=(if *stay_show.get() {"display:flex;"} else {""}),
-                on:click=on_click
-            ) {"×"}
-            div(class="toast-title") {(title)}
-            div(class="toast-content") {
-                img(class="toast-img", src=(icon_url))
-                div(class="toast-text") {(text)}
+            div(class="toast-box") {
+                div(class="toast-x", 
+                    style=(if *stay_show.get() {"display:inline-block;"} else {""}),
+                    on:click=on_click
+                ) {"×"}
+                div(class="toast-title") {(title)}
+                div(class="toast-content") {
+                    img(class="toast-img", src=(icon_url))
+                    div(class="toast-text") {(text)}
+                }
             }
-    
         }
     }
 }
