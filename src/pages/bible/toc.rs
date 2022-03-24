@@ -1,6 +1,6 @@
 
-use gloo_timers::future::TimeoutFuture;
-use sycamore::{prelude::*, futures::spawn_local_scoped};
+
+use sycamore::{prelude::*};
 use sycamore::suspense::Suspense;
 use crate::{pages::bible::{ 
     self, 

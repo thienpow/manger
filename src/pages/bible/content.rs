@@ -245,8 +245,12 @@ pub fn Content<G: Html>(cx: Scope) -> View<G> {
         if inner_width <= 738.0 {
             height =  inner_height-128.0;
         } 
-        
-        format!("height:{}px;",height)
+        let mut width = inner_width;
+        if *bible_state.show_bible_toc.get() || *bible_state.pin_bible_toc.get() {
+            width = inner_width-188.0;
+        }
+
+        format!("width:{}px; height:{}px;", width, height)
     });
 
     let verse_content_style = create_memo(cx,|| {

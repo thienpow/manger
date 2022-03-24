@@ -19,7 +19,14 @@
   transform: translate(0, 0);
 }
 .toc-bar-left.hide {
-  position: absolute;
+  transform: translateX(-188px);
+  -webkit-animation: out 0.5s;
+  animation: out 0.5s;
+}
+.main-container.show {
+  transform: translate(0, 0);
+}
+.main-container.hide {
   transform: translateX(-188px);
 }
 .bible-wrapper {

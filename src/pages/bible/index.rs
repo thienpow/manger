@@ -40,7 +40,6 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
         key_code.set(key.key_code());
     };
 
-
     view! { cx,
 
         div(class="wrapper",
@@ -50,9 +49,24 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
             TOC()
 
             // bible verse content area
-            div(class="main-container", 
+            div(class=(
+                    if bible_state.selected_bible_book.get().book_id == 0 || bible_state.selected_bible_chapter.get().id == 0 {
+                        "main-container show"
+                    } else {
+                        if *bible_state.show_bible_toc.get() || *bible_state.pin_bible_toc.get() {
+                            "main-container show"
+                        } else {
+                            "main-container hide"
+                        }
+                    }
+                ), 
                 tabindex="0", 
-                style=format!("{}", if bible_state.verses.get().iter().len() > 0 {""} else {"display: none;"})) {
+                style=format!(
+                    "{}", 
+                    if bible_state.verses.get().iter().len() > 0 {""} else {"display: none;"}
+                ),
+                
+            ) {
 
 
                 div(class="bible-wrapper") {
