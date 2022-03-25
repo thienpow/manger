@@ -247,7 +247,9 @@ pub fn Content<G: Html>(cx: Scope) -> View<G> {
         } 
         let mut width = inner_width;
         if *bible_state.show_bible_toc.get() || *bible_state.pin_bible_toc.get() {
-            width = inner_width-188.0;
+            if !*bible_state.toc_animating.get() {
+                width = inner_width-188.0;
+            }
         }
 
         format!("width:{}px; height:{}px;", width, height)

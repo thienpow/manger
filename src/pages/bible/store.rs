@@ -21,6 +21,8 @@ pub fn initialize(cx: Scope) {
             let selected_bible_chapter: RcSignal<ChapterItem> = create_rc_signal(ChapterItem {id: 0, name: "".to_string() });
             let show_bible_toc: RcSignal<bool> = create_rc_signal(false);
             let pin_bible_toc: RcSignal<bool> = create_rc_signal(true);
+            let toc_animating: RcSignal<bool> = create_rc_signal(false);
+            
             let current_verse_page: RcSignal<i32> = create_rc_signal(0);
             let current_verse_scroll_x: RcSignal<f64> = create_rc_signal(0.0);
             let verse_text_size: RcSignal<i32> = create_rc_signal(12);
@@ -43,6 +45,7 @@ pub fn initialize(cx: Scope) {
                 selected_bible_chapter,
                 show_bible_toc,
                 pin_bible_toc,
+                toc_animating,
                 current_verse_page,
                 current_verse_scroll_x,
                 verse_text_size,
@@ -66,6 +69,7 @@ pub struct BibleState {
     pub selected_bible_chapter: RcSignal<ChapterItem>,
     pub show_bible_toc: RcSignal<bool>,
     pub pin_bible_toc: RcSignal<bool>,
+    pub toc_animating: RcSignal<bool>,
     pub current_verse_page: RcSignal<i32>,
     pub current_verse_scroll_x: RcSignal<f64>,
     pub verse_text_size: RcSignal<i32>,

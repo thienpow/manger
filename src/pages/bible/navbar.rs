@@ -1,6 +1,7 @@
 
 
-use sycamore::prelude::*;
+use gloo_timers::future::TimeoutFuture;
+use sycamore::{prelude::*, futures::spawn_local_scoped};
 
 use crate::pages::bible::store::BibleState;
 
@@ -25,7 +26,12 @@ pub fn NavBar<G: Html>(cx: Scope) -> View<G> {
                     
             div(class="navbar-menu", style="padding-left: 25px; color:var(--button-inactive);",
                 on:click=move |_| {
-                    bible_state.pin_bible_toc.set(!*bible_state.pin_bible_toc.get())
+                    bible_state.toc_animating.set(true);
+                    bible_state.pin_bible_toc.set(!*bible_state.pin_bible_toc.get());
+                    spawn_local_scoped(cx, async move {
+                        TimeoutFuture::new(288).await;
+                        bible_state.toc_animating.set(false);
+                    });
                 }
             ) {
                 i(class=(if *bible_state.pin_bible_toc.get() {"icon-chevron-double-right-r"} else {"icon-chevron-double-left-r"}), 
