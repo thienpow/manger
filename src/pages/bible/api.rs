@@ -25,6 +25,16 @@ pub async fn get_toc() -> Result<TableOfContents, reqwasm::Error> {
     Ok(result)
 }
 
+pub async fn download_all_data(bible: String) -> Result<BookData, reqwasm::Error> {
+
+    let url = format!("/bible/{}/full.json", bible);
+    let resp = Request::get(&url).send().await?;
+
+    let result = resp.json::<BookData>().await?;
+
+    Ok(result)
+}
+
 pub async fn get_book_data(bible: String, book: i32) -> Result<BookData, reqwasm::Error> {
 
     //console::log_1(&"get_book_data".into());

@@ -1,0 +1,11 @@
+
+.safearea {
+    display: none;
+    height: 50px;
+}
+
+@media all and (display-mode: standalone) {
+    .safearea {
+        display: flex;
+    }
+}

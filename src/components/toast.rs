@@ -2,6 +2,8 @@ use core::fmt;
 use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::*, futures::{spawn_local_scoped}};
 
+use crate::components::safearea::SafeArea;
+
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy)]
@@ -91,7 +93,9 @@ pub fn Toast<G: Html>(cx: Scope, props: ToastContainerProps) -> View<G> {
 
 
     view! { cx,
-        div(ref=toast_container, class="toast-container", data-position=props.position.to_string())
+        div(ref=toast_container, class="toast-container", data-position=props.position.to_string()) {
+            SafeArea {}
+        }
     }
 }
 

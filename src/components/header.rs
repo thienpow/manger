@@ -2,6 +2,7 @@
 
 use sycamore::prelude::*;
 
+use crate::components::safearea::SafeArea;
 use crate::route::AppRoutes;
 use crate::store::{CurrentRoute};
 use crate::svg::{NOTIF_SVG};
@@ -22,6 +23,7 @@ pub fn Header<G: Html>(cx: Scope) -> View<G> {
     };
 
     view! { cx,
+        SafeArea {}
 
         header(ref=header_ref, id="header", class="header") {
             div(ref=left_menu_ref, class="header-menu-left") {

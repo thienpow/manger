@@ -41,7 +41,7 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
     };
 
     view! { cx,
-
+        meta(name="apple-mobile-web-app-status-bar-style", content="var(--content-text-bg)")
         div(class="wrapper",
             on:keydown=on_keydown,
         ) {

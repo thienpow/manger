@@ -5,3 +5,4 @@ pub mod contactbar;
 pub mod tabbar;
 pub mod footer;
 pub mod toast;
+pub mod safearea;
