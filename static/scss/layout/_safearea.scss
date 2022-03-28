@@ -4,6 +4,10 @@
     height: 0px;
 }
 
+/*
+    standalone mode is set inside manifest.json
+    "start_url": "./?mode=standalone",
+*/
 @media all and (display-mode: standalone) {
     .safearea {
         display: flex;
