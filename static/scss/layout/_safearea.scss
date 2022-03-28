@@ -1,11 +1,20 @@
 
 .safearea {
     display: none;
-    height: 50px;
+    height: 0px;
 }
 
 @media all and (display-mode: standalone) {
     .safearea {
         display: flex;
+    }
+}
+
+/*
+    android will still have 0px height, only webkit in ios would have the 50px height
+*/
+@supports (-webkit-touch-callout: none) {
+    .safearea {
+        height: 50px;
     }
 }
