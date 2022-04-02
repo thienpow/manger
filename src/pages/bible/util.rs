@@ -92,7 +92,7 @@ pub fn scroll_to_previous_page(cx: Scope, wait: u32) {
                 if e.scroll_left() > 0 {
                     let previous_page = current_verse_page - 1;
                     bible_state.current_verse_page.set(previous_page);
-                    let x = (previous_page * e.client_width()) as f64 + (48.0 * previous_page as f64);
+                    let x = (previous_page * e.client_width() as u32) as f64 + (48.0 * previous_page as f64);
                     bible_state.current_verse_scroll_x.set(x);
                     e.scroll_with_x_and_y(x, 0.0);
                 }
@@ -115,7 +115,7 @@ pub fn scroll_to_next_page(cx: Scope) {
                 if e.scroll_width() - e.scroll_left() > e.client_width()  {
                     let next_page = current_verse_page + 1;
                     bible_state.current_verse_page.set(next_page);
-                    let x = (next_page * e.client_width()) as f64 + (48.0 * next_page as f64);
+                    let x = (next_page * e.client_width() as u32) as f64 + (48.0 * next_page as f64);
                     bible_state.current_verse_scroll_x.set(x);
                     e.scroll_with_x_and_y(x, 0.0);
                 }

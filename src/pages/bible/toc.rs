@@ -19,7 +19,7 @@ pub fn BookItem<G: Html>(cx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
     let chapters = book.chapters;
     let book_name_span = book.book_name.clone();
 
-    let handle_toc_click = |cx: Scope, book_id: i32, book_name:  String, chapters: i32| {
+    let handle_toc_click = |cx: Scope, book_id: u32, book_name:  String, chapters: u32| {
         let book_name_clone = book_name.clone();
         bible_state.selected_bible_book.set(BibleBookItem {book_id, book_name, chapters});
         bible_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
@@ -80,7 +80,7 @@ fn ChapterItem<G: Html>(cx: Scope, chapter: RcSignal<ChapterItem>) -> View<G> {
     let id = chapter.get().id;
     let bible_state = use_context::<BibleState>(cx);
     
-    let handle_chapter_click = |cx: Scope, id: i32| {
+    let handle_chapter_click = |cx: Scope, id: u32| {
         bible_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
         bible::util::reload_chapter_data(cx);
         bible::util::scroll_to_selected_chapter(cx, 0);

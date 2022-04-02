@@ -5,4 +5,5 @@ mod toc;
 mod navbar;
 mod content;
 mod api;
+mod intro;
 pub mod db;

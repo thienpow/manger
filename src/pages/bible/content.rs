@@ -106,6 +106,7 @@ fn VerseItem<G: Html>(cx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
 
     let on_mousedown = move |_: Event| {
         bible_state.selection_first_verse.set(VerseItem{
+            //id: verse.id,
             book_id: verse.book_id,
             chapter: verse.chapter,
             verse: verse.verse,
@@ -179,7 +180,7 @@ pub fn Content<G: Html>(cx: Scope) -> View<G> {
                 if i == 2 {
                     match sel_text.chars().position(|c| c == ']') {
                         Some(num) => {
-                            found_index = num as i32;
+                            found_index = num as u32;
                         },
                         _ => {
                             found_index = -1
@@ -231,7 +232,7 @@ pub fn Content<G: Html>(cx: Scope) -> View<G> {
         }
         
         //console::log_1(&format!("{}", page_to_scroll).into());
-        bible_state.current_verse_page.set(page_to_scroll as i32);
+        bible_state.current_verse_page.set(page_to_scroll as u32);
         let x = (page_to_scroll * e.client_width() as f64) as f64 + (48.0 * page_to_scroll as f64);
         bible_state.current_verse_scroll_x.set(x);
         e.scroll_with_x_and_y(x, 0.0);
