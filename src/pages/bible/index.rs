@@ -1,4 +1,5 @@
 
+use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::*, futures::spawn_local_scoped};
 use wasm_bindgen::JsCast;
 use web_sys::{KeyboardEvent, Event, console};
@@ -19,7 +20,8 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
 
     let bible_state = use_context::<BibleState>(cx);
     spawn_local_scoped(cx, async move {
-        bible_state.load_bible().await;
+        bible_state.load_books().await;
+        bible_state.load_verses().await;
     });
     
     
@@ -78,11 +80,9 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
                         Content {}
                 }
             }
-            div(class="main-container", tabindex="0", style=format!("{}", if bible_state.verses.get().iter().len() > 0 {"display: none"} else {""})) {
-                Intro {}
 
-                
-            }
+            Intro {}
+            
 
         }
          

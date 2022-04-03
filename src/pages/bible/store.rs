@@ -3,7 +3,7 @@ use sycamore::prelude::{RcSignal, create_rc_signal, Scope, provide_context};
 use web_sys::console;
 use crate::pages::bible::api;
 
-use super::db::{self};
+use super::db;
 
 pub fn initialize(cx: Scope) {
 
@@ -89,16 +89,17 @@ pub struct BibleState {
 
 impl BibleState  {
 
-    pub async fn load_bible(&self) {
+    pub async fn load_verses(&self) {
+        console::log_1(&"load_verses".into());
+        
         let bible = self.selected_bible.get().to_string();
 
         //check if indexedDB got downloaded the verses or not. if got then dont need to call api to download again.
         let rexie = db::build_database(bible.clone()).await.unwrap();
-        //db::close_and_delete_db(rexie).await;
 
-        let is_downloaded = db::check_bible_downloaded(&rexie, bible.clone()).await.unwrap();
+        let is_downloaded = db::check_verses_downloaded(&rexie, bible.clone()).await.unwrap();
         if !is_downloaded {
-            let verses = api::download_all_data(bible.clone()).await.unwrap().verses;
+            let verses = api::download_full_verses(bible.clone()).await.unwrap().verses;
             let _last_id = db::append_all_verses(&rexie, bible.clone(), verses).await.unwrap();
         }
 
@@ -107,9 +108,10 @@ impl BibleState  {
             self.full_verses.set(full_verses);
         }
 
+        rexie.close();
     }
 
-    pub async fn delete_bible(&self) {
+    pub async fn _delete_verses(&self) {
         let bible = self.selected_bible.get().to_string();
 
         let rexie = db::build_database(bible.clone()).await.unwrap();
@@ -120,9 +122,6 @@ impl BibleState  {
 
         let book_id = self.selected_bible_book.get().book_id;
         if *self.loaded_book.get() != book_id {
-
-            //self.load_bible().await;
-
             let loaded_verses = self.full_verses.get().iter().filter(|v| v.book_id == book_id).cloned().collect::<Vec<VerseItem>>();
             self.loaded_book.set(book_id);
             self.loaded_verses.set(loaded_verses);
@@ -132,13 +131,23 @@ impl BibleState  {
         self.reset_verses();
     }
 
-    pub async fn init_bible_books(&self) {
+    pub async fn load_books(&self) {
 
-        if self.bible_books.get().len() == 0 {
-            let toc = api::get_toc().await.unwrap_or_default();
+        let bible = self.selected_bible.get().to_string();
 
-            self.bible_books.set(Vec::new());
-            for b in toc.books.iter() {
+        //check if indexedDB got downloaded the books or not. if got then dont need to call api to download again.
+        let rexie = db::build_database(bible.clone()).await.unwrap();
+
+        let is_downloaded = db::check_books_downloaded(&rexie, bible.clone()).await.unwrap();
+        if !is_downloaded {
+            let books = api::download_books(bible.clone()).await.unwrap().books;
+            let _last_id = db::append_all_books(&rexie, bible.clone(), books).await.unwrap();
+        }
+
+        if self.bible_books.get().is_empty() {
+
+            let bible_books = db::get_books(&rexie, bible.clone()).await.unwrap();
+            for b in bible_books.iter() {
                 self.bible_books.set(
                     self.bible_books
                         .get()
@@ -153,11 +162,14 @@ impl BibleState  {
                         .collect()
                 )
             }
+            
         }
+
+        rexie.close();
     }
 
     
-    pub fn init_chapters(&self, max: u32) {
+    pub fn load_chapters(&self, max: u32) {
         self.chapters.set(Vec::new());
         for n in 1..max+1 {
             self.chapters.set(
@@ -233,13 +245,3 @@ pub struct VerseItem {
     pub verse: u32,
     pub text: String
 }
-/*
-
-#[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
-pub struct VerseItemRaw {
-    pub book_id: u32,
-    pub chapter: u32,
-    pub verse: u32,
-    pub text: String
-}
- */

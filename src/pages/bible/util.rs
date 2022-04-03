@@ -8,11 +8,11 @@ use crate::pages::bible::store::BibleState;
 
 pub fn reload_chapter_data(cx: Scope) {
     spawn_local_scoped(cx, async move {
-        let app_state = use_context::<BibleState>(cx);
-        app_state.load_chapter_data().await;
+        let bible_state = use_context::<BibleState>(cx);
+        bible_state.load_chapter_data().await;
 
         //evertime loading new chapter data, reset the verse page to 0
-        app_state.current_verse_page.set(0);
+        bible_state.current_verse_page.set(0);
         scroll_to_previous_page(cx, 1000);
     });
 }

@@ -1,6 +1,3 @@
-
-
-
 use std::{rc::Rc};
 use sycamore::prelude::*;
 use web_sys::{Event, Element};

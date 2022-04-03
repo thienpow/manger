@@ -47,8 +47,7 @@ pub fn BookItem<G: Html>(cx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
 #[component]
 async fn BookList<G: Html>(cx: Scope<'_>) -> View<G> {
     let bible_state = use_context::<BibleState>(cx);
-    bible_state.init_bible_books().await;
-
+    
     let filtered_books = create_memo(cx, || {
         bible_state
             .bible_books
@@ -135,7 +134,7 @@ pub fn TOC<G: Html>(cx: Scope) -> View<G> {
     let bible_state = use_context::<BibleState>(cx);
 
     if bible_state.chapters.get().len() == 0 {
-        bible_state.init_chapters(150);
+        bible_state.load_chapters(150);
     }
 
 
