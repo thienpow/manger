@@ -23,21 +23,35 @@ pub async fn close_and_delete_db(rexie: Rexie) {
     assert!(Rexie::delete("manger").await.is_ok());
 }
 
-pub async fn build_database(bible: String) -> Result<Rexie> {
+pub async fn build_database() -> Result<Rexie> {
     // Create a new database
     let rexie = Rexie::builder("manger")
         // Set the version of the database to 1.0
         .version(1)
         // Add an object store named `bibleBooks`
         .add_object_store(
-            ObjectStore::new(format!("bibleBooks-{}", bible).as_str())
+            ObjectStore::new(format!("bibleBooks-en/kjv").as_str())
                 // Set the key path to `id`
                 .key_path("id")
                 // Enable auto increment
                 .auto_increment(true)
         )
         .add_object_store(
-            ObjectStore::new(format!("bibleVerses-{}", bible).as_str())
+            ObjectStore::new(format!("bibleVerses-en/kjv").as_str())
+                // Set the key path to `id`
+                .key_path("id")
+                // Enable auto increment
+                .auto_increment(true)
+        )
+        .add_object_store(
+            ObjectStore::new(format!("bibleBooks-zh/cuv_t").as_str())
+                // Set the key path to `id`
+                .key_path("id")
+                // Enable auto increment
+                .auto_increment(true)
+        )
+        .add_object_store(
+            ObjectStore::new(format!("bibleVerses-zh/cuv_t").as_str())
                 // Set the key path to `id`
                 .key_path("id")
                 // Enable auto increment
@@ -139,14 +153,14 @@ pub async fn append_all_books(rexie: &Rexie, bible: String, books: Vec<BibleBook
 pub async fn check_verses_downloaded(rexie: &Rexie, bible: String) -> Result<bool> {
     let store_name = format!("bibleVerses-{}", bible);
     let transaction = rexie.transaction(&[store_name.clone().as_str()], TransactionMode::ReadOnly);
-    //assert!(transaction.is_ok());
+    assert!(transaction.is_ok());
     let transaction = transaction.unwrap();
 
     let bible_verses = transaction.store(store_name.clone().as_str());
-    //assert!(bible_verses.is_ok());
+    assert!(bible_verses.is_ok());
     let bible_verses = bible_verses.unwrap();
 
-    let id: u32 = 31102;
+    let id: u32 = 30000;
     let verse_js = bible_verses.get(&id.into()).await?;
     if verse_js.is_undefined() {
         Ok(false)

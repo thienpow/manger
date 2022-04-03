@@ -9,8 +9,8 @@ pub fn Intro<G: Html>(cx: Scope) -> View<G> {
     let bible_state = use_context::<BibleState>(cx);
     let on_click = move |_: Event| {
         spawn_local_scoped(cx, async move {
-            //bible_state.delete_verses().await;
-            //bible_state.load_verses().await;
+            bible_state.change_bible("zh/cuv_t".to_string()).await;
+            
         });
     };
     
@@ -19,7 +19,7 @@ pub fn Intro<G: Html>(cx: Scope) -> View<G> {
                 
             blockquote {
                 p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
-                button(on:click=on_click) {"reset"}
+                button(on:click=on_click) {"cuv"}
             }
             
             blockquote {

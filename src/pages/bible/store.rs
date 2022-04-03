@@ -89,13 +89,22 @@ pub struct BibleState {
 
 impl BibleState  {
 
+    pub async fn change_bible(&self, bible: String) {
+
+        self.selected_bible.set(bible);
+        self.bible_books.set(Vec::new());
+        self.full_verses.set(Vec::new());
+        self.load_books().await;
+        self.load_verses().await;
+    }
+
     pub async fn load_verses(&self) {
         console::log_1(&"load_verses".into());
         
         let bible = self.selected_bible.get().to_string();
 
         //check if indexedDB got downloaded the verses or not. if got then dont need to call api to download again.
-        let rexie = db::build_database(bible.clone()).await.unwrap();
+        let rexie = db::build_database().await.unwrap();
 
         let is_downloaded = db::check_verses_downloaded(&rexie, bible.clone()).await.unwrap();
         if !is_downloaded {
@@ -114,7 +123,7 @@ impl BibleState  {
     pub async fn _delete_verses(&self) {
         let bible = self.selected_bible.get().to_string();
 
-        let rexie = db::build_database(bible.clone()).await.unwrap();
+        let rexie = db::build_database().await.unwrap();
         db::close_and_delete_db(rexie).await;
     }
 
@@ -125,7 +134,6 @@ impl BibleState  {
             let loaded_verses = self.full_verses.get().iter().filter(|v| v.book_id == book_id).cloned().collect::<Vec<VerseItem>>();
             self.loaded_book.set(book_id);
             self.loaded_verses.set(loaded_verses);
-              
         }
 
         self.reset_verses();
@@ -136,7 +144,7 @@ impl BibleState  {
         let bible = self.selected_bible.get().to_string();
 
         //check if indexedDB got downloaded the books or not. if got then dont need to call api to download again.
-        let rexie = db::build_database(bible.clone()).await.unwrap();
+        let rexie = db::build_database().await.unwrap();
 
         let is_downloaded = db::check_books_downloaded(&rexie, bible.clone()).await.unwrap();
         if !is_downloaded {

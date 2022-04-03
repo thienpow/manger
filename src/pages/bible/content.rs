@@ -83,6 +83,8 @@ fn VerseItem<G: Html>(cx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
     let mut verse_text_with_mark: String = "".to_string();
     let mut verse_text_after_mark: String = "".to_string();
 
+    /*
+    
     let (x1, x2) = get_marked_index(&verse);
     if x2 > 0 {
         is_marked = true;
@@ -100,6 +102,7 @@ fn VerseItem<G: Html>(cx: Scope, verse: RcSignal<VerseItem>) -> View<G> {
             None => "".to_string()
         };
     }
+     */
 
     let on_mousedown = move |_: Event| {
         bible_state.selection_first_verse.set(VerseItem{
