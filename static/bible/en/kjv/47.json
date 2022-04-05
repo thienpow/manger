@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 47},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":47,"chapter":1,"verse":1,"text":"Paul, an apostle of Jesus Christ by the will of God, and Timothy [our] brother, unto the church of God which is at Corinth, with all the saints which are in all Achaia:"},
         {"book_id":47,"chapter":1,"verse":2,"text":"Grace [be] to you and peace from God our Father, and [from] the Lord Jesus Christ."},

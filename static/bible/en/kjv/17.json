@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 17},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":17,"chapter":1,"verse":1,"text":"Now it came to pass in the days of Ahasuerus, (this [is] Ahasuerus which reigned, from India even unto Ethiopia, [over] an hundred and seven and twenty provinces:)"},
         {"book_id":17,"chapter":1,"verse":2,"text":"[That] in those days, when the king Ahasuerus sat on the throne of his kingdom, which [was] in Shushan the palace,"},

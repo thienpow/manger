@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 22},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":22,"chapter":1,"verse":1,"text":"The song of songs, which [is] Solomon's."},
         {"book_id":22,"chapter":1,"verse":2,"text":"Let him kiss me with the kisses of his mouth: for thy love [is] better than wine."},

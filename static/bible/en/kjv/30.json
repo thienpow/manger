@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 30},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":30,"chapter":1,"verse":1,"text":"The words of Amos, who was among the herdmen of Tekoa, which he saw concerning Israel in the days of Uzziah king of Judah, and in the days of Jeroboam the son of Joash king of Israel, two years before the earthquake."},
         {"book_id":30,"chapter":1,"verse":2,"text":"And he said, The LORD will roar from Zion, and utter his voice from Jerusalem; and the habitations of the shepherds shall mourn, and the top of Carmel shall wither."},

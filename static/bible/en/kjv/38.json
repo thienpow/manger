@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 38},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":38,"chapter":1,"verse":1,"text":"In the eighth month, in the second year of Darius, came the word of the LORD unto Zechariah, the son of Berechiah, the son of Iddo the prophet, saying,"},
         {"book_id":38,"chapter":1,"verse":2,"text":"The LORD hath been sore displeased with your fathers."},

@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 32},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":32,"chapter":1,"verse":1,"text":"Now the word of the LORD came unto Jonah the son of Amittai, saying,"},
         {"book_id":32,"chapter":1,"verse":2,"text":"Arise, go to Nineveh, that great city, and cry against it; for their wickedness is come up before me."},

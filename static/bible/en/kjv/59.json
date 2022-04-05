@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 59},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":59,"chapter":1,"verse":1,"text":"James, a servant of God and of the Lord Jesus Christ, to the twelve tribes which are scattered abroad, greeting."},
         {"book_id":59,"chapter":1,"verse":2,"text":"My brethren, count it all joy when ye fall into divers temptations;"},

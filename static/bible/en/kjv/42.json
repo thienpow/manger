@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 42},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":42,"chapter":1,"verse":1,"text":"Forasmuch as many have taken in hand to set forth in order a declaration of those things which are most surely believed among us,"},
         {"book_id":42,"chapter":1,"verse":2,"text":"Even as they delivered them unto us, which from the beginning were eyewitnesses, and ministers of the word;"},

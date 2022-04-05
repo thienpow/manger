@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 6},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":6,"chapter":1,"verse":1,"text":"Now after the death of Moses the servant of the LORD it came to pass, that the LORD spake unto Joshua the son of Nun, Moses' minister, saying,"},
         {"book_id":6,"chapter":1,"verse":2,"text":"Moses my servant is dead; now therefore arise, go over this Jordan, thou, and all this people, unto the land which I do give to them, [even] to the children of Israel."},

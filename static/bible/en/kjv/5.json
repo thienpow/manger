@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 5},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":5,"chapter":1,"verse":1,"text":"These [be] the words which Moses spake unto all Israel on this side Jordan in the wilderness, in the plain over against the Red [sea], between Paran, and Tophel, and Laban, and Hazeroth, and Dizahab."},
         {"book_id":5,"chapter":1,"verse":2,"text":"([There are] eleven days' [journey] from Horeb by the way of mount Seir unto Kadeshbarnea.)"},

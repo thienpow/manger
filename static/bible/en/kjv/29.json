@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en", "book_id": 29},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
     "verses":[
         {"book_id":29,"chapter":1,"verse":1,"text":"The word of the LORD that came to Joel the son of Pethuel."},
         {"book_id":29,"chapter":1,"verse":2,"text":"Hear this, ye old men, and give ear, all ye inhabitants of the land. Hath this been in your days, or even in the days of your fathers?"},

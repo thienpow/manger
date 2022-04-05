@@ -90,7 +90,6 @@ pub struct BibleState {
 impl BibleState  {
 
     pub async fn change_bible(&self, bible: String) {
-
         self.selected_bible.set(bible);
         self.bible_books.set(Vec::new());
         self.full_verses.set(Vec::new());
@@ -99,8 +98,6 @@ impl BibleState  {
     }
 
     pub async fn load_verses(&self) {
-        console::log_1(&"load_verses".into());
-        
         let bible = self.selected_bible.get().to_string();
 
         //check if indexedDB got downloaded the verses or not. if got then dont need to call api to download again.
@@ -242,7 +239,7 @@ pub struct MetadataItem {
     pub name: String,
     pub short_code: String,
     pub language: String,
-    pub book_id: u32
+    //pub book_id: u32
 }
 
 #[derive(Serialize, Deserialize, Default, Debug, Clone, PartialEq, Eq)]
