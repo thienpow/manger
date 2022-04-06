@@ -9,7 +9,7 @@ use crate::util;
 struct SelectionFirst(pub RcSignal<VerseItem>);
 
 
-fn get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
+fn _get_marked_index(verse: &Rc<VerseItem>) -> (usize, usize) {
 
     if verse.book_id == 1 && verse.verse == 1 && verse.chapter == 1 {
 
@@ -143,7 +143,7 @@ pub fn Content<G: Html>(cx: Scope) -> View<G> {
 
     let get_filtered_verses = create_memo(cx, || {
         bible_state
-            .verses
+            .display_verses
             .get()
             .iter()
             //.filter(|v| bible_state.selected_bible_chapter.get().id == v.get().chapter)

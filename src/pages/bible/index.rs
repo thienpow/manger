@@ -1,5 +1,3 @@
-
-use gloo_timers::future::TimeoutFuture;
 use sycamore::{prelude::*, futures::spawn_local_scoped};
 use wasm_bindgen::JsCast;
 use web_sys::{KeyboardEvent, Event, console};
@@ -69,7 +67,7 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
                 tabindex="0", 
                 style=format!(
                     "{}", 
-                    if bible_state.verses.get().iter().len() > 0 {""} else {"display: none;"}
+                    if bible_state.display_verses.get().iter().len() > 0 {""} else {"display: none;"}
                 ),
                 
             ) {

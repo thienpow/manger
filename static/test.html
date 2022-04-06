@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <style>
+            .container {
+                display: grid;
+                grid-template: 'header' 'main' 'footer';
+                border: 1px solid red;
+            }
+            .header { 
+                grid-area: header; 
+                border: 1px solid rgb(0, 13, 255);
+            }
+            .main { grid-area: main; height: 100%;}
+            .right { grid-area: right; }
+            .footer { grid-area: footer; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">header</div>
+            <div class="main">main</div>
+            <div class="footer">footer</div>
+        </div>
+    </body>
+</html>

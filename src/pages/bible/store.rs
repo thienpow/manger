@@ -1,6 +1,5 @@
 use serde::{Serialize, Deserialize};
 use sycamore::prelude::{RcSignal, create_rc_signal, Scope, provide_context};
-use web_sys::console;
 use crate::pages::bible::api;
 
 use super::db;
@@ -16,8 +15,8 @@ pub fn initialize(cx: Scope) {
 
             let bible_books: RcSignal<Vec<RcSignal<BibleBookItem>>> = create_rc_signal(Vec::new());
             let chapters: RcSignal<Vec<RcSignal<ChapterItem>>> = create_rc_signal(Vec::new());
-            let verses: RcSignal<Vec<RcSignal<VerseItem>>> = create_rc_signal(Vec::new());
-            let loaded_verses: RcSignal<Vec<VerseItem>> = create_rc_signal(Vec::new());
+            let display_verses: RcSignal<Vec<RcSignal<VerseItem>>> = create_rc_signal(Vec::new());
+            let book_verses: RcSignal<Vec<VerseItem>> = create_rc_signal(Vec::new());
             let full_verses: RcSignal<Vec<VerseItem>> = create_rc_signal(Vec::new());
             let loaded_book: RcSignal<u32> = create_rc_signal(0);
             
@@ -44,8 +43,8 @@ pub fn initialize(cx: Scope) {
             let bible_state = BibleState {
                 bible_books,
                 chapters,
-                verses,
-                loaded_verses,
+                display_verses,
+                book_verses,
                 full_verses,
                 loaded_book,
                 selected_bible,
@@ -70,8 +69,8 @@ pub fn initialize(cx: Scope) {
 pub struct BibleState {
     pub bible_books: RcSignal<Vec<RcSignal<BibleBookItem>>>,
     pub chapters: RcSignal<Vec<RcSignal<ChapterItem>>>,
-    pub verses: RcSignal<Vec<RcSignal<VerseItem>>>,
-    pub loaded_verses: RcSignal<Vec<VerseItem>>,
+    pub display_verses: RcSignal<Vec<RcSignal<VerseItem>>>,
+    pub book_verses: RcSignal<Vec<VerseItem>>,
     pub full_verses: RcSignal<Vec<VerseItem>>,
     pub loaded_book: RcSignal<u32>,
     pub selected_bible: RcSignal<String>,
@@ -118,22 +117,22 @@ impl BibleState  {
     }
 
     pub async fn _delete_verses(&self) {
-        let bible = self.selected_bible.get().to_string();
+        //let bible = self.selected_bible.get().to_string();
 
-        let rexie = db::build_database().await.unwrap();
-        db::close_and_delete_db(rexie).await;
+        //let rexie = db::build_database().await.unwrap();
+        //db::close_and_delete_db(rexie).await;
     }
 
-    pub async fn load_chapter_data(&self) {
+    pub async fn load_book_verses(&self) {
 
         let book_id = self.selected_bible_book.get().book_id;
         if *self.loaded_book.get() != book_id {
-            let loaded_verses = self.full_verses.get().iter().filter(|v| v.book_id == book_id).cloned().collect::<Vec<VerseItem>>();
+            let book_verses = self.full_verses.get().iter().filter(|v| v.book_id == book_id).cloned().collect::<Vec<VerseItem>>();
             self.loaded_book.set(book_id);
-            self.loaded_verses.set(loaded_verses);
+            self.book_verses.set(book_verses);
         }
 
-        self.reset_verses();
+        self.reset_display_verses();
     }
 
     pub async fn load_books(&self) {
@@ -193,15 +192,15 @@ impl BibleState  {
     }
 
 
-    fn reset_verses(&self) {
+    fn reset_display_verses(&self) {
         let chapter_id = self.selected_bible_chapter.get().id;
-        let loaded_verses = self.loaded_verses.get().iter().cloned().filter(|v| v.chapter == chapter_id).collect::<Vec<VerseItem>>();
+        let book_verses = self.book_verses.get().iter().cloned().filter(|v| v.chapter == chapter_id).collect::<Vec<VerseItem>>();
 
-        self.verses.set(Vec::new());
-        for v in loaded_verses.iter() {
+        self.display_verses.set(Vec::new());
+        for v in book_verses.iter() {
             //console::log_1(&"iter".into());
-            self.verses.set(
-                self.verses
+            self.display_verses.set(
+                self.display_verses
                     .get()
                     .as_ref()
                     .clone()

@@ -9,7 +9,7 @@ use crate::pages::bible::store::BibleState;
 pub fn reload_chapter_data(cx: Scope) {
     spawn_local_scoped(cx, async move {
         let bible_state = use_context::<BibleState>(cx);
-        bible_state.load_chapter_data().await;
+        bible_state.load_book_verses().await;
 
         //evertime loading new chapter data, reset the verse page to 0
         bible_state.current_verse_page.set(0);

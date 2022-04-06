@@ -15,7 +15,7 @@ pub fn Intro<G: Html>(cx: Scope) -> View<G> {
     };
     
     view! { cx,
-        div(class="main-container", tabindex="0", style=format!("{}", if bible_state.verses.get().iter().len() > 0 {"display: none"} else {""})) {
+        div(class="main-container", tabindex="0", style=format!("{}", if bible_state.display_verses.get().iter().len() > 0 {"display: none"} else {""})) {
                 
             blockquote {
                 p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}

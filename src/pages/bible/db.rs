@@ -18,7 +18,7 @@ struct VerseRequest<'a> {
     text: &'a str
 }
 
-pub async fn close_and_delete_db(rexie: Rexie) {
+pub async fn _close_and_delete_db(rexie: Rexie) {
     rexie.close();
     assert!(Rexie::delete("manger").await.is_ok());
 }
