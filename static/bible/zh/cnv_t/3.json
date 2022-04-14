@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t"},
+    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t","total_verses":859},
     "verses":[
         {"book_id":3,"chapter":1,"verse":1,"text":"燔祭的條例耶和華呼叫摩西，從會幕裡對摩西說："},
         {"book_id":3,"chapter":1,"verse":2,"text":"“你要告訴以色列人說：如果你們中間有人把供物獻給耶和華，就要從牛群羊群中獻家畜為供物。"},

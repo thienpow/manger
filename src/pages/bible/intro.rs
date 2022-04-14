@@ -17,6 +17,8 @@ pub fn Intro<G: Html>(cx: Scope) -> View<G> {
     view! { cx,
         div(class="main-container", tabindex="0", style=format!("{}", if bible_state.display_verses.get().iter().len() > 0 {"display: none"} else {""})) {
                 
+            //TODO: check if bible_state.full_verses_loading, show a loading status
+
             blockquote {
                 p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
                 button(on:click=on_click) {"cuv"}

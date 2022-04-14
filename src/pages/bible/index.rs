@@ -1,19 +1,12 @@
-use sycamore::{prelude::*, futures::spawn_local_scoped};
-use wasm_bindgen::JsCast;
-use web_sys::{KeyboardEvent, Event, console};
-use crate::{
-    pages::bible::{
-        self, toc::TOC, navbar::NavBar, content::Content, 
-        store::{
-            BibleState
-        }, intro::Intro
-    }
+use crate::pages::bible::{
+    self, content::Content, intro::Intro, navbar::NavBar, store::BibleState, toc::TOC,
 };
-
+use sycamore::{futures::spawn_local_scoped, prelude::*};
+use wasm_bindgen::JsCast;
+use web_sys::{console, Event, KeyboardEvent};
 
 #[component]
 pub fn Bible<G: Html>(cx: Scope) -> View<G> {
-
     bible::store::initialize(cx);
 
     let bible_state = use_context::<BibleState>(cx);
@@ -21,10 +14,9 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
         bible_state.load_books().await;
         bible_state.load_verses().await;
     });
-    
-    
+
     //TODO: key up/down = change chapter
-        // key left/right = change page
+    // key left/right = change page
 
     /*
     37 = left arrow
@@ -63,13 +55,13 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
                             "main-container hide"
                         }
                     }
-                ), 
-                tabindex="0", 
+                ),
+                tabindex="0",
                 style=format!(
-                    "{}", 
+                    "{}",
                     if bible_state.display_verses.get().iter().len() > 0 {""} else {"display: none;"}
                 ),
-                
+
             ) {
 
 
@@ -80,9 +72,9 @@ pub fn Bible<G: Html>(cx: Scope) -> View<G> {
             }
 
             Intro {}
-            
+
 
         }
-         
+
     }
 }

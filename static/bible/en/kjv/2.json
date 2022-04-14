@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":1213},
     "verses":[
         {"book_id":2,"chapter":1,"verse":1,"text":"Now these [are] the names of the children of Israel, which came into Egypt; every man and his household came with Jacob."},
         {"book_id":2,"chapter":1,"verse":2,"text":"Reuben, Simeon, Levi, and Judah,"},

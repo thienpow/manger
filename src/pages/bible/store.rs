@@ -19,6 +19,7 @@ pub fn initialize(cx: Scope) {
             let book_verses: RcSignal<Vec<VerseItem>> = create_rc_signal(Vec::new());
             let full_verses: RcSignal<Vec<VerseItem>> = create_rc_signal(Vec::new());
             let loaded_book: RcSignal<u32> = create_rc_signal(0);
+            let full_verses_loading: RcSignal<bool> = create_rc_signal(false);
             
             let selected_bible: RcSignal<String> = create_rc_signal("en/kjv".to_string());
             let selected_bible_book: RcSignal<BibleBookItem> = create_rc_signal(BibleBookItem {book_id: 0, book_name: "".to_string(), chapters: 0 });
@@ -47,6 +48,7 @@ pub fn initialize(cx: Scope) {
                 book_verses,
                 full_verses,
                 loaded_book,
+                full_verses_loading,
                 selected_bible,
                 selected_bible_book,
                 selected_bible_chapter,
@@ -73,6 +75,7 @@ pub struct BibleState {
     pub book_verses: RcSignal<Vec<VerseItem>>,
     pub full_verses: RcSignal<Vec<VerseItem>>,
     pub loaded_book: RcSignal<u32>,
+    pub full_verses_loading: RcSignal<bool>,
     pub selected_bible: RcSignal<String>,
     pub selected_bible_book: RcSignal<BibleBookItem>,
     pub selected_bible_chapter: RcSignal<ChapterItem>,
@@ -89,11 +92,13 @@ pub struct BibleState {
 impl BibleState  {
 
     pub async fn change_bible(&self, bible: String) {
+        self.full_verses_loading.set(true);
         self.selected_bible.set(bible);
         self.bible_books.set(Vec::new());
         self.full_verses.set(Vec::new());
         self.load_books().await;
         self.load_verses().await;
+        self.full_verses_loading.set(false);
     }
 
     pub async fn load_verses(&self) {
@@ -124,6 +129,9 @@ impl BibleState  {
     }
 
     pub async fn load_book_verses(&self) {
+        if *self.full_verses_loading.get() {
+            return;
+        }
 
         let book_id = self.selected_bible_book.get().book_id;
         if *self.loaded_book.get() != book_id {
@@ -193,6 +201,10 @@ impl BibleState  {
 
 
     fn reset_display_verses(&self) {
+        if *self.full_verses_loading.get() {
+            return;
+        }
+        
         let chapter_id = self.selected_bible_chapter.get().id;
         let book_verses = self.book_verses.get().iter().cloned().filter(|v| v.chapter == chapter_id).collect::<Vec<VerseItem>>();
 

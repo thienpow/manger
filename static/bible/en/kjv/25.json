@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":154},
     "verses":[
         {"book_id":25,"chapter":1,"verse":1,"text":"How doth the city sit solitary, [that was] full of people! [how] is she become as a widow! she [that was] great among the nations, [and] princess among the provinces, [how] is she become tributary!"},
         {"book_id":25,"chapter":1,"verse":2,"text":"She weepeth sore in the night, and her tears [are] on her cheeks: among all her lovers she hath none to comfort [her]: all her friends have dealt treacherously with her, they are become her enemies."},

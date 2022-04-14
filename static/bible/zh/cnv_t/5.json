@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t"},
+    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t","total_verses":959},
     "verses":[
         {"book_id":5,"chapter":1,"verse":1,"text":"引言：摩西憶述往事以下是摩西在約旦河東的曠野，疏弗對面的亞拉巴，就是在巴蘭和陀弗、拉班、哈洗錄、底撒哈之間，向以色列人所說的話。"},
         {"book_id":5,"chapter":1,"verse":2,"text":"從何烈山經過西珥山的路，到達加低斯．巴尼亞，共有十一天的路程。"},

@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t"},
+    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t","total_verses":1533},
     "verses":[
         {"book_id":1,"chapter":1,"verse":1,"text":"創造天地萬物起初，　神創造天地。"},
         {"book_id":1,"chapter":1,"verse":2,"text":"地是空虛混沌；深淵上一片黑暗；　神的靈運行在水面上。"},

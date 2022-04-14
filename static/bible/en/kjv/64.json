@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":14},
     "verses":[
         {"book_id":64,"chapter":1,"verse":1,"text":"The elder unto the wellbeloved Gaius, whom I love in the truth."},
         {"book_id":64,"chapter":1,"verse":2,"text":"Beloved, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth."},

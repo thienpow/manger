@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":95},
     "verses":[
         {"book_id":51,"chapter":1,"verse":1,"text":"Paul, an apostle of Jesus Christ by the will of God, and Timotheus [our] brother,"},
         {"book_id":51,"chapter":1,"verse":2,"text":"To the saints and faithful brethren in Christ which are at Colosse: Grace [be] unto you, and peace, from God our Father and the Lord Jesus Christ."},

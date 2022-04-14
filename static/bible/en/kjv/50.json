@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":104},
     "verses":[
         {"book_id":50,"chapter":1,"verse":1,"text":"Paul and Timotheus, the servants of Jesus Christ, to all the saints in Christ Jesus which are at Philippi, with the bishops and deacons:"},
         {"book_id":50,"chapter":1,"verse":2,"text":"Grace [be] unto you, and peace, from God our Father, and [from] the Lord Jesus Christ."},

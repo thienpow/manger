@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t"},
+    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t","total_verses":657},
     "verses":[
         {"book_id":6,"chapter":1,"verse":1,"text":"耶和華勉勵約書亞耶和華的僕人摩西死了以後，耶和華吩咐摩西的侍從，嫩的兒子約書亞，說："},
         {"book_id":6,"chapter":1,"verse":2,"text":"“我的僕人摩西死了；現在你要起來，和全體人民過這約旦河，到我現在要賜給他們以色列人的地去。"},

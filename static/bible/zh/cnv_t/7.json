@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t"},
+    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t","total_verses":618},
     "verses":[
         {"book_id":7,"chapter":1,"verse":1,"text":"猶大和西緬俘擄比色王約書亞死後，以色列人求問耶和華說：“誰要為我們首先去攻打迦南人，與他們作戰呢？”"},
         {"book_id":7,"chapter":1,"verse":2,"text":"耶和華回答：“猶大要先上去，看哪，我已經把那地交在他手中。”"},

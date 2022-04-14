@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":155},
     "verses":[
         {"book_id":49,"chapter":1,"verse":1,"text":"Paul, an apostle of Jesus Christ by the will of God, to the saints which are at Ephesus, and to the faithful in Christ Jesus:"},
         {"book_id":49,"chapter":1,"verse":2,"text":"Grace [be] to you, and peace, from God our Father, and [from] the Lord Jesus Christ."},

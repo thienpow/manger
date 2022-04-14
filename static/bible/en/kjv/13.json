@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":942},
     "verses":[
         {"book_id":13,"chapter":1,"verse":1,"text":"Adam, Sheth, Enosh,"},
         {"book_id":13,"chapter":1,"verse":2,"text":"Kenan, Mahalaleel, Jered,"},

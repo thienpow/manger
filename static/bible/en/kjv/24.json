@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":1364},
     "verses":[
         {"book_id":24,"chapter":1,"verse":1,"text":"The words of Jeremiah the son of Hilkiah, of the priests that [were] in Anathoth in the land of Benjamin:"},
         {"book_id":24,"chapter":1,"verse":2,"text":"To whom the word of the LORD came in the days of Josiah the son of Amon king of Judah, in the thirteenth year of his reign."},

@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":13},
     "verses":[
         {"book_id":63,"chapter":1,"verse":1,"text":"The elder unto the elect lady and her children, whom I love in the truth; and not I only, but also all they that have known the truth;"},
         {"book_id":63,"chapter":1,"verse":2,"text":"For the truth's sake, which dwelleth in us, and shall be with us for ever."},

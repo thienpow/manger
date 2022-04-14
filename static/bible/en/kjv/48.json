@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":149},
     "verses":[
         {"book_id":48,"chapter":1,"verse":1,"text":"Paul, an apostle, (not of men, neither by man, but by Jesus Christ, and God the Father, who raised him from the dead;)"},
         {"book_id":48,"chapter":1,"verse":2,"text":"And all the brethren which are with me, unto the churches of Galatia:"},

@@ -19,3 +19,12 @@ Key is saved at:         /etc/letsencrypt/live/ipfs-pi.aadi.my/privkey.pem
 
 
 dig manger.aadi.my  +nostats +nocomments +nocmd
+
+
+-ideal-size: 10em;
+--max-column-count: 3;
+--gap: .5em;
+.supergrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(max(100% / var(--max-column-count) - var(--gap), var(--ideal-size)), 100%), 1fr));
+    gap: var(--gap);
+}

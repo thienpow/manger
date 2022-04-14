@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en"},
+    "metadata":{"name":"Authorized King James Version","short_code":"kjv","language":"en","total_verses":678},
     "verses":[
         {"book_id":41,"chapter":1,"verse":1,"text":"The beginning of the gospel of Jesus Christ, the Son of God;"},
         {"book_id":41,"chapter":1,"verse":2,"text":"As it is written in the prophets, Behold, I send my messenger before thy face, which shall prepare thy way before thee."},

@@ -1,5 +1,5 @@
 {
-    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t"},
+    "metadata":{"name":"新译本 Chinese New Version","short_code":"cnv","language":"zh-t","total_verses":1288},
     "verses":[
         {"book_id":4,"chapter":1,"verse":1,"text":"以色列人第一次數點人口以色列人出埃及地以後，第二年二月一日，耶和華在西奈的曠野，在會幕裡對摩西說："},
         {"book_id":4,"chapter":1,"verse":2,"text":"“你們要把以色列全體會眾，按著他們的宗族、父家，根據人名數目，統計人口；所有男丁，都要按著人口登記。"},
