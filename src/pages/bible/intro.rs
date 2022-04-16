@@ -13,6 +13,12 @@ pub fn Intro<G: Html>(cx: Scope) -> View<G> {
             
         });
     };
+    let on_click_cnv = move |_: Event| {
+        spawn_local_scoped(cx, async move {
+            bible_state.change_bible("zh/cnv_t".to_string()).await;
+            
+        });
+    };
     
     view! { cx,
         div(class="main-container", tabindex="0", style=format!("{}", if bible_state.display_verses.get().iter().len() > 0 {"display: none"} else {""})) {
@@ -22,6 +28,7 @@ pub fn Intro<G: Html>(cx: Scope) -> View<G> {
             blockquote {
                 p {"notify/alert status here... e.g 'you haven't pick a book/chapter. or you are disconnected from internet. etc' "}
                 button(on:click=on_click) {"cuv"}
+                button(on:click=on_click_cnv) {"cnv"}
             }
             
             blockquote {

@@ -28,3 +28,10 @@ dig manger.aadi.my  +nostats +nocomments +nocmd
     grid-template-columns: repeat(auto-fit, minmax(min(max(100% / var(--max-column-count) - var(--gap), var(--ideal-size)), 100%), 1fr));
     gap: var(--gap);
 }
+
+UeC6GkvpccVsjCNHbYzkVXhzMY5bw1pLJfviFSDUhWW
+hoice truth glance like blouse air liar swing uncle bracket hand balcony
+
+anchor deploy --provider.cluster devnet
+
+https://github.com/project-serum/anchor/blob/master/client/example/src/main.rs

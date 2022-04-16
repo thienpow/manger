@@ -57,6 +57,20 @@ pub async fn build_database() -> Result<Rexie> {
                 // Enable auto increment
                 .auto_increment(true)
         )
+        .add_object_store(
+            ObjectStore::new(format!("bibleBooks-zh/cnv_t").as_str())
+                // Set the key path to `id`
+                .key_path("id")
+                // Enable auto increment
+                .auto_increment(true)
+        )
+        .add_object_store(
+            ObjectStore::new(format!("bibleVerses-zh/cnv_t").as_str())
+                // Set the key path to `id`
+                .key_path("id")
+                // Enable auto increment
+                .auto_increment(true)
+        )
         // Build the database
         .build()
         .await?;

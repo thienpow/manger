@@ -250,6 +250,7 @@ pub struct MetadataItem {
     pub name: String,
     pub short_code: String,
     pub language: String,
+    pub total_verses: u32
     //pub book_id: u32
 }
 

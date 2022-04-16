@@ -10,10 +10,6 @@ pub fn reload_chapter_data(cx: Scope) {
     spawn_local_scoped(cx, async move {
         let bible_state = use_context::<BibleState>(cx);
         bible_state.load_book_verses().await;
-
-        //evertime loading new chapter data, reset the verse page to 0
-        bible_state.current_verse_page.set(0);
-        scroll_to_previous_page(cx, 1000);
     });
 }
 
@@ -78,6 +74,28 @@ pub fn scroll_to_selected_chapter(cx: Scope, wait: u32) {
     
 }
 
+
+pub fn scroll_to_first_page(cx: Scope, wait: u32) {
+    spawn_local_scoped(cx, async move {
+        
+        TimeoutFuture::new(wait).await;
+
+        match web_sys::window().unwrap().document().unwrap().get_element_by_id("bible-verse-content") {
+            Some(e) => {
+                
+                if e.scroll_left() > 0 {
+                    let bible_state = use_context::<BibleState>(cx);
+                    bible_state.current_verse_page.set(0);
+
+                    bible_state.current_verse_scroll_x.set(0.0);
+                    e.scroll_with_x_and_y(0.0, 0.0);
+                }
+                
+            },
+            _ => {}
+        }
+    });
+}
 
 pub fn scroll_to_previous_page(cx: Scope, wait: u32) {
     spawn_local_scoped(cx, async move {

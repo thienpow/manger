@@ -25,8 +25,9 @@ pub fn BookItem<G: Html>(cx: Scope, book: RcSignal<BibleBookItem>) -> View<G> {
         bible_state.selected_bible_chapter.set(ChapterItem {id: 1, name: "1".to_string()});
         bible::util::reload_chapter_data(cx);
 
-        bible::util::scroll_to_selected_chapter(cx, 560);
         bible::util::scroll_to_selected_book(cx, 60);
+        bible::util::scroll_to_selected_chapter(cx, 560);
+        bible::util::scroll_to_first_page(cx, 1000);
 
         toast::show(cx, ToastProps{title: "title here".to_string(), text: book_name_clone, icon_url: "".to_string()});
     };
@@ -82,7 +83,8 @@ fn ChapterItem<G: Html>(cx: Scope, chapter: RcSignal<ChapterItem>) -> View<G> {
     let handle_chapter_click = |cx: Scope, id: u32| {
         bible_state.selected_bible_chapter.set(ChapterItem {id, name: id.to_string()});
         bible::util::reload_chapter_data(cx);
-        bible::util::scroll_to_selected_chapter(cx, 0);
+        bible::util::scroll_to_selected_chapter(cx, 60);
+        bible::util::scroll_to_first_page(cx, 560);
     };
 
     view! { cx,
