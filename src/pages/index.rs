@@ -1,20 +1,17 @@
-
 use gloo_timers::future::TimeoutFuture;
 use sycamore::futures::spawn_local_scoped;
 use sycamore::prelude::*;
 use sycamore_router::{HistoryIntegration, Router};
 
 use crate::components::{header::Header, tabbar::TabBar};
-use crate::pages::{home, bible, chat, profile};
-use crate::route::AppRoutes; 
-use crate::store::{CurrentRoute, AppState};
+use crate::pages::{bible, chat, home, profile};
+use crate::route::AppRoutes;
+use crate::store::{AppState, CurrentRoute};
 
 #[component]
 pub fn Index<G: Html>(cx: Scope) -> View<G> {
-    
-
     view! { cx,
-        
+
         Router {
             integration: HistoryIntegration::new(),
             view: |cx, route: &ReadSignal<AppRoutes>| {
@@ -24,13 +21,13 @@ pub fn Index<G: Html>(cx: Scope) -> View<G> {
                 let CurrentRoute(current_route) = use_context::<CurrentRoute>(cx);
 
                 let app_state = use_context::<AppState>(cx);
-    
+
                 let app_content_ref = create_node_ref(cx);
                 let slide_in = move |i: i32| {
                     if *page_index.get() == i {
                         return;
                     }
-                    
+
                     page_index.set(i);
                     if *app_state.inner_width.get() <= 738.0 {
                         spawn_local_scoped(cx, async move {
@@ -39,9 +36,9 @@ pub fn Index<G: Html>(cx: Scope) -> View<G> {
                             content.set_attribute("style", "transform: translate(0, 0); transition: transform 288ms ease-in-out;");
                         });
                     }
-                    
+
                 };
-                
+
                 let reset_slide = move |i: i32| {
                     if *app_state.inner_width.get() <= 738.0 {
                         let content = app_content_ref.get::<DomNode>();
@@ -58,31 +55,29 @@ pub fn Index<G: Html>(cx: Scope) -> View<G> {
                         let style = format!("-webkit-animation:fadein 0.288s;animation:fadein 0.288s; transform:translateX({}px);", x);
                         content.set_attribute("style", &style);
                     }
-                    
+
                 };
 
 
-                let home_page = view! { cx, 
+                let home_page = view! { cx,
                     home::index::Home()
                 };
-                let bible_page = view! { cx, 
+                let bible_page = view! { cx,
                     bible::index::Bible()
                 };
-                let chat_page = view! { cx, 
+                let chat_page = view! { cx,
                     chat::index::Chat()
                 };
-                let profile_page = view! { cx, 
+                let profile_page = view! { cx,
                     profile::profile::Profile()
                 };
 
                 view! { cx,
                     div(class="app") {
-                        
+
                         Header()
 
                         div(ref=app_content_ref, class="app-content") {(
-                            {
-                                
                                 match route.get().as_ref() {
                                     AppRoutes::Home => {
                                         reset_slide(0);
@@ -132,16 +127,15 @@ pub fn Index<G: Html>(cx: Scope) -> View<G> {
                                         p { "404 Not Found" }
                                     }},
                                 }
-                            }
                         )}
 
                         TabBar()
                     }
-                    
+
                 }
             }
         }
-        
-        
+
+
     }
 }
