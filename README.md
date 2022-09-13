@@ -11,3 +11,4 @@ to run the sample, just do:
 ```bash
 trunk serve
 ```
+then go to http://localhost:9000
