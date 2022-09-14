@@ -69,7 +69,7 @@ pub fn Index<G: Html>(cx: Scope) -> View<G> {
                     chat::index::Chat()
                 };
                 let profile_page = view! { cx,
-                    profile::profile::Profile()
+                    profile::index::Profile()
                 };
 
                 view! { cx,
