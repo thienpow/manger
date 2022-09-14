@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" style="box-sizing: border-box;-webkit-font-smoothing: antialiased;">
+
 <head>
-    <link data-trunk rel="scss" href="/www/scss/index.scss">
-    <link data-trunk rel="copy-dir" href="/www/assets"/>
-    <link data-trunk rel="copy-dir" href="/www/bible"/>
-    <link data-trunk rel="copy-file" href="/www/manifest.json"/>
-    <link data-trunk rel="copy-file" href="/www/site.webmanifest"/>
-    <link data-trunk rel="copy-file" href="/www/robots.txt"/>
-    <link data-trunk rel="copy-file" href="/www/CNAME"/>
-    <link data-trunk rel="copy-file" href="/www/README.md"/>
-    <link data-trunk rel="copy-file" href="/www/404.html"/>
-    <link data-trunk rel="copy-file" href="/www/offline.html"/>
-    <link data-trunk rel="copy-file" href="/www/favicon.ico"/>
-    <link data-trunk rel="copy-file" href="/www/favicon-16x16.png"/>
-    <link data-trunk rel="copy-file" href="/www/favicon-32x32.png"/>
-    <link data-trunk rel="copy-file" href="/www/service-worker.js"/>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Manger | Live together in Jesus name">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
-        
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link data-trunk rel="scss" href="/www/scss/index.scss">
+  <link data-trunk rel="copy-dir" href="/www/assets" />
+  <link data-trunk rel="copy-dir" href="/www/bible" />
+  <link data-trunk rel="copy-file" href="/www/manifest.json" />
+  <link data-trunk rel="copy-file" href="/www/site.webmanifest" />
+  <link data-trunk rel="copy-file" href="/www/robots.txt" />
+  <link data-trunk rel="copy-file" href="/www/CNAME" />
+  <link data-trunk rel="copy-file" href="/www/README.md" />
+  <link data-trunk rel="copy-file" href="/www/404.html" />
+  <link data-trunk rel="copy-file" href="/www/offline.html" />
+  <link data-trunk rel="copy-file" href="/www/favicon.ico" />
+  <link data-trunk rel="copy-file" href="/www/favicon-16x16.png" />
+  <link data-trunk rel="copy-file" href="/www/favicon-32x32.png" />
+  <link data-trunk rel="copy-file" href="/www/service-worker.js" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Manger | Live together in Jesus name">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
 
-    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json"/>
-    
-    <title>Manger | Live together in Jesus name</title>
-    
-    <script type="text/javascript">
-        (function(l) {
-          if (l.search[1] === '/' ) {
-            var decoded = l.search.slice(1).split('&').map(function(s) { 
-              return s.replace(/~and~/g, '&')
-            }).join('?');
-            window.history.replaceState(null, null,
-                l.pathname.slice(0, -1) + decoded + l.hash
-            );
-          }
-        }(window.location))
-        
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/service-worker.js');
-        }
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    </script>
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+  <link rel="manifest" crossorigin="use-credentials" href="/manifest.json" />
+
+  <title>Manger | Live together in Jesus name</title>
+
+  <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+
+  </script>
 </head>
+
 </html>
